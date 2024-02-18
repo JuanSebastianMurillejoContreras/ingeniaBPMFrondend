@@ -1,0 +1,33 @@
+<form class="example-container" [formGroup]="form" #frmnameCompanyType="ngForm" (submit)="operate()">
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idCompanyType">
+        </mat-form-field>
+    </div>
+    <h1>Tipo de empresa</h1>
+    <mat-form-field class="example-full-width, invalid">
+     
+        <input matInput placeholder="Name" minlength="2" maxlength="30" required pattern= "[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}" formControlName="nameCompanyType">
+        <small *ngIf="form.get('nameCompanyType').hasError('required') && form.get('nameCompanyType').touched">
+            Debe ingresar un nombre para registrar el tipo de compañia
+        </small>
+        <small *ngIf="form.get('nameCompanyType').hasError('minlength') && form.get('nameCompanyType').dirty">
+            Debe ingresar minimo 3 caracteres
+        </small>
+        <small *ngIf="form.get('nameCompanyType').hasError('pattern') && form.get('nameCompanyType').dirty">
+            El nombre no puede incluir números
+        </small>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameCompanyType.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/companytype">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

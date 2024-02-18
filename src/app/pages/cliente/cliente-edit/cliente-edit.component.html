@@ -1,0 +1,63 @@
+<form class="example-container" [formGroup]="form" #frmnameCliente="ngForm" (submit)="operate()">
+    <div>
+        <h1>Cliente</h1>
+        <h2>Formulario de registro</h2>
+    </div>
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idClient">
+        </mat-form-field>
+    </div>
+
+    <!-- NIT -->
+    <h3>NIT</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="number" placeholder="Ingrese el NIT del cliente" required pattern="[0-9]{8,12}" formControlName="nit">
+        <mat-error *ngIf="form.get('nit').invalid && (form.get('nit').dirty )">
+            <span *ngIf="form.get('nit').hasError('required')">
+                Debe ingresar un número para registrar el NIT.
+            </span>
+            <span *ngIf="form.get('nit').hasError('pattern')">
+                El NIT debe tener entre 8 y 12 dígitos numéricos.
+            </span>
+        </mat-error>
+    </mat-form-field>
+
+
+
+    <!-- NOMBRE -->
+    <h3>Nombre</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese el nombre del cliente" minlength="2" maxlength="40" required pattern="[0-9a-zA-ZáéíóúÁÉÍÓÚ\s]{2,40}"
+            formControlName="name">
+
+        <small *ngIf="form.get('name').hasError('required') && form.get('name').touched">
+            Debe ingresar un nombre para registrar la empresa
+        </small>
+        <small *ngIf="form.get('name').hasError('minlength') && form.get('name').dirty">
+            Debe ingresar minimo 2 caracteres
+        </small>
+    </mat-form-field>
+
+    <!-- TIPO DE EMPRESA -->
+    <h3>Tipo de empresa</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione el tipo de empresa a la que pertence el cliente" required=""
+            formControlName="companyType" [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
+        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+            <mat-option *ngFor="let c of companyTypeFiltered$ | async" [value]="c">
+                {{c.nameCompanyType}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameCliente.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/cliente">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>
