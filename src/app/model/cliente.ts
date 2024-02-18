@@ -1,4 +1,5 @@
 import { CompanyType } from "./companyType"
+import { Department } from "./department"
 
 export class Cliente{
     idClient: number
@@ -6,7 +7,7 @@ export class Cliente{
     nit: number
     name: string
     logoURL: string
-    department: string
+    department: Department
     city: string
     address: string
     mail: string
