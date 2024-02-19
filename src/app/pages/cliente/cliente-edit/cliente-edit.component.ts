@@ -130,17 +130,10 @@ export class ClienteEditComponent implements OnInit {
           'logoURL': data.logoURL
 
         } )
-        console.log(data.companyType)
+        console.log(data.name)
+        console.log(data.logoURL)
       } );
     }
-  }
-
-  get a() {
-    return this.form.controls;
-  }
-
-  get f() {
-    return this.form.controls;
   }
 
   operate() {
@@ -149,6 +142,7 @@ export class ClienteEditComponent implements OnInit {
     let cliente = new Cliente();
     cliente.idClient = this.form.value['idClient'];
     cliente.nit = this.form.value['nit'];
+    cliente.name = this.form.value['name'];
     cliente.companyType = this.form.value['companyType'];
     cliente.department = this.form.value['department'];
     cliente.city = this.form.value['city'];
@@ -158,6 +152,7 @@ export class ClienteEditComponent implements OnInit {
     cliente.numberEmployee = this.form.value['numberEmployee'];
     cliente.size = this.form.value['size'];
     cliente.guarded = this.form.value['guarded'];
+    cliente.logoURL = this.form.value['logoURL'];
 
     if ( this.isEdit ) {
       this.clienteService.update( cliente.idClient, cliente ).pipe( switchMap( () => {

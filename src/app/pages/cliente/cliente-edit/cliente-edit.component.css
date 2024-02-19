@@ -1,12 +1,12 @@
 .example-container {
     display: flex;
     flex-direction: column;
-    margin: 50px; /* Espacio alrededor de la tabla */
+    margin: 100px; /* Espacio alrededor de la tabla */
 }
 
 .example-container>* {
     width: 100%;
-    border-radius: 10px; 
+    border-radius: 100px; 
 }
 
 .invalid {
