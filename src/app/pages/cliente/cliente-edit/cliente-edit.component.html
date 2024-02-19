@@ -28,15 +28,8 @@
     <!-- NOMBRE -->
     <h3>Nombre</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el nombre del cliente" minlength="2" maxlength="40" required pattern="[0-9a-zA-ZáéíóúÁÉÍÓÚ\s]{2,40}"
+        <input matInput placeholder="Ingrese el nombre del cliente" 
             formControlName="name">
-
-        <small *ngIf="form.get('name').hasError('required') && form.get('name').touched">
-            Debe ingresar un nombre para registrar la empresa
-        </small>
-        <small *ngIf="form.get('name').hasError('minlength') && form.get('name').dirty">
-            Debe ingresar minimo 2 caracteres
-        </small>
     </mat-form-field>
 
     <!-- TIPO DE EMPRESA -->
@@ -66,65 +59,63 @@
 
 <h3>Departamento</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el departamento" minlength="2" maxlength="40" required pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}"
-            formControlName="department">
+        <input matInput type="text" placeholder="Ingrese el departamento" formControlName="department">
     </mat-form-field>
 
 
 <!-- CIUDAD -->
 <h3>Ciudad</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese la ciudad" minlength="2" maxlength="40" required pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}"
+        <input matInput type="text" placeholder="Ingrese la ciudad" 
             formControlName="city">
     </mat-form-field>
 
 <!-- DIRECCION -->
 <h3>Dirección</h3>
     <mat-form-field class="example-full-width">
-        <input matInput  placeholder="Ingrese la dirección" minlength="2" maxlength="40" required formControlName="address">
+        <input matInput  placeholder="Ingrese la dirección" formControlName="address">
     </mat-form-field>
 
 <!-- EMAIL -->
 <h3>Email</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el email" minlength="2" maxlength="30" required formControlName="mail">
+        <input matInput type="text" placeholder="Ingrese el email" formControlName="mail">
     </mat-form-field>
 
 <!-- TELEFONO -->
 <h3>Teléfono</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el teléfono" minlength="2" maxlength="30" required  pattern="[0-9]{9,12}" formControlName="phone">
+        <input matInput  placeholder="Ingrese el teléfono" formControlName="phone">
+    </mat-form-field>
+
+<!-- NUMERO EMPLEADOS -->
+<h3>Numero empleados</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese el numero de empleados"  formControlName="numberEmployee">
     </mat-form-field>
 
 <!-- TAMAÑO -->
 <h3>Tamaño</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el tamaño de la empresa" minlength="2" maxlength="30" required  pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}" formControlName="size">
+        <input matInput type="text" placeholder="Ingrese el tamaño de la empresa"  formControlName="size">
     </mat-form-field>
 
 <!-- VIGILADO -->
 <h3>Vigilado</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el organismo que la vigila" minlength="2" maxlength="30" required  pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}" formControlName="guarded">
+        <input matInput type="text" placeholder="Ingrese el organismo que la vigila" formControlName="guarded">
     </mat-form-field>
 
 <!-- LOGO URL -->
 <h3>Logo URL</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese la url del logo de la compañía" minlength="2" maxlength="30" required formControlName="logoURL">
+        <input matInput placeholder="Ingrese la url del logo de la compañía" required formControlName="logoURL">
     </mat-form-field>
 
 
 <!-- USUARIO GRABADO -->
 
 <!-- FECHA GRABADO -->
-
-
-
-
-
-
-
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameCliente.invalid">
         <mat-icon>done</mat-icon>

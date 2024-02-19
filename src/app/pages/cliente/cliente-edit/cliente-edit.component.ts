@@ -57,7 +57,7 @@ export class ClienteEditComponent implements OnInit {
       'address': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
       'mail': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 30 )] ),
       'phone': new FormControl( '', [Validators.required, Validators.minLength( 9 ), Validators.maxLength( 12 )] ),
-      'numberEmployee ': new FormControl( '', [Validators.required, Validators.minLength( 1 ), Validators.maxLength( 5 )] ),
+      'numberEmployee': new FormControl( '', [Validators.required, Validators.minLength( 1 ), Validators.maxLength( 5 )] ),
       'size': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 10 )] ),
       'guarded': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
       'logoURL': new FormControl( '', [Validators.required, Validators.minLength( 1 ), Validators.maxLength( 80 )] ),
@@ -130,6 +130,7 @@ export class ClienteEditComponent implements OnInit {
           'logoURL': data.logoURL
 
         } )
+        console.log(data.companyType)
       } );
     }
   }
