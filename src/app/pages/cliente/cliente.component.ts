@@ -55,7 +55,7 @@ export class ClienteComponent {
     } ) )
       .subscribe( data => {
         this.clienteService.setClienteChange( data );
-        this.clienteService.setMessageChange( 'CLIENTE ELIMINADO!' );
+        this.clienteService.setMessageChange( 'Cliente eliminado!' );
       } )
       ;
   }

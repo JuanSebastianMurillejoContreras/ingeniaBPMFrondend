@@ -7,14 +7,12 @@ export class Cliente{
     nit: number
     name: string
     logoURL: string
-    department: Department
+    department: string
     city: string
     address: string
     mail: string
     phone: string
     numberEmployee: string
     size: string
-    guarded: string
-    recordingDate: string
-    recordedUser: string
+    guarded: string    
 }

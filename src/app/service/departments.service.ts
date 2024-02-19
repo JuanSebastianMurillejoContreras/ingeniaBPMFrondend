@@ -10,7 +10,7 @@ export class DepartmentService extends Department{
 
   private examChange: Subject<Department[]> = new Subject<Department[]>;
   private messageChange: Subject<string> = new Subject<string>;
-  private apiUrl = 'https://www.datos.gov.co/resource/xdk5-pm3f.json?$query=SELECT%0A%20%20%60region%60%2C%0A%20%20%60c_digo_dane_del_departamento%60%2C%0A%20%20%60departamento%60%2C%0A%20%20%60c_digo_dane_del_municipio%60%2C%0A%20%20%60municipio%60%0ASEARCH%20%22Tolima%22';
+  private apiUrl = 'https://www.datos.gov.co/resource/xdk5-pm3f.json?';
 
   constructor(protected http: HttpClient) {
     super();

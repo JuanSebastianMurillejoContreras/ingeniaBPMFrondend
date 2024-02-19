@@ -52,7 +52,7 @@
     </mat-form-field>
 
 
-<!-- DEPARTAMENTO -->
+<!-- DEPARTAMENTO 
 <h3>Departamento</h3>
 <mat-form-field>
     <input matInput placeholder="Seleccione el departamento" required=""
@@ -62,23 +62,58 @@
             {{d.municipio }}
         </mat-option>
     </mat-autocomplete>
-</mat-form-field>
+</mat-form-field>-->
+
+<h3>Departamento</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese el departamento" minlength="2" maxlength="40" required pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}"
+            formControlName="department">
+    </mat-form-field>
+
 
 <!-- CIUDAD -->
+<h3>Ciudad</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese la ciudad" minlength="2" maxlength="40" required pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}"
+            formControlName="city">
+    </mat-form-field>
 
 <!-- DIRECCION -->
+<h3>Dirección</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput  placeholder="Ingrese la dirección" minlength="2" maxlength="40" required formControlName="address">
+    </mat-form-field>
 
 <!-- EMAIL -->
+<h3>Email</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese el email" minlength="2" maxlength="30" required formControlName="mail">
+    </mat-form-field>
 
 <!-- TELEFONO -->
-
-<!-- NUMERO -->
+<h3>Teléfono</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese el teléfono" minlength="2" maxlength="30" required  pattern="[0-9]{9,12}" formControlName="phone">
+    </mat-form-field>
 
 <!-- TAMAÑO -->
+<h3>Tamaño</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese el tamaño de la empresa" minlength="2" maxlength="30" required  pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}" formControlName="size">
+    </mat-form-field>
 
 <!-- VIGILADO -->
+<h3>Vigilado</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese el organismo que la vigila" minlength="2" maxlength="30" required  pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}" formControlName="guarded">
+    </mat-form-field>
 
 <!-- LOGO URL -->
+<h3>Logo URL</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="Ingrese la url del logo de la compañía" minlength="2" maxlength="30" required formControlName="logoURL">
+    </mat-form-field>
+
 
 <!-- USUARIO GRABADO -->
 
