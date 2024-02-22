@@ -1,1 +1,93 @@
-<p>user works!</p>
+<router-outlet></router-outlet>
+
+<div class="table-container">
+
+    <div [hidden]="checkChildren()">
+        <mat-form-field>
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar usuario" #input>
+        </mat-form-field>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="idUserData">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th> <!-- [style.display]="'none'" -->
+                    <td mat-cell *matCellDef="let row"> {{row.idUserData}} </td> <!-- [style.display]="'none'" -->
+                </ng-container>
+
+                <!-- Tipo empresa -->
+                <ng-container matColumnDef="client">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cliente </th>
+                    <td mat-cell *matCellDef="let row"> {{row.client.name}}</td>
+                </ng-container>
+
+                <!-- NIT -->
+                <ng-container matColumnDef="numberIdentity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Número de identidad</th>
+                    <td mat-cell *matCellDef="let row"> {{row.numberIdentity}} </td>
+                </ng-container>
+
+                <!-- PRIMER NOMBRE -->
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Primer nombre</th>
+                    <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+                </ng-container>
+
+                <!-- SEGUNDO NOMBRE -->
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Segundo nombre</th>
+                    <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+                </ng-container>
+
+                <!-- PRIMER NOMBRE -->
+                <ng-container matColumnDef="firstSurname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Primer apellido</th>
+                    <td mat-cell *matCellDef="let row"> {{row.firstSurname}} </td>
+                </ng-container>
+
+                <!-- SEGUNDO APELLIDO -->
+                <ng-container matColumnDef="lastSurname">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Segundo apellido</th>
+                    <td mat-cell *matCellDef="let row"> {{row.lastSurname}} </td>
+                </ng-container>
+
+                <!-- PRIMER APELLIDO -->
+                <ng-container matColumnDef="userName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre usuario</th>
+                    <td mat-cell *matCellDef="let row"> {{row.userName}} </td>
+                </ng-container>
+
+                <!-- Acciones -->
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let row">
+                        <button mat-button color="primary" [routerLink]="['edit', row.idUser]">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-button color="warn" (click)="delete(row.idUser)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                <!-- Row shown when there is no matching data. -->
+                <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter {{input.value}}</td>
+                </tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"
+                aria-label="Select page of company type"></mat-paginator>
+
+            <button mat-fab class="add_color_button" id="fixedButton" style="float: right"
+                routerLink="/pages/user/new">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>

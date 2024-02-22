@@ -72,7 +72,7 @@ export class CompanyTypeEditComponent implements OnInit {
     }))      
       .subscribe(data => {
           this.companyTypeService.setCompanyTypeChange(data);
-          this.companyTypeService.setMessageChange('TIPO DE COMPAÑÍA ACTUALIZADA!')
+          this.companyTypeService.setMessageChange('Tipo de empresa actualizada!')
      
       });
     } else {      
@@ -81,7 +81,7 @@ export class CompanyTypeEditComponent implements OnInit {
       }))
       .subscribe(data => {
         this.companyTypeService.setCompanyTypeChange(data);
-        this.companyTypeService.setMessageChange("TIPO DE COMPAÑÍA CREADA!")
+        this.companyTypeService.setMessageChange("Tipo de empresa creada!")
       });
     }
     this.router.navigate(['/pages/companytype']);

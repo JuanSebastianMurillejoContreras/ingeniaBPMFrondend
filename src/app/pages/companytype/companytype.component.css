@@ -1,8 +1,5 @@
 .table-container {
-  margin-top: 50px;
-  margin-left: 150px; /* Espacio alrededor de la tabla */
-  margin-right: 150px;
-  margin-bottom: 15px;
+  margin: 150px;/* Espacio alrededor de la tabla */
 }
 
 
