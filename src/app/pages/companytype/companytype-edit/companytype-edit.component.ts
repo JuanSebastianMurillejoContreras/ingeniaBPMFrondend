@@ -61,7 +61,6 @@ export class CompanyTypeEditComponent implements OnInit {
 
   operate() {
     if (this.form.invalid) { return; }
-
     let companyType = new CompanyType();
     companyType.idCompanyType = this.form.value['idCompanyType'];
     companyType.nameCompanyType = this.form.value['nameCompanyType'];

@@ -41,3 +41,10 @@
     background-color: #ffd700;
     color: black
   }
+
+  #fixedButton {
+    position: fixed;
+    bottom: 20px; /* Puedes ajustar la posición según tus necesidades */
+    right: 20px; /* Puedes ajustar la posición según tus necesidades */
+    z-index: 1000; /* Ajusta el z-index según sea necesario para que el botón esté por encima de otros elementos */
+  }

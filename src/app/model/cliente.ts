@@ -11,7 +11,7 @@ export class Cliente{
     city: string
     address: string
     mail: string
-    phone: string
+    phone: string   
     numberEmployee: string
     size: string
     guarded: string    

@@ -14,7 +14,7 @@
         </button>
 
         <mat-menu #menu="matMenu">
-                   <button mat-menu-item>
+            <button mat-menu-item>
                 <mat-icon>account_box</mat-icon>
                 <span>My account</span>
             </button>
@@ -24,36 +24,202 @@
             </button>
         </mat-menu>
     </mat-toolbar>
- 
+
     <mat-sidenav-container class="example-sidenav-container">
-        <mat-sidenav #sidenav style="width: 250px" mode="over">
+        <mat-sidenav #sidenav style="width: 300px" mode="over">
 
-            <img src="assets/ingeniabpm.png" width="130" style="margin-left: 50px">
+            <!---<img src="assets/ingeniabpm.png" width="130" style="margin-left: 80px">--->
 
             <mat-divider></mat-divider>
             <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/search" style="cursor: pointer">
-                <mat-icon>search</mat-icon>
-                <span>Buscar</span>
+                routerLink="/pages/" style="cursor:progress">
+                <mat-icon>
+                    <img src="assets/icons/dashboard.png" width="20" height="20">
+                </mat-icon>
+                <span>Dashboard</span>
             </button>
             <mat-divider></mat-divider>
-            <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/companytype" style="cursor: pointer">
-                <mat-icon>assignment</mat-icon>
-                <span>Tipo empresa</span>
-            </button>
-            <mat-divider></mat-divider>
-            <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/cliente" style="cursor: pointer">
-                <mat-icon>star_rate</mat-icon>
-                <span>Cliente</span>
-            </button>
-            <mat-divider></mat-divider>
-            <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                routerLink="/pages/patient" style="cursor: pointer">
-                <mat-icon>accessibility</mat-icon>
-                <span>Usuario</span>
-            </button>
+
+            <!---CLIENTE--------------------------------------------------------------------->
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+                    <mat-expansion-panel-header>
+
+                        <mat-panel-title>
+                            <!---<mat-icon class="icon-menu">
+                                <img src="assets/icons/client.png" width="20" height="20">
+                            </mat-icon>--->
+                            1. CLIENTE
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/companytype" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/tipoempresa1.png" width="20" height="20">
+                        </mat-icon>
+                        <span>1.1 Tipo empresa</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/cliente" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/client.png" width="20" height="20">
+                        </mat-icon>
+                        <span>1.2 Cliente</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/user" style="cursor: pointer">
+                        <span>1.3 Usuario</span>
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/user.png" width="20" height="20">
+                        </mat-icon>
+                    </button>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <!---PROGRAMA--------------------------------------------------------------------->
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+                    <mat-expansion-panel-header>
+
+                        <mat-panel-title>
+                            2. PROGRAMA
+                            <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/companytype" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/book.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.1 Glosario</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/cliente" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/specificgoal.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.2 Objetivo específico</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/user" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/generalgoal.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.3 Objetivo general</span>
+                    </button>
+
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/report" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/theory.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.4 Marco teórico</span>
+                    </button>
+                    <mat-divider></mat-divider>
+
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/report" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/monitoring.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.5 Programa</span>
+                    </button>
+                    <mat-divider></mat-divider>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <!---PROCEDIMIENTO--------------------------------------------------------------------->
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+                    <mat-expansion-panel-header>
+
+                        <mat-panel-title>
+                            3. PROCEDIMIENTO
+                            <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/companytype" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/variable.png" width="20" height="20">
+                        </mat-icon>
+                        <span>3.1 Variable</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/cliente" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/element.png" width="20" height="20">
+                        </mat-icon>
+                        <span>3.2 Elemento</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/user" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/consumer.png" width="20" height="20">
+                        </mat-icon>
+                        <span>3.3 Insumo</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/user" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/ejecucion.png" width="20" height="20">
+                        </mat-icon>
+                        <span>3.4 Procedimiento</span>
+                    </button>
+
+                    <mat-divider></mat-divider>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+
+            <!---EJECUCIÓN--------------------------------------------------------------------->
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            3. EJECUCION
+                            <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>                    
+                    <mat-divider></mat-divider>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
+             <!---REPORTES--------------------------------------------------------------------->
+             <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            3. REPORTES
+                            <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>                    
+                    <mat-divider></mat-divider>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+
             <mat-divider></mat-divider>
             <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
                 routerLink="/pages/report" style="cursor: pointer">
@@ -64,10 +230,11 @@
         </mat-sidenav>
 
 
+
         <mat-sidenav-content>
             <router-outlet></router-outlet>
         </mat-sidenav-content>
 
     </mat-sidenav-container>
-    
+
 </div>

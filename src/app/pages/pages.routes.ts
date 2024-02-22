@@ -3,6 +3,8 @@ import { CompanyTypeEditComponent } from './companytype/companytype-edit/company
 import { CompanyTypeComponent } from './companytype/companytype.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { ClienteEditComponent } from './cliente/cliente-edit/cliente-edit.component';
+import { UserComponent } from './user/user.component';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
 
 
 
@@ -32,6 +34,20 @@ export const PagesRoutes: Routes = [
       {
         path: 'edit/:id',
         component: ClienteEditComponent,
+      },
+    ],
+  },
+  {
+    path: 'user',
+    component: UserComponent,
+    children: [
+      {
+        path: 'new',
+        component: UserEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: UserEditComponent,
       },
     ],
   }

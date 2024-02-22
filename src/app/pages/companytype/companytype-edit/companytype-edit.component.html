@@ -1,3 +1,4 @@
+
 <form class="example-container" [formGroup]="form" #frmnameCompanyType="ngForm" (submit)="operate()">
 
     <div [hidden]="true">
@@ -5,7 +6,7 @@
             <input matInput placeholder="ID" required formControlName="idCompanyType">
         </mat-form-field>
     </div>
-    <h1>Tipo de empresa</h1>
+
     <mat-form-field class="example-full-width, invalid">
      
         <input matInput placeholder="Name" minlength="2" maxlength="30" required pattern= "[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}" formControlName="nameCompanyType">
