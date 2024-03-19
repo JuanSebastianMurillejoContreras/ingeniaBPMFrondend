@@ -3,14 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { Observable, isEmpty, map, switchMap } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Cliente } from 'src/app/model/cliente';
 import { CompanyType } from 'src/app/model/companyType';
-import { Department } from 'src/app/model/department';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { CompanyTypeService } from 'src/app/service/companyType.service';
-import { DepartmentService } from 'src/app/service/departments.service';
 
 @Component( {
   standalone: true,
@@ -31,16 +29,11 @@ export class ClienteEditComponent implements OnInit {
   companyTypeControl: FormControl = new FormControl();
   companyTypeFiltered$: Observable<CompanyType[]>;
 
-  /*departments: Department[];
-  departmentsControl: FormControl = new FormControl();
-  departmentFiltered$: Observable<Department[]>;*/
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private clienteService: ClienteService,
     private companyTypeService: CompanyTypeService,
-    //private departmentService: DepartmentService,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -65,7 +58,6 @@ export class ClienteEditComponent implements OnInit {
 
     this.loadInitialData();
     this.companyTypeFiltered$ = this.companyTypeControl.valueChanges.pipe( map( val => this.filterCompanyType( val ) ) );
-    //this.departmentFiltered$ = this.departmentsControl.valueChanges.pipe( map( val => //this.filterDepartment( val ) ) );
 
     this.route.params.subscribe( data => {
       this.id = data['id'];
@@ -88,28 +80,16 @@ export class ClienteEditComponent implements OnInit {
     }
   }
 
-  /*filterDepartment( val: any ) {
-      if ( val?.departamento == null) {
-      return this.departments.filter( el =>
-        el.departamento.toLowerCase().includes( val.departamento.toLowerCase() ) );
-    } else {
-      return this.departments.filter( el =>
-        el.departamento.toLowerCase().includes( val?.toLowerCase() ) );
-    }
-  }*/
 
   loadInitialData() {
     this.companyTypeService.findAll().subscribe( data => this.companyTypes = data );
-    //this.departmentService.findAll().subscribe( data => this.departments = data );
-  }
+     }
 
   showCompanyType( val: any ) {
     return val ? `${val.nameCompanyType}` : val;
   }
 
-  /*showDepartment( val: any ) {
-    return val ? `${val.departamento}` : val;
-  }*/
+
 
   initForm() {
     if ( this.isEdit ) {

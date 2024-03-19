@@ -19,7 +19,7 @@ import { ClienteService } from 'src/app/service/cliente.service';
 export class ClienteComponent {
 
   displayedColumns: string[] = ['idClient', "nit", "name", "companyType", 'actions'];
-  //"logoURL", "department", "city", "address", "mail", "phone", "numberEmployee", "size", "guarded", "recordingDate", "recordedUser", 
+  //"logoURL", "department", "city", "address", "mail", "phone", "numberEmployee", "size", "guarded" 
 
   dataSource: MatTableDataSource<Cliente>;
   @ViewChild( MatPaginator ) paginator: MatPaginator;

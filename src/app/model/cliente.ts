@@ -16,3 +16,4 @@ export class Cliente{
     size: string
     guarded: string    
 }
+

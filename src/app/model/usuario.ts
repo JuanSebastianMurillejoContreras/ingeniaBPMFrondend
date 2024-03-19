@@ -1,8 +1,7 @@
-import { SafeResourceUrl } from "@angular/platform-browser"
 import { Cliente } from "./cliente"
 
 export class Usuario{
-    idUserData: string
+    idUserData: number
     client: Cliente
     identityType: string
     numberIdentity: string

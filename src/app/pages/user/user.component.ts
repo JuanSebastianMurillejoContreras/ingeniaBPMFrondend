@@ -26,6 +26,8 @@ export class UserComponent {
   @ViewChild( MatPaginator ) paginator: MatPaginator;
   @ViewChild( MatSort ) sort: MatSort;
 
+  cliente: Cliente;
+
   constructor(
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
