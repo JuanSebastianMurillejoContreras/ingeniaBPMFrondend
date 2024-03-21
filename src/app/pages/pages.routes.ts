@@ -7,6 +7,9 @@ import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { GlossaryComponent } from './glossary/glossary.component';
 import { GlossaryEditComponent } from './glossary/glossary-edit/glossary-edit.component';
+import { GeneralGoalService } from '../service/generalGoal.service';
+import { GeneralGoalComponent } from './general-goal/general-goal.component';
+import { GeneralGoalEditComponent } from './general-goal/general-goal-edit/general-goal-edit.component';
 
 
 
@@ -64,6 +67,20 @@ export const PagesRoutes: Routes = [
       {
         path: 'edit/:id',
         component: GlossaryEditComponent,
+      },
+    ],
+  },
+  {
+    path: 'generalgoal',
+    component: GeneralGoalComponent,
+    children: [
+      {
+        path: 'new',
+        component: GeneralGoalEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: GeneralGoalEditComponent,
       },
     ],
   }

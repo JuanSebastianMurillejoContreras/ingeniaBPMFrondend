@@ -97,14 +97,7 @@
                         </mat-icon>
                         <span>2.1 Glosario</span>
                     </button>
-                    <mat-divider></mat-divider>
-                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/specificgoal" style="cursor: pointer">
-                        <mat-icon class="icon-menu">
-                            <img src="assets/icons/specificgoal.png" width="20" height="20">
-                        </mat-icon>
-                        <span>2.2 Objetivo específico</span>
-                    </button>
+
                     <mat-divider></mat-divider>
                     <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
                         routerLink="/pages/generalgoal" style="cursor: pointer">
@@ -112,6 +105,15 @@
                             <img src="assets/icons/generalgoal.png" width="20" height="20">
                         </mat-icon>
                         <span>2.3 Objetivo general</span>
+                    </button>
+
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/specificgoal" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/specificgoal.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.2 Objetivo específico</span>
                     </button>
 
                     <mat-divider></mat-divider>
