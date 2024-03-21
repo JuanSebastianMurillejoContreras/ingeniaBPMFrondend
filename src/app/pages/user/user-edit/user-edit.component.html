@@ -12,7 +12,7 @@
     <!-- CLIENTE -->
     <h3>Tipo de empresa</h3>
     <mat-form-field>
-        <input matInput placeholder="Seleccione la empresa a la que pertenece el usuario" required=""
+        <input matInput placeholder="Seleccione la empresa a la que pertenece el usuario" required
             formControlName="client" [matAutocomplete]="autoClient" [formControl]="clientControl">
 
         <mat-autocomplete #autoClient="matAutocomplete" [displayWith]="showClient">
@@ -52,23 +52,21 @@
     </mat-form-field>
 
 
-
     <!-- PRIMER NOMBRE -->
     <h3>Primer nombre</h3>
     <mat-form-field class="">
         <input matInput placeholder="Primer nombre" minlength="2" maxlength="30" required
-        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstName">
+            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstName">
         <small *ngIf="form.get('firstName').hasError('required') && form.get('firstName').touched">
             Debe ingresar el nombre
         </small>
         <small *ngIf="form.get('firstName').hasError('minlength') && form.get('firstName').dirty">
-            Debe ingresar minimo 3 caracteres
+            Debe ingresar mínimo 3 caracteres
         </small>
         <small *ngIf="form.get('firstName').hasError('pattern') && form.get('firstName').dirty">
             El nombre no puede incluir números
         </small>
     </mat-form-field>
-
 
     <!-- SEGUNDO NOMBRE -->
     <h3>Segundo nombre</h3>
@@ -80,11 +78,16 @@
         </small>
     </mat-form-field>
 
+
+
+
+
+
     <!-- PRIMER APELLIDO -->
     <h3>Primer apellido</h3>
     <mat-form-field class="">
         <input matInput placeholder="Primer nombre" minlength="2" maxlength="30" required
-        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstSurname">
+            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstSurname">
         <small *ngIf="form.get('firstSurname').hasError('required') && form.get('firstSurname').touched">
             Debe ingresar el apellido
         </small>
@@ -218,7 +221,7 @@
             <mat-option value="No">No</mat-option>
         </mat-select>
 
-        </mat-form-field>
+    </mat-form-field>
 
 
 

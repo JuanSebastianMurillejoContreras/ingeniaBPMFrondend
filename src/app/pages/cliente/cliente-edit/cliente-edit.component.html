@@ -12,7 +12,8 @@
     <!-- NIT -->
     <h3>NIT</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Ingrese el NIT del cliente" required pattern="[0-9]{8,12}" formControlName="nit">
+        <input matInput type="number" placeholder="Ingrese el NIT del cliente" required pattern="[0-9]{8,12}"
+            formControlName="nit">
         <mat-error *ngIf="form.get('nit').invalid && (form.get('nit').dirty )">
             <span *ngIf="form.get('nit').hasError('required')">
                 Debe ingresar un número para registrar el NIT.
@@ -28,8 +29,7 @@
     <!-- NOMBRE -->
     <h3>Nombre</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese el nombre del cliente" 
-            formControlName="name">
+        <input matInput placeholder="Ingrese el nombre del cliente" formControlName="name">
     </mat-form-field>
 
     <!-- TIPO DE EMPRESA -->
@@ -45,68 +45,108 @@
     </mat-form-field>
 
 
-<!-- DEPARTAMENTO-->
-
-
-<h3>Departamento</h3>
+    <!-- DEPARTAMENTO-->
+        <!-- Esto debe corregirse, es una mala práctica-->
+    <h3>Departamento</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el departamento" formControlName="department">
+        <mat-label>Seleccionar el departamento</mat-label>
+        <mat-select matNativeControl formControlName="department" required>
+            <mat-option value="Amazonas">Amazonas</mat-option>
+            <mat-option value="Antioquia">Antioquia</mat-option>
+            <mat-option value="Arauca">Arauca</mat-option>
+            <mat-option value="Atlántico">Atlántico</mat-option>
+            <mat-option value="Bolívar">Bolívar</mat-option>
+            <mat-option value="Boyacá">Boyacá</mat-option>
+            <mat-option value="Caldas">Caldas</mat-option>
+            <mat-option value="Caquetá">Caquetá</mat-option>
+            <mat-option value="Casanare">Casanare</mat-option>
+            <mat-option value="Cauca">Cauca</mat-option>
+            <mat-option value="Cesar">Cesar</mat-option>
+            <mat-option value="Chocó">Chocó</mat-option>
+            <mat-option value="Córdoba">Córdoba</mat-option>
+            <mat-option value="Cundinamarca">Cundinamarca</mat-option>
+            <mat-option value="Guainía">Guainía</mat-option>
+            <mat-option value="Guaviare">Guaviare</mat-option>
+            <mat-option value="Huila">Huila</mat-option>
+            <mat-option value="La Guajira">La Guajira</mat-option>
+            <mat-option value="Magdalena">Magdalena</mat-option>
+            <mat-option value="Meta">Meta</mat-option>
+            <mat-option value="Nariño">Nariño</mat-option>
+            <mat-option value="Norte de Santander">Norte de Santander</mat-option>
+            <mat-option value="Putumayo">Putumayo</mat-option>
+            <mat-option value="Quindío">Quindío</mat-option>
+            <mat-option value="Risaralda">Risaralda</mat-option>
+            <mat-option value="San Andrés y Providencia">San Andrés y Providencia</mat-option>
+            <mat-option value="Santander">Santander</mat-option>
+            <mat-option value="Sucre">Sucre</mat-option>
+            <mat-option value="Tolima">Tolima</mat-option>
+            <mat-option value="Valle del Cauca">Valle del Cauca</mat-option>
+            <mat-option value="Vaupés">Vaupés</mat-option>
+            <mat-option value="Vichada">Vichada</mat-option>
+        </mat-select>
     </mat-form-field>
 
 
-<!-- CIUDAD -->
-<h3>Ciudad</h3>
+    <!-- CIUDAD -->
+    <h3>Ciudad</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese la ciudad" 
-            formControlName="city">
+        <input matInput type="text" placeholder="Ingrese la ciudad" formControlName="city">
     </mat-form-field>
 
-<!-- DIRECCION -->
-<h3>Dirección</h3>
+    <!-- DIRECCION -->
+    <h3>Dirección</h3>
     <mat-form-field class="example-full-width">
-        <input matInput  placeholder="Ingrese la dirección" formControlName="address">
+        <input matInput placeholder="Ingrese la dirección" formControlName="address">
     </mat-form-field>
 
-<!-- EMAIL -->
-<h3>Email</h3>
+    <!-- EMAIL -->
+    <h3>Email</h3>
     <mat-form-field class="example-full-width">
         <input matInput type="text" placeholder="Ingrese el email" formControlName="mail">
     </mat-form-field>
 
-<!-- TELEFONO -->
-<h3>Teléfono</h3>
+    <!-- TELEFONO -->
+    <h3>Teléfono</h3>
     <mat-form-field class="example-full-width">
-        <input matInput  placeholder="Ingrese el teléfono" formControlName="phone">
+        <input matInput placeholder="Ingrese el teléfono" formControlName="phone">
     </mat-form-field>
 
-<!-- NUMERO EMPLEADOS -->
-<h3>Numero empleados</h3>
+    <!-- TAMAÑO -->
+    <h3>Tamaño</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el numero de empleados"  formControlName="numberEmployee">
+        <mat-label>Ingrese el tamaño de la empresa</mat-label>
+        <mat-select matNativeControl formControlName="size" required>
+            <mat-option value="Pequeña">Pequeña</mat-option>
+            <mat-option value="Mediana">Mediana</mat-option>
+            <mat-option value="Grande">Grande</mat-option>
+        </mat-select>
     </mat-form-field>
 
-<!-- TAMAÑO -->
-<h3>Tamaño</h3>
+
+    <!-- NUMERO EMPLEADOS -->
+    <h3>Numero empleados</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el tamaño de la empresa"  formControlName="size">
+        <input matInput type="text" placeholder="Ingrese el numero de empleados" formControlName="numberEmployee">
     </mat-form-field>
 
-<!-- VIGILADO -->
-<h3>Vigilado</h3>
+
+    <!-- VIGILADO -->
+    <h3>Vigilado</h3>
     <mat-form-field class="example-full-width">
+        <mat-label>La empresa es vigilada por:</mat-label>
+        <mat-select>
+            <mat-option value="Secretaría de salud municipal">Secretaría de salud municipal</mat-option>
+            <mat-option value="INVIMA">INVIMA</mat-option>
+        </mat-select>
         <input matInput type="text" placeholder="Ingrese el organismo que la vigila" formControlName="guarded">
     </mat-form-field>
 
-<!-- LOGO URL -->
-<h3>Logo URL</h3>
+    <!-- LOGO URL -->
+    <h3>Logo URL</h3>
     <mat-form-field class="example-full-width">
         <input matInput placeholder="Ingrese la url del logo de la compañía" required formControlName="logoURL">
     </mat-form-field>
 
-
-<!-- USUARIO GRABADO -->
-
-<!-- FECHA GRABADO -->
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameCliente.invalid">
         <mat-icon>done</mat-icon>
