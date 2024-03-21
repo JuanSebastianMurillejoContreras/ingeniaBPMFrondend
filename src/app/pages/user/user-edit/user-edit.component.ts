@@ -6,10 +6,8 @@ import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/route
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Cliente } from 'src/app/model/cliente';
-import { CompanyType } from 'src/app/model/companyType';
 import { Usuario } from 'src/app/model/usuario';
 import { ClienteService } from 'src/app/service/cliente.service';
-import { CompanyTypeService } from 'src/app/service/companyType.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component( {
@@ -24,8 +22,8 @@ export class UserEditComponent implements OnInit {
   id: number;
   isEdit: boolean;
   form: FormGroup;
-  hide= true;
-  
+  hide = true;
+
   client: Cliente[];
   clientControl: FormControl = new FormControl();
   clientFiltered$: Observable<Cliente[]>;
@@ -97,7 +95,7 @@ export class UserEditComponent implements OnInit {
   initForm() {
     if ( this.isEdit ) {
       this.usuarioService.findById( this.id ).subscribe( data => {
-        this.form.setValue( {
+        this.form.patchValue( {
           'idUserData': data.idUserData,
           'client': data.client,
           'identityType': data.identityType,
@@ -138,6 +136,7 @@ export class UserEditComponent implements OnInit {
     usuario.mail = this.form.value['mail'];
     usuario.companyPosition = this.form.value['companyPosition'];
     usuario.userName = this.form.value['userName'];
+    usuario.password = this.form.value['password'];
     usuario.privilege = this.form.value['privilege'];
     usuario.isActive = this.form.value['isActive'];
 

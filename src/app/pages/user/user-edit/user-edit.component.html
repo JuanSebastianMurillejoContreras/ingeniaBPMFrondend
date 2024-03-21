@@ -1,4 +1,4 @@
-<form class="example-container" [formGroup]="form" #frmnameUser="ngForm" (submit)="operate()">
+<form class="example-container" [formGroup]="form" #frmnameUsuario="ngForm" (submit)="operate()">
     <div>
         <h1>Usuario</h1>
         <h2>Formulario de registro de usuario</h2>
@@ -27,12 +27,12 @@
     <h3>Tipo de documento de identidad</h3>
     <mat-form-field class="example-full-width">
         <mat-label>Tipo de documento de identidad</mat-label>
-        <mat-select matNativeControl required>
-            <mat-option value="Cédula de ciudadania">Cedula de ciudadania</mat-option>
+        <mat-select matNativeControl formControlName="identityType" required>
+            <mat-option value="Cédula de ciudadania">Cédula de ciudadania</mat-option>
             <mat-option value="Cédula de extrangería">Cédula de extrangería</mat-option>
+            <mat-option value="Tarjeta de Identidad">Tarjeta de Identidad</mat-option>
+            <mat-option value="Pasaporte">Pasaporte</mat-option>
         </mat-select>
-
-        <input matInput placeholder="Ingrese el tipo de documento de identidad" formControlName="identityType">
     </mat-form-field>
 
 
@@ -57,7 +57,7 @@
     <h3>Primer nombre</h3>
     <mat-form-field class="">
         <input matInput placeholder="Primer nombre" minlength="2" maxlength="30" required
-            pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}" formControlName="firstName">
+        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstName">
         <small *ngIf="form.get('firstName').hasError('required') && form.get('firstName').touched">
             Debe ingresar el nombre
         </small>
@@ -84,7 +84,7 @@
     <h3>Primer apellido</h3>
     <mat-form-field class="">
         <input matInput placeholder="Primer nombre" minlength="2" maxlength="30" required
-            pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}" formControlName="firstSurname">
+        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstSurname">
         <small *ngIf="form.get('firstSurname').hasError('required') && form.get('firstSurname').touched">
             Debe ingresar el apellido
         </small>
@@ -202,12 +202,10 @@
     <h3>Privilegio</h3>
     <mat-form-field class="example-full-width">
         <mat-label>Seleccionar el privilegio del usuario</mat-label>
-        <mat-select matNativeControl required>
+        <mat-select matNativeControl formControlName="privilege" required>
             <mat-option value="Administrador">Administrador</mat-option>
             <mat-option value="Usuario">Usuario</mat-option>
         </mat-select>
-
-        <input matInput placeholder="Seleccionar el privilegio del usuario" formControlName="privilege">
     </mat-form-field>
 
 
@@ -215,17 +213,16 @@
     <h3>Activo</h3>
     <mat-form-field class="example-full-width">
         <mat-label>¿Esta activo el usuario?</mat-label>
-        <mat-select matNativeControl required>
+        <mat-select matNativeControl formControlName="isActive" required>
             <mat-option value="Si">Si</mat-option>
             <mat-option value="No">No</mat-option>
         </mat-select>
 
-        <input matInput placeholder="Seleccionar el privilegio del usuario" formControlName="isActive">
-    </mat-form-field>
+        </mat-form-field>
 
 
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameUser.invalid">
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameUsuario.invalid">
         <mat-icon>done</mat-icon>
         <span>Done</span>
     </button>

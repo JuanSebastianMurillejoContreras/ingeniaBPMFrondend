@@ -110,8 +110,6 @@ export class ClienteEditComponent implements OnInit {
           'logoURL': data.logoURL
 
         } )
-        console.log(data.name)
-        console.log(data.logoURL)
       } );
     }
   }
