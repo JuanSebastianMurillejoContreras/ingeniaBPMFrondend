@@ -3,6 +3,12 @@
 <div class="table-container">
 
     <div [hidden]="checkChildren()">
+        <mat-label>
+            <div>
+                <h1>Usuarios</h1>
+            </div>
+        </mat-label>
+
         <mat-form-field>
             <mat-label>Buscar</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Buscar usuario" #input>
