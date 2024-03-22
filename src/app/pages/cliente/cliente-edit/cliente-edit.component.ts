@@ -34,7 +34,6 @@ export class ClienteEditComponent implements OnInit {
     private router: Router,
     private clienteService: ClienteService,
     private companyTypeService: CompanyTypeService,
-    private _snackBar: MatSnackBar
   ) { }
 
 
@@ -45,14 +44,14 @@ export class ClienteEditComponent implements OnInit {
       'nit': new FormControl( '', [Validators.required, Validators.minLength( 8 ), Validators.maxLength( 12 )] ),
       'name': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 40 )] ),
       'companyType': this.companyTypeControl,
-      'department': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
+      'department': new FormControl( '', [Validators.required] ),
       'city': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
       'address': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
       'mail': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 30 )] ),
       'phone': new FormControl( '', [Validators.required, Validators.minLength( 9 ), Validators.maxLength( 12 )] ),
       'numberEmployee': new FormControl( '', [Validators.required, Validators.minLength( 1 ), Validators.maxLength( 5 )] ),
       'size': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 10 )] ),
-      'guarded': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
+      'guarded': new FormControl( '', [Validators.required]),
       'logoURL': new FormControl( '', [Validators.required, Validators.minLength( 1 ), Validators.maxLength( 80 )] ),
     } );
 

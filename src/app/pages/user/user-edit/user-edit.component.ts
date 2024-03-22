@@ -1,8 +1,6 @@
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -16,7 +14,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
   styleUrls: ['./user-edit.component.css'],
-  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet, MatGridListModule]
+  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
 } )
 export class UserEditComponent implements OnInit {
 
@@ -34,7 +32,6 @@ export class UserEditComponent implements OnInit {
     private router: Router,
     private clientService: ClienteService,
     private usuarioService: UsuarioService,
-    private _snackBar: MatSnackBar
   ) { }
 
 
@@ -42,8 +39,8 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup( {
       'idUserData': new FormControl( 0 ),
-      'client': new FormControl( '', [Validators.required, Validators.minLength( 8 ), Validators.maxLength( 12 )] ),
-      'identityType': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 40 )] ),
+      'client': this.clientControl,
+      'identityType': new FormControl( '', [Validators.required] ),
       'numberIdentity': new FormControl( '', [Validators.required, Validators.minLength( 7 ), Validators.maxLength( 12 )] ),
       'firstName': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
       'lastName': new FormControl( '', [Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
@@ -96,7 +93,7 @@ export class UserEditComponent implements OnInit {
   initForm() {
     if ( this.isEdit ) {
       this.usuarioService.findById( this.id ).subscribe( data => {
-        this.form.patchValue( {
+        this.form.setValue( {
           'idUserData': data.idUserData,
           'client': data.client,
           'identityType': data.identityType,

@@ -7,16 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { SpecificGoalComponent } from './pages/specific-goal/specific-goal.component';
-import { SpecificGoalEditComponent } from './pages/specific-goal/specific-goal-edit/specific-goal-edit.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    SpecificGoalComponent,
-    SpecificGoalEditComponent,
+    LoginComponent
 
   ],
   imports: [

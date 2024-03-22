@@ -1,4 +1,4 @@
-<form class="example-container" [formGroup]="form" #frmnameUsuario="ngForm" (submit)="operate()">
+<form class="example-container" [formGroup]="form" #frmnameUser="ngForm" (submit)="operate()">
     <div>
         <h1>Usuario</h1>
         <h2>Formulario de registro de usuario</h2>
@@ -26,7 +26,7 @@
     <!-- TIPO DOCUMENTO IDENTIDAD -->
     <h3>Tipo de documento de identidad</h3>
     <mat-form-field class="example-full-width">
-        <mat-label>Tipo de documento de identidad</mat-label>
+        <mat-label>Seleccionar tipo de documento de identidad</mat-label>
         <mat-select matNativeControl formControlName="identityType" required>
             <mat-option value="Cédula de ciudadania">Cédula de ciudadania</mat-option>
             <mat-option value="Cédula de extrangería">Cédula de extrangería</mat-option>
@@ -68,6 +68,7 @@
         </small>
     </mat-form-field>
 
+
     <!-- SEGUNDO NOMBRE -->
     <h3>Segundo nombre</h3>
     <mat-form-field class="">
@@ -77,9 +78,6 @@
             El nombre no puede incluir números
         </small>
     </mat-form-field>
-
-
-
 
 
 
@@ -114,11 +112,11 @@
     <!-- TELEPHONE -->
     <h3>Telefono</h3>
     <mat-form-field>
-        <input matInput type="number" placeholder="Ingrese el número de teléfono" pattern="[0-9]{6,12}"
+        <input matInput type="number" placeholder="Ingrese el número de teléfono" pattern="[0-9]{6,9}" 
             formControlName="telephone">
         <mat-error>
             <span *ngIf="form.get('telephone').hasError('pattern')">
-                El número tener entre 6 y 12 dígitos numéricos.
+                El número tener entre 6 y 9 dígitos numéricos.
             </span>
         </mat-error>
     </mat-form-field>
@@ -150,9 +148,6 @@
         <small *ngIf="form.get('mail').hasError('minlength') && form.get('mail').dirty">
             Debe ingresar minimo 2 caracteres
         </small>
-        <!--<small *ngIf="form.get('mail').hasError('pattern') && form.get('mail').dirty">
-            Por favor, ingrese un correo electrónico válido.
-        </small>-->
     </mat-form-field>
 
 
@@ -193,7 +188,7 @@
     <h3>Contraseña</h3>
     <mat-form-field>
         <mat-label>Ingrese su contraseña</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -224,8 +219,7 @@
     </mat-form-field>
 
 
-
-    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameUsuario.invalid">
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameUser.invalid">
         <mat-icon>done</mat-icon>
         <span>Done</span>
     </button>

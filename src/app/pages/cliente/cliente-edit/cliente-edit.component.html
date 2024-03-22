@@ -15,6 +15,7 @@
         <input matInput type="number" placeholder="Ingrese el NIT del cliente" required pattern="[0-9]{8,12}"
             formControlName="nit">
         <mat-error *ngIf="form.get('nit').invalid && (form.get('nit').dirty )">
+
             <span *ngIf="form.get('nit').hasError('required')">
                 Debe ingresar un número para registrar el NIT.
             </span>
@@ -29,24 +30,46 @@
     <!-- NOMBRE -->
     <h3>Nombre</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese el nombre del cliente" formControlName="name">
+        <input matInput placeholder="Ingrese el nombre del cliente" formControlName="name" required
+            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,40}">
+
+        <mat-error *ngIf="form.get('name').invalid && (form.get('name').dirty )">
+
+            <span *ngIf="form.get('name').hasError('required')">
+                Debe ingresar el nombre del cliente.
+            </span>
+            <span *ngIf="form.get('name').hasError('pattern')">
+                El nombre debe tener entre 2 y 40 caracteres.
+            </span>
+
+        </mat-error>
+
     </mat-form-field>
 
     <!-- TIPO DE EMPRESA -->
     <h3>Tipo de empresa</h3>
     <mat-form-field>
-        <input matInput placeholder="Seleccione el tipo de empresa a la que pertence el cliente" required=""
+        <input matInput placeholder="Seleccione el tipo de empresa a la que pertence el cliente" required
             formControlName="companyType" [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
+
+            <mat-error *ngIf="form.get('companyType').invalid && (form.get('companyType').dirty )">
+                <span *ngIf="form.get('companyType').hasError('required')">
+                    Debe seleccionar un tipo de empresa.
+                </span>
+            </mat-error>
+
         <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
             <mat-option *ngFor="let c of companyTypeFiltered$ | async" [value]="c">
                 {{c.nameCompanyType}}
-            </mat-option>
+            </mat-option>           
         </mat-autocomplete>
+
+        
     </mat-form-field>
 
 
     <!-- DEPARTAMENTO-->
-        <!-- Esto debe corregirse, es una mala práctica-->
+    <!-- Esto debe corregirse, es una mala práctica-->
     <h3>Departamento</h3>
     <mat-form-field class="example-full-width">
         <mat-label>Seleccionar el departamento</mat-label>
@@ -90,25 +113,25 @@
     <!-- CIUDAD -->
     <h3>Ciudad</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese la ciudad" formControlName="city">
+        <input matInput type="text" placeholder="Ingrese la ciudad" formControlName="city" required>
     </mat-form-field>
 
     <!-- DIRECCION -->
     <h3>Dirección</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese la dirección" formControlName="address">
+        <input matInput placeholder="Ingrese la dirección" formControlName="address" required>
     </mat-form-field>
 
     <!-- EMAIL -->
     <h3>Email</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el email" formControlName="mail">
+        <input matInput type="text" placeholder="Ingrese el email" formControlName="mail" required>
     </mat-form-field>
 
     <!-- TELEFONO -->
     <h3>Teléfono</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese el teléfono" formControlName="phone">
+        <input matInput type="number" placeholder="Ingrese el teléfono" formControlName="phone" required>
     </mat-form-field>
 
     <!-- TAMAÑO -->
@@ -126,7 +149,7 @@
     <!-- NUMERO EMPLEADOS -->
     <h3>Numero empleados</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el numero de empleados" formControlName="numberEmployee">
+        <input matInput type="number" placeholder="Ingrese el numero de empleados" formControlName="numberEmployee" required>
     </mat-form-field>
 
 
@@ -134,11 +157,10 @@
     <h3>Vigilado</h3>
     <mat-form-field class="example-full-width">
         <mat-label>La empresa es vigilada por:</mat-label>
-        <mat-select>
+        <mat-select formControlName="guarded" required>
             <mat-option value="Secretaría de salud municipal">Secretaría de salud municipal</mat-option>
             <mat-option value="INVIMA">INVIMA</mat-option>
         </mat-select>
-        <input matInput type="text" placeholder="Ingrese el organismo que la vigila" formControlName="guarded">
     </mat-form-field>
 
     <!-- LOGO URL -->

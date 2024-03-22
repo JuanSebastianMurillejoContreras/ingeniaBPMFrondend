@@ -10,6 +10,8 @@ import { GlossaryEditComponent } from './glossary/glossary-edit/glossary-edit.co
 import { GeneralGoalService } from '../service/generalGoal.service';
 import { GeneralGoalComponent } from './general-goal/general-goal.component';
 import { GeneralGoalEditComponent } from './general-goal/general-goal-edit/general-goal-edit.component';
+import { SpecificGoalComponent } from './specific-goal/specific-goal.component';
+import { SpecificGoalEditComponent } from './specific-goal/specific-goal-edit/specific-goal-edit.component';
 
 
 
@@ -83,6 +85,21 @@ export const PagesRoutes: Routes = [
         component: GeneralGoalEditComponent,
       },
     ],
+  },
+  {
+    path: 'specificgoal',
+    component: SpecificGoalComponent,
+    children: [
+      {
+        path: 'new',
+        component: SpecificGoalEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: SpecificGoalEditComponent,
+      },
+    ],
   }
+
 
 ];

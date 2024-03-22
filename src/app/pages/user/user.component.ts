@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -17,7 +17,7 @@ import { UsuarioService } from 'src/app/service/usuario.service';
   styleUrls: ['./user.component.css'],
   imports: [MaterialModule, RouterLink, RouterOutlet]
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
 
   displayedColumns: string[] = ['idUserData', "client", "numberIdentity", "firstName", "lastName", "firstSurname", "lastSurname", "userName", 'actions'];
 

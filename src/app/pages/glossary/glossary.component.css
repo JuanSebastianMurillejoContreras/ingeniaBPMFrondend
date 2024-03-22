@@ -1,5 +1,5 @@
 .table-container {
-    margin: 150px;/* Espacio alrededor de la tabla */
+    margin: 100px;/* Espacio alrededor de la tabla */
   }
   
   
@@ -15,7 +15,7 @@
   
   /* Estilo para las celdas de la tabla */
   td, th {
-    text-align: center; /* Centra el texto horizontalmente en las celdas */
+    text-align: justify; /* Centra el texto horizontalmente en las celdas */
     padding: 12px; /* Espacio interno alrededor del contenido de la celda */
     border: 1px solid #dddddd; /* Bordes suaves para las celdas */
   }
