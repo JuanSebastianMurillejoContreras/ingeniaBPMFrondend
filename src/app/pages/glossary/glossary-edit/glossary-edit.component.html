@@ -21,10 +21,10 @@
         </small>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
+    <mat-form-field class="example-full-width, invalid">
         <mat-label>Escribe la definción</mat-label>
 
-        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" required
+        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" rows="10" required
                   formControlName="definition"></textarea>
 
         <div *ngIf="form.get('definition').invalid && form.get('definition').dirty">

@@ -8,7 +8,6 @@ import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Cliente } from 'src/app/model/cliente';
 import { Usuario } from 'src/app/model/usuario';
-import { ClienteService } from 'src/app/service/cliente.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component({
