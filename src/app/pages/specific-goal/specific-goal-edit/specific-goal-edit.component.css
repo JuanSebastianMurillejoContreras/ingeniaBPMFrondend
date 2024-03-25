@@ -1,0 +1,19 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    margin: 80px; /* Espacio alrededor de la tabla */
+}
+
+.example-container>* {
+    width: 100%;
+    border-radius: 10px !important; 
+}
+
+.example-full-width {
+    width: 100%;
+  }
+
+.invalid {
+    color: red;
+}
+  

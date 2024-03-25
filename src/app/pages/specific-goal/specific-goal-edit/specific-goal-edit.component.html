@@ -1,1 +1,59 @@
-<p>specific-goal-edit works!</p>
+<form class="example-container" [formGroup]="form" #frmnameSpecificGoal="ngForm" (submit)="operate()">
+
+    <div>
+        <h1>Objetivo específico</h1>
+        <h2>Formulario de registro</h2>
+    </div>
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idSpecificGoal">
+        </mat-form-field>
+    </div>
+        
+    <h3>Objetivo Específico</h3> 
+    <p>{{ generalGoal?.generalGoal }}</p>
+
+    <mat-form-field class="example-full-width">        
+        <mat-label>Escribe la definción</mat-label>        
+
+        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" rows="10" required
+                  formControlName="specificGoal"></textarea>
+
+        <div *ngIf="form.get('specificGoal').invalid && form.get('specificGoal').dirty">
+            <small *ngIf="form.get('specificGoal').hasError('required')">
+                Debe ingresar una definición para el glosario
+            </small>
+            <small *ngIf="form.get('specificGoal').hasError('minlength')">
+                Debe ingresar mínimo 3 caracteres
+            </small>
+            <small *ngIf="form.get('specificGoal').hasError('maxlength')">
+                Debe ingresar máximo 1.200 caracteres
+            </small>
+        </div>
+
+          <!-- Botón para agregar más objetivos específicos -->
+  <button mat-raised-button color="primary"><!-- (click)="addSpecificGoal()"-->>
+    Agregar objetivo específico
+  </button>
+
+  <!-- Lista de objetivos específicos agregados
+  <div *ngFor="let addSpecificGoal of addSpecificGoal; let i = index" class="specific-goal-item">
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Objetivo Específico" [formControl]="getSpecificGoalControl(i)"></textarea>
+    </mat-form-field>
+  </div>
+-->
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameSpecificGoal.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/specificgoal">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

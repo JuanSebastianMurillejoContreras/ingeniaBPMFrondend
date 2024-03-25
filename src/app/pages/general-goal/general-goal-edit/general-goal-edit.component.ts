@@ -14,7 +14,7 @@ import { GeneralGoalService } from 'src/app/service/generalGoal.service';
   styleUrls: ['./general-goal-edit.component.css'],
 
 
-  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
+  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet ]
 })
 export class GeneralGoalEditComponent implements OnInit {
 
@@ -49,7 +49,7 @@ export class GeneralGoalEditComponent implements OnInit {
         this.form = new FormGroup({
           'idGeneralGoal': new FormControl(data.idGeneralGoal),
           'generalGoal': new FormControl(data.generalGoal, [Validators.required, Validators.minLength(2), Validators.maxLength(1200)
-            
+      
           ]),    
         });
       });

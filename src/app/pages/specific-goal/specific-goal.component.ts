@@ -20,7 +20,7 @@ import { SpecificGoalService } from 'src/app/service/specificGoal.service';
 })
 export class SpecificGoalComponent implements OnInit {
 
-  displayedColumns: string[] = ['idSpecificGoal', 'generalGoal', 'specificGoal','actions'];
+  displayedColumns: string[] = ['idSpecificGoal', 'specificGoal', 'generalGoal', 'actions'];
   dataSource: MatTableDataSource<SpecificGoal>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
