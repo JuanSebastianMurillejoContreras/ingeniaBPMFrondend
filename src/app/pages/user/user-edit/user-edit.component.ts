@@ -110,9 +110,9 @@ export class UserEditComponent implements OnInit {
           'password': data.password,
           'privilege': data.privilege,
           'isActive': data.isActive
-
-        } )
-
+          
+        })
+        console.log(data.identityType)
       } );
     }
   }

@@ -106,10 +106,9 @@ export class ClienteEditComponent implements OnInit {
           'numberEmployee': data.numberEmployee,
           'size': data.size,
           'guarded': data.guarded,
-          'logoURL': data.logoURL
-
-        } )
-      } );
+          'logoURL': data.logoURL          
+        });
+      });
     }
   }
 

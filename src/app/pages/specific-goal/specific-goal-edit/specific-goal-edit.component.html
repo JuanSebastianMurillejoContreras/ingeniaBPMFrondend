@@ -1,9 +1,5 @@
 <form class="example-container" [formGroup]="form" #frmnameSpecificGoal="ngForm" (submit)="operate()">
 
-    <div>
-        <h1>Objetivo específico</h1>
-        <h2>Formulario de registro</h2>
-    </div>
 
     <div [hidden]="true">
         <mat-form-field class="example-full-width">
@@ -11,9 +7,23 @@
         </mat-form-field>
     </div>
         
-    <h3>Objetivo Específico</h3> 
-    <p>{{ generalGoal?.generalGoal }}</p>
+     <!-- SPECIFIC GOAL -->
+    <h3></h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione el objetivo específico" required
+            formControlName="generalGoal" [matAutocomplete]="autoGeneralGoal" [formControl]="generalGoalControl">
 
+        <mat-autocomplete #autoGeneralGoal="matAutocomplete" [displayWith]="showGeneralGoal">
+            <mat-option *ngFor="let c of generalGoalFiltered$ | async" [value]="c">                
+                {{c.generalGoal}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+
+
+
+<!-- GENERAL GOAL -->
     <mat-form-field class="example-full-width">        
         <mat-label>Escribe la definción</mat-label>        
 
@@ -31,19 +41,6 @@
                 Debe ingresar máximo 1.200 caracteres
             </small>
         </div>
-
-          <!-- Botón para agregar más objetivos específicos -->
-  <button mat-raised-button color="primary"><!-- (click)="addSpecificGoal()"-->>
-    Agregar objetivo específico
-  </button>
-
-  <!-- Lista de objetivos específicos agregados
-  <div *ngFor="let addSpecificGoal of addSpecificGoal; let i = index" class="specific-goal-item">
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Objetivo Específico" [formControl]="getSpecificGoalControl(i)"></textarea>
-    </mat-form-field>
-  </div>
--->
     </mat-form-field>
 
 

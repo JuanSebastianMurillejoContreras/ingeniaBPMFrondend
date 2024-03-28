@@ -1,0 +1,66 @@
+<form class="example-container" [formGroup]="form" #frmnameProgram="ngForm" (submit)="operate()">
+
+    <h1>Marco teórico</h1>
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idProgram">
+        </mat-form-field>
+    </div>
+
+    <!-- Code -->
+    <h2>Código</h2>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Código" formControlName="code" required>
+        <mat-error *ngIf="form.get('code').invalid && (form.get('code').dirty )">
+            <span *ngIf="form.get('code').hasError('required')">
+                Debe ingresar el código.
+            </span>
+        </mat-error>
+    </mat-form-field>
+
+
+    <!-- Code -->
+    <h2>Nombre del programa</h2>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nombre" formControlName="name" required>
+        <mat-error *ngIf="form.get('name').invalid && (form.get('name').dirty )">
+            <span *ngIf="form.get('name').hasError('required')">
+                Debe ingresar el nombre
+            </span>
+        </mat-error>
+    </mat-form-field>
+
+
+
+    <!-- Scope -->
+    <h2>Alcance</h2>
+    <mat-form-field class="example-full-width">
+        <mat-label>Escriba el alcande del programa</mat-label>
+        <textarea matInput placeholder="Alcance del programa" minlength="3" maxlength="1200" rows="10" required
+            formControlName="scope"></textarea>
+
+        <div *ngIf="form.get('scope').invalid && form.get('scope').dirty">
+            <small *ngIf="form.get('scope').hasError('required')">
+                Debe ingresar consideracion general
+            </small>
+            <small *ngIf="form.get('scope').hasError('minlength')">
+                Debe ingresar mínimo 3 caracteres
+            </small>
+            <small *ngIf="form.get('scope').hasError('maxlength')">
+                Debe ingresar máximo 1.200 caracteres
+            </small>
+        </div>
+    </mat-form-field>
+
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProgram.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/theoreticalframework">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

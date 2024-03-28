@@ -7,7 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { GeneralGoalService } from 'src/app/service/generalGoal.service';
 import { SpecificGoalService } from 'src/app/service/specificGoal.service';
 import { GeneralGoal } from 'src/app/model/generalGoal';
-import { generate, switchMap } from 'rxjs';
+import { Observable, generate, map, switchMap } from 'rxjs';
 import { SpecificGoal } from 'src/app/model/specificGoal';
 
 @Component( {
@@ -19,13 +19,13 @@ import { SpecificGoal } from 'src/app/model/specificGoal';
 } )
 export class SpecificGoalEditComponent implements OnInit {
 
-
   id: number;
   isEdit: boolean;
   form: FormGroup;
 
-  generalGoal: GeneralGoal;
-  idgeneralGoal: number;
+  generalGoal: GeneralGoal[];
+  generalGoalControl: FormControl = new FormControl();
+  generalGoalFiltered$: Observable<GeneralGoal[]>;
   
   constructor(
     private route: ActivatedRoute,
@@ -37,31 +37,52 @@ export class SpecificGoalEditComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       'idSpecificGoal': new FormControl(0),
+      'generalGoal': this.generalGoalControl,
       'specificGoal': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(1200)]),
     });
 
-    this.route.params.subscribe(data => {
+    this.loadInitialData();
+    this.generalGoalFiltered$ = this.generalGoalControl.valueChanges.pipe(map( val => this.filterGeneralGoal( val ) ) );
+
+    this.route.params.subscribe( data => {
       this.id = data['id'];
       this.isEdit = data['id'] != null;
       this.initForm();
-    })
-
+    } )
   }
 
+  filterGeneralGoal( val: any ): GeneralGoal[] {
+    if ( !val ) {
+      return this.generalGoal;
+    }
+
+    if ( val?.idGeneralGoal > 0 ) {
+      return this.generalGoal.filter( el =>
+        el.generalGoal.toLowerCase().includes( val.generalGoal.toLowerCase() ) );
+    } else {
+      return this.generalGoal.filter( el =>
+        el.generalGoal.toLowerCase().includes( val?.toLowerCase() ) );
+    }
+  }
+
+
+  loadInitialData() {
+    this.generalGoalService.findAll().subscribe( data => this.generalGoal = data );
+  }
+
+  showGeneralGoal( val: any ) {
+    return val ? `${val.generalGoal}` : val;
+  }
+
+
   initForm() {
-    if (this.isEdit) {
-
-      this.specificGoalService.findById(this.id).subscribe(data => {
-        this.form = new FormGroup({
-          'idSpecificGoal': new FormControl(data.idSpecificGoal),
-          'specificGoal': new FormControl(data.specificGoal, [Validators.required, Validators.minLength(2), Validators.maxLength(1200)]),    
-        });
-         // Obtener el generalGoal correspondiente
-         this.generalGoalService.findById(data.generalGoal.idGeneralGoal).subscribe(generalGoal => {
-          this.idgeneralGoal = generalGoal.idGeneralGoal;
-          this.generalGoal = generalGoal;
-
-      });
+    if ( this.isEdit ) {
+      this.specificGoalService.findById( this.id ).subscribe( data => {
+        this.form.setValue( {
+          'idSpecificGoal': data.idSpecificGoal,
+          'generalGoal': data.generalGoal,
+          'specificGoal': data.specificGoal,
+        });      
       });
     }
   }
@@ -74,7 +95,7 @@ export class SpecificGoalEditComponent implements OnInit {
     if (this.form.invalid) { return; }
     let specificGoal = new SpecificGoal();
     specificGoal.idSpecificGoal = this.form.value['idSpecificGoal'];
-    specificGoal.generalGoal = this.generalGoal;        
+    specificGoal.generalGoal = this.form.value['generalGoal']
     specificGoal.specificGoal = this.form.value['specificGoal'];
     
 

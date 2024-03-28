@@ -12,8 +12,6 @@ import { GeneralGoalService } from 'src/app/service/generalGoal.service';
   standalone: true,
   templateUrl: './general-goal-edit.component.html',
   styleUrls: ['./general-goal-edit.component.css'],
-
-
   imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet ]
 })
 export class GeneralGoalEditComponent implements OnInit {

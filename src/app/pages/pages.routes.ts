@@ -12,6 +12,10 @@ import { GeneralGoalComponent } from './general-goal/general-goal.component';
 import { GeneralGoalEditComponent } from './general-goal/general-goal-edit/general-goal-edit.component';
 import { SpecificGoalComponent } from './specific-goal/specific-goal.component';
 import { SpecificGoalEditComponent } from './specific-goal/specific-goal-edit/specific-goal-edit.component';
+import { TheoreticalFrameworkComponent } from './theoretical-framework/theoretical-framework.component';
+import { TheoreticalFrameworkEditComponent } from './theoretical-framework/theoretical-framework-edit/theoretical-framework-edit.component';
+import { ProgramComponent } from './program/program.component';
+import { ProgramEditComponent } from './program/program-edit/program-edit.component';
 
 
 
@@ -97,6 +101,36 @@ export const PagesRoutes: Routes = [
       {
         path: 'edit/:id',
         component: SpecificGoalEditComponent,
+      },
+    ],
+  },
+
+  {
+    path: 'theoreticalframework',
+    component: TheoreticalFrameworkComponent,
+    children: [
+      {
+        path: 'new',
+        component: TheoreticalFrameworkEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: TheoreticalFrameworkEditComponent,
+      },
+    ],
+  },
+
+  {
+    path: 'program',
+    component: ProgramComponent,
+    children: [
+      {
+        path: 'new',
+        component: ProgramEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ProgramEditComponent,
       },
     ],
   }

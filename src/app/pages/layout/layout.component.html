@@ -85,7 +85,7 @@
                     <mat-expansion-panel-header>
 
                         <mat-panel-title>
-                            2. PROGRAMA
+                            2. DISEÑO DEL PROGRAMA
                             <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
                         </mat-panel-title>
                     </mat-expansion-panel-header>
@@ -132,10 +132,11 @@
                         <mat-icon class="icon-menu">
                             <img src="assets/icons/monitoring.png" width="20" height="20">
                         </mat-icon>
-                        <span>2.5 Programa</span>
+                        <span>2.5 Nombre del programa</span>
                     </button>
                     <mat-divider></mat-divider>
 
+                   
                 </mat-expansion-panel>
             </mat-accordion>
 
@@ -150,6 +151,16 @@
                             <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/program" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/monitoring.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.6 Nombre del procedimiento</span>
+                    </button>
+                    <mat-divider></mat-divider>
 
                     <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
                         routerLink="/pages/companytype" style="cursor: pointer">
