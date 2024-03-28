@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { CompanyTypeEditComponent } from './companytype/companytype-edit/companytype-edit.component';
 import { CompanyTypeComponent } from './companytype/companytype.component';
-import { ClienteComponent } from './cliente/cliente.component';
-import { ClienteEditComponent } from './cliente/cliente-edit/cliente-edit.component';
+import { ClienteComponent } from './company/cliente.component';
+import { ClienteEditComponent, CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { GlossaryComponent } from './glossary/glossary.component';
@@ -35,16 +35,16 @@ export const PagesRoutes: Routes = [
     ],
   },
   {
-    path: 'cliente',
-    component: ClienteComponent,
+    path: 'company',
+    component: CompanyComponent,
     children: [
       {
         path: 'new',
-        component: ClienteEditComponent,
+        component: CompanyEditComponent,
       },
       {
         path: 'edit/:id',
-        component: ClienteEditComponent,
+        component: CompanyEditComponent,
       },
     ],
   },

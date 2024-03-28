@@ -4,9 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Cliente } from 'src/app/model/cliente';
+import { Cliente } from 'src/app/model/company';
 import { Usuario } from 'src/app/model/usuario';
-import { ClienteService } from 'src/app/service/cliente.service';
+import { ClienteService } from 'src/app/service/company.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component( {

@@ -1,4 +1,4 @@
-import { Cliente } from "./cliente"
+import { Cliente } from "./company"
 
 export class Usuario{
     idUserData: number

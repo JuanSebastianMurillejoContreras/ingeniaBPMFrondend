@@ -10,16 +10,16 @@
         </mat-label>
         <mat-form-field>
             <mat-label>Buscar</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar cliente" #input>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar compañía" #input>
         </mat-form-field>
 
         <div class="mat-elevation-z8">
             <table mat-table [dataSource]="dataSource" matSort>
 
                 <!-- ID Column -->
-                <ng-container matColumnDef="idClient">
+                <ng-container matColumnDef="idCompany">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th> <!-- [style.display]="'none'" -->
-                    <td mat-cell *matCellDef="let row"> {{row.idClient}} </td> <!-- [style.display]="'none'" -->
+                    <td mat-cell *matCellDef="let row"> {{row.idCompany}} </td> <!-- [style.display]="'none'" -->
                 </ng-container>
 
                 <!-- Tipo empresa -->
@@ -44,10 +44,10 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef> Acciones </th>
                     <td mat-cell *matCellDef="let row">
-                        <button mat-button color="primary" [routerLink]="['edit', row.idClient]">
+                        <button mat-button color="primary" [routerLink]="['edit', row.idCompany]">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-button color="warn" (click)="delete(row.idClient)">
+                        <button mat-button color="warn" (click)="delete(row.idCompany)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>
@@ -65,7 +65,7 @@
             <mat-paginator [pageSizeOptions]="[10, 25, 50, 100]"
                 aria-label="Select page of company type"></mat-paginator>
 
-            <button mat-fab class="add_color_button" id="fixedButton" style="float: right" routerLink="/pages/cliente/new">
+            <button mat-fab class="add_color_button" id="fixedButton" style="float: right" routerLink="/pages/company/new">
                 <mat-icon>add</mat-icon>
             </button>
         </div>

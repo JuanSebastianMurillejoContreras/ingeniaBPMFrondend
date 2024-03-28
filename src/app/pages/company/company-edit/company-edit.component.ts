@@ -5,21 +5,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Cliente } from 'src/app/model/cliente';
+import { Company } from 'src/app/model/company';
 import { CompanyType } from 'src/app/model/companyType';
-import { ClienteService } from 'src/app/service/cliente.service';
+import { CompanyService } from 'src/app/service/company.service';
 import { CompanyTypeService } from 'src/app/service/companyType.service';
 
 @Component( {
   standalone: true,
   selector: 'app-cliente-edit',
-  templateUrl: './cliente-edit.component.html',
-  styleUrls: ['./cliente-edit.component.css'],
+  templateUrl: './company-edit.component.html',
+  styleUrls: ['./company-edit.component.css'],
   imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
 } )
 
 
-export class ClienteEditComponent implements OnInit {
+export class CompanyEditComponent implements OnInit {
 
   id: number;
   isEdit: boolean;
@@ -32,7 +32,7 @@ export class ClienteEditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private clienteService: ClienteService,
+    private companyService: CompanyService,
     private companyTypeService: CompanyTypeService,
   ) { }
 
@@ -92,9 +92,9 @@ export class ClienteEditComponent implements OnInit {
 
   initForm() {
     if ( this.isEdit ) {
-      this.clienteService.findById( this.id ).subscribe( data => {
+      this.companyService.findById( this.id ).subscribe( data => {
         this.form.setValue( {
-          'idClient': data.idClient,
+          'idCompany': data.idCompany,
           'nit': data.nit,
           'name': data.name,
           'companyType': data.companyType,
@@ -115,40 +115,40 @@ export class ClienteEditComponent implements OnInit {
   operate() {
     if ( this.form.invalid ) { return; }
 
-    let cliente = new Cliente();
-    cliente.idClient = this.form.value['idClient'];
-    cliente.nit = this.form.value['nit'];
-    cliente.name = this.form.value['name'];
-    cliente.companyType = this.form.value['companyType'];
-    cliente.department = this.form.value['department'];
-    cliente.city = this.form.value['city'];
-    cliente.address = this.form.value['address'];
-    cliente.mail = this.form.value['mail'];
-    cliente.phone = this.form.value['phone'];
-    cliente.numberEmployee = this.form.value['numberEmployee'];
-    cliente.size = this.form.value['size'];
-    cliente.guarded = this.form.value['guarded'];
-    cliente.logoURL = this.form.value['logoURL'];
+    let company = new Company();
+    company.idCompany = this.form.value['idCompany'];
+    company.nit = this.form.value['nit'];
+    company.name = this.form.value['name'];
+    company.companyType = this.form.value['companyType'];
+    company.department = this.form.value['department'];
+    company.city = this.form.value['city'];
+    company.address = this.form.value['address'];
+    company.mail = this.form.value['mail'];
+    company.phone = this.form.value['phone'];
+    company.numberEmployee = this.form.value['numberEmployee'];
+    company.size = this.form.value['size'];
+    company.guarded = this.form.value['guarded'];
+    company.logoURL = this.form.value['logoURL'];
 
     if ( this.isEdit ) {
-      this.clienteService.update( cliente.idClient, cliente ).pipe( switchMap( () => {
-        return this.clienteService.findAll();
+      this.companyService.update( company.idCompany, company ).pipe( switchMap( () => {
+        return this.companyService.findAll();
       } ) )
         .subscribe( data => {
-          this.clienteService.setClienteChange( data );
-          this.clienteService.setMessageChange( 'Cliente actualizado!' )
+          this.companyService.setCompanyChange( data );
+          this.companyService.setMessageChange( 'Compañía actualizada!' )
 
         } );
     } else {
-      this.clienteService.save( cliente ).pipe( switchMap( () => {
-        return this.clienteService.findAll();
+      this.companyService.save( company ).pipe( switchMap( () => {
+        return this.companyService.findAll();
       } ) )
         .subscribe( data => {
-          this.clienteService.setClienteChange( data );
-          this.clienteService.setMessageChange( "Cliente creado!" )
+          this.companyService.setCompanyChange( data );
+          this.companyService.setMessageChange( "Compañia creada!" )
         } );
     }
-    this.router.navigate( ['/pages/cliente'] );
+    this.router.navigate( ['/pages/company'] );
   }
 
 

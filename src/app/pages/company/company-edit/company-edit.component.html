@@ -1,18 +1,18 @@
-<form class="example-container" [formGroup]="form" #frmnameCliente="ngForm" (submit)="operate()">
+<form class="example-container" [formGroup]="form" #frmnameCompany="ngForm" (submit)="operate()">
     <div>
-        <h1>Cliente</h1>
+        <h1>Empresa</h1>
         <h2>Formulario de registro</h2>
     </div>
     <div [hidden]="true">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="ID" required formControlName="idClient">
+            <input matInput placeholder="ID" required formControlName="idCompany">
         </mat-form-field>
     </div>
 
     <!-- NIT -->
     <h3>NIT</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Ingrese el NIT del cliente" required pattern="[0-9]{8,12}"
+        <input matInput type="number" placeholder="Ingrese el NIT de la empresa" required pattern="[0-9]{8,12}"
             formControlName="nit">
         <mat-error *ngIf="form.get('nit').invalid && (form.get('nit').dirty )">
 
@@ -30,7 +30,7 @@
     <!-- NOMBRE -->
     <h3>Nombre</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese el nombre del cliente" formControlName="name" required
+        <input matInput placeholder="Ingrese el nombre de la empresa" formControlName="name" required
             pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,40}">
 
         <mat-error *ngIf="form.get('name').invalid && (form.get('name').dirty )">
@@ -49,7 +49,7 @@
     <!-- TIPO DE EMPRESA -->
     <h3>Tipo de empresa</h3>
     <mat-form-field>
-        <input matInput placeholder="Seleccione el tipo de empresa a la que pertence el cliente" required
+        <input matInput placeholder="Seleccione el tipo de empresa" required
             formControlName="companyType" [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
 
             <mat-error *ngIf="form.get('companyType').invalid && (form.get('companyType').dirty )">
@@ -170,12 +170,12 @@
     </mat-form-field>
 
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameCliente.invalid">
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameCompany.invalid">
         <mat-icon>done</mat-icon>
         <span>Done</span>
     </button>
 
-    <button mat-raised-button color="accent" type="button" routerLink="/pages/cliente">
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/company">
         <mat-icon>cancel</mat-icon>
         <span>Cancel</span>
     </button>

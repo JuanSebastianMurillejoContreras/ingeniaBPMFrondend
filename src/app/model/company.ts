@@ -1,8 +1,7 @@
 import { CompanyType } from "./companyType"
-import { Department } from "./department"
 
-export class Cliente{
-    idClient: number
+export class Company{
+    idCompany: number
     companyType: CompanyType
     nit: number
     name: string

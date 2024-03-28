@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Cliente } from 'src/app/model/cliente';
-import { ClienteService } from 'src/app/service/cliente.service';
+import { Company } from 'src/app/model/company';
+import { ClienteService } from 'src/app/service/company.service';
 
 @Component( {
   standalone: true,
@@ -18,29 +18,29 @@ import { ClienteService } from 'src/app/service/cliente.service';
 } )
 export class ClienteComponent {
 
-  displayedColumns: string[] = ['idClient', "nit", "name", "companyType", 'actions'];
+  displayedColumns: string[] = ['idCompany', "nit", "name", "companyType", 'actions'];
   //"logoURL", "department", "city", "address", "mail", "phone", "numberEmployee", "size", "guarded" 
 
-  dataSource: MatTableDataSource<Cliente>;
+  dataSource: MatTableDataSource<Company>;
   @ViewChild( MatPaginator ) paginator: MatPaginator;
   @ViewChild( MatSort ) sort: MatSort;
 
   constructor(
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private clienteService: ClienteService
+    private companyService: ClienteService
   ) { }
 
   ngOnInit(): void {
-    this.clienteService.getClienteChange().subscribe( data => {
+    this.companyService.getCompanyChange().subscribe( data => {
       this.createTable( data );
     } );
 
-    this.clienteService.getMessageChange().subscribe( data => {
+    this.companyService.getMessageChange().subscribe( data => {
       this.snackBar.open(data, 'INFO', { duration: 2500, verticalPosition: "bottom", horizontalPosition: "right" });
     } );
 
-    this.clienteService.findAll().subscribe( data => {
+    this.companyService.findAll().subscribe( data => {
       this.createTable( data );
     } );
   }
@@ -49,18 +49,18 @@ export class ClienteComponent {
     this.dataSource.filter = e.target.value.trim().toLowerCase();
   }
 
-  delete( idCliente: number ) {
-    this.clienteService.delete( idCliente ).pipe( switchMap( () => {
-      return this.clienteService.findAll();
+  delete( idCompany: number ) {
+    this.companyService.delete( idCompany ).pipe( switchMap( () => {
+      return this.companyService.findAll();
     } ) )
       .subscribe( data => {
-        this.clienteService.setClienteChange( data );
-        this.clienteService.setMessageChange( 'Cliente eliminado!' );
+        this.companyService.setCompanyChange( data );
+        this.companyService.setMessageChange( 'Compañia eliminado!' );
       } )
       ;
   }
 
-  createTable( cliente: Cliente[] ) {
+  createTable( cliente: Company[] ) {
     this.dataSource = new MatTableDataSource( cliente );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

@@ -3,7 +3,7 @@ import { Usuario } from '../model/usuario';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { Cliente } from '../model/cliente';
+import { Cliente } from '../model/company';
 import { GenericService } from './generic.service';
 
 @Injectable({

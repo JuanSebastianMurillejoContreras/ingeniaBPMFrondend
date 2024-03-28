@@ -4,7 +4,7 @@ import { GenericService } from './generic.service';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-import { Cliente } from '../model/cliente';
+import { Cliente } from '../model/company';
 
 @Injectable({
   providedIn: 'root'
