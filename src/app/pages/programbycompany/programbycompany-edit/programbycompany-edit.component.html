@@ -1,0 +1,46 @@
+<form class="example-container" [formGroup]="form" #frmnameProgramByCompany="ngForm" (submit)="operate()">
+    <div>
+        <h1>Programa por empresa</h1>
+        <h2>Formulario de vinculación</h2>
+    </div>
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idProgramByCompany">
+        </mat-form-field>
+    </div>
+
+    <!-- PROGRAM -->
+    <h3>Seleccione el programa</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione el programa" required formControlName="program"
+            [matAutocomplete]="autoProgram" [formControl]="programControl">
+        <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+            <mat-option *ngFor="let p of programFiltered$ | async" [value]="p">
+                {{p.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- COMPANY -->
+    <h3>Seleccione la empresa para asociar</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione la empresa " required formControlName="company"
+            [matAutocomplete]="autoCompany" [formControl]="companyControl">
+        <mat-autocomplete #autoCompany="matAutocomplete" [displayWith]="showCompany">
+            <mat-option *ngFor="let c of companyFiltered$ | async" [value]="c">
+                {{c.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProgramByCompany.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/programbycompany">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

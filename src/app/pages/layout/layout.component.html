@@ -89,14 +89,15 @@
                             <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-
+                    <mat-divider></mat-divider>
                     <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/glossary" style="cursor: pointer">
+                        routerLink="/pages/program" style="cursor: pointer">
                         <mat-icon class="icon-menu">
-                            <img src="assets/icons/book.png" width="20" height="20">
+                            <img src="assets/icons/monitoring.png" width="20" height="20">
                         </mat-icon>
-                        <span>2.1 Glosario</span>
+                        <span>2.1 Nombre del programa</span>
                     </button>
+                    <mat-divider></mat-divider>
 
                     <mat-divider></mat-divider>
                     <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
@@ -104,7 +105,7 @@
                         <mat-icon class="icon-menu">
                             <img src="assets/icons/generalgoal.png" width="20" height="20">
                         </mat-icon>
-                        <span>2.3 Objetivo general</span>
+                        <span>2.2 Objetivo general</span>
                     </button>
 
                     <mat-divider></mat-divider>
@@ -113,7 +114,24 @@
                         <mat-icon class="icon-menu">
                             <img src="assets/icons/specificgoal.png" width="20" height="20">
                         </mat-icon>
-                        <span>2.2 Objetivo específico</span>
+                        <span>2.3 Objetivo específico</span>
+                    </button>
+
+                    <mat-divider></mat-divider>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/scope" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/specificgoal.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.4 Alcance </span>
+                    </button>
+
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/glossary" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/book.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.5 Glosario</span>
                     </button>
 
                     <mat-divider></mat-divider>
@@ -122,21 +140,20 @@
                         <mat-icon class="icon-menu">
                             <img src="assets/icons/theory.png" width="20" height="20">
                         </mat-icon>
-                        <span>2.4 Marco teórico</span>
+                        <span>2.6 Marco teórico</span>
                     </button>
                     <mat-divider></mat-divider>
 
                     <mat-divider></mat-divider>
                     <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/program" style="cursor: pointer">
+                        routerLink="/pages/programbycompany" style="cursor: pointer">
                         <mat-icon class="icon-menu">
-                            <img src="assets/icons/monitoring.png" width="20" height="20">
+                            <img src="assets/icons/theory.png" width="20" height="20">
                         </mat-icon>
-                        <span>2.5 Nombre del programa</span>
+                        <span>2.7 Programas por empresa</span>
                     </button>
                     <mat-divider></mat-divider>
-
-                   
+                    
                 </mat-expansion-panel>
             </mat-accordion>
 

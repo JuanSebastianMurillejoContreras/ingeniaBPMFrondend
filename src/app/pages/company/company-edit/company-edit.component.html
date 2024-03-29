@@ -124,10 +124,17 @@
     <!-- EMAIL -->
     <h3>Email</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="text" placeholder="Ingrese el email" formControlName="mail" required>
+        <input matInput type="text" placeholder="Ingrese el email" formControlName="mail" required maxlength="30"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
         <mat-error *ngIf="form.get('mail').invalid && (form.get('mail').touched || form.get('mail').dirty)">
-            <span *ngIf="form.get('mail').hasError('required')">
-                Debe ingresar una dirección.
+            <span *ngIf="form.get('mail').hasError('required') && form.get('mail').touched">
+                Debe ingresar el correo electrónico
+            </span>
+            <span *ngIf="form.get('mail').hasError('maxlength') && form.get('mail').dirty">
+                No debe exceder los 30 caracteres
+            </span>
+            <span *ngIf="form.get('mail').hasError('pattern') && form.get('mail').dirty">
+                El correo electrónico debe ser válido
             </span>
         </mat-error>
     </mat-form-field>
@@ -168,7 +175,7 @@
         <mat-error
             *ngIf="form.get('numberEmployee').invalid && (form.get('numberEmployee').touched || form.get('numberEmployee').dirty)">
             <span *ngIf="form.get('numberEmployee').hasError('required')">
-                Debe registrar el número de teléfono.
+                Debe registrar el número de empleados.
             </span>
         </mat-error>
 
@@ -178,7 +185,7 @@
     <!-- VIGILADO -->
     <h3>Vigilado</h3>
     <mat-form-field class="example-full-width">
-        <mat-label for="    ">La empresa es vigilada por:</mat-label>
+        <mat-label>La empresa es vigilada por:</mat-label>
         <mat-select formControlName="guarded" required>
             <mat-option value="Secretaría de salud municipal">Secretaría de salud municipal</mat-option>
             <mat-option value="INVIMA">INVIMA</mat-option>

@@ -1,0 +1,36 @@
+<form class="example-container" [formGroup]="form" #frmnameScope="ngForm" (submit)="operate()">
+
+    <div>
+        <h1>Alcance</h1>
+        <h2>Formulario de registro</h2>
+    </div>
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idScope">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Escribe la definción</mat-label>
+
+        <textarea matInput placeholder="Alcance" required formControlName="definitionScope"></textarea>
+
+        <div *ngIf="form.get('definitionScope').invalid && form.get('definitionScope').dirty">
+            <small *ngIf="form.get('definitionScope').hasError('required')">
+                Debe ingresar el alcance del programa. 
+            </small>
+        </div>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameScope.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/scope">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

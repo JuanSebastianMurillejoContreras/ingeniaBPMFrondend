@@ -7,14 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ProgramEditComponent } from './pages/program/program-edit/program-edit.component';
-
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-
   ],
   imports: [
     BrowserModule,

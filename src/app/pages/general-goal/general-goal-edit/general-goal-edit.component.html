@@ -14,18 +14,12 @@
     <mat-form-field class="example-full-width">
         <mat-label>Escribe la definción</mat-label>
 
-        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" required
+        <textarea matInput placeholder="Definición" required
                   formControlName="generalGoal"></textarea>
 
         <div *ngIf="form.get('generalGoal').invalid && form.get('generalGoal').dirty">
             <small *ngIf="form.get('generalGoal').hasError('required')">
-                Debe ingresar una definición para el glosario
-            </small>
-            <small *ngIf="form.get('generalGoal').hasError('minlength')">
-                Debe ingresar mínimo 3 caracteres
-            </small>
-            <small *ngIf="form.get('generalGoal').hasError('maxlength')">
-                Debe ingresar máximo 1.200 caracteres
+                Debe ingresar una definición para el objetivo general
             </small>
         </div>
     </mat-form-field>

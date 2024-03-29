@@ -33,7 +33,7 @@ export class ProgramEditComponent implements OnInit {
       'idProgram': new FormControl( 0 ),
       'code': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] ),
       'name': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] ),
-      'description': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] )
+      'description': new FormControl( '', [Validators.required] )
     } );
 
     this.route.params.subscribe( data => {

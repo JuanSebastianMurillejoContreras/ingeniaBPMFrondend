@@ -11,9 +11,15 @@
 
     <!-- CLIENTE -->
     <h3>Tipo de empresa</h3>
-    <mat-form-field>
+    <mat-form-field class="example-full-width">
         <input matInput placeholder="Seleccione la empresa a la que pertenece el usuario" required
             formControlName="company" [matAutocomplete]="autoCompany" [formControl]="companyControl">
+
+        <mat-error *ngIf="form.get('company').invalid && (form.get('company').touched || form.get('company').dirty)">
+            <span *ngIf="form.get('company').hasError('required')">
+                Debe seleccionar la empresa a la que pertenece el usuario
+            </span>
+        </mat-error>
 
         <mat-autocomplete #autoCompany="matAutocomplete" [displayWith]="showCompany">
             <mat-option *ngFor="let c of companyFiltered$ | async" [value]="c">
@@ -33,6 +39,12 @@
             <mat-option value="Tarjeta de Identidad">Tarjeta de Identidad</mat-option>
             <mat-option value="Pasaporte">Pasaporte</mat-option>
         </mat-select>
+        <mat-error
+            *ngIf="form.get('identityType').invalid && (form.get('identityType').touched || form.get('identityType').dirty)">
+            <span *ngIf="form.get('identityType').hasError('required')">
+                Debe seleccionar el tipo de documento de identidad
+            </span>
+        </mat-error>
     </mat-form-field>
 
 
@@ -43,12 +55,13 @@
     <mat-form-field class="example-full-width">
         <input matInput type="number" placeholder="Ingrese el número de documento de identidad" required
             pattern="[0-9]{8,12}" formControlName="numberIdentity">
-        <mat-error *ngIf="form.get('numberIdentity').invalid && (form.get('numberIdentity').dirty )">
+        <mat-error
+            *ngIf="form.get('numberIdentity').invalid && (form.get('numberIdentity').touched || form.get('numberIdentity').dirty)">
             <span *ngIf="form.get('numberIdentity').hasError('required')">
-                Debe ingresar un número para registrar el documento de identidad.
+                Debe ingresar registrar el documento de identidad.
             </span>
             <span *ngIf="form.get('numberIdentity').hasError('pattern')">
-                El documento de identidad debe tener entre 8 y 12 dígitos numéricos.
+                El documento de identidad debe tener minimo 8 y 12 dígitos numéricos.
             </span>
         </mat-error>
     </mat-form-field>
@@ -56,79 +69,115 @@
 
     <!-- PRIMER NOMBRE -->
     <h3>Primer nombre</h3>
-    <mat-form-field class="">
+    <mat-form-field class="example-full-width">
         <input matInput placeholder="Primer nombre" minlength="2" maxlength="30" required
             pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstName">
-        <small *ngIf="form.get('firstName').hasError('required') && form.get('firstName').touched">
-            Debe ingresar el nombre
-        </small>
-        <small *ngIf="form.get('firstName').hasError('minlength') && form.get('firstName').dirty">
-            Debe ingresar mínimo 3 caracteres
-        </small>
-        <small *ngIf="form.get('firstName').hasError('pattern') && form.get('firstName').dirty">
-            El nombre no puede incluir números
-        </small>
+        <mat-error
+            *ngIf="form.get('firstName').invalid && (form.get('firstName').touched || form.get('firstName').dirty)">
+            <span *ngIf="form.get('firstName').hasError('required')">
+                Debe ingresar su nombre.
+            </span>
+            <span *ngIf="form.get('firstName').hasError('minlength')">
+                Detene tener mínimo 2 caracteres.
+            </span>
+            <span *ngIf="form.get('firstName').hasError('maxlength')">
+                Detene tener maximo 30 caracteres.
+            </span>
+            <span *ngIf="form.get('firstName').hasError('pattern')">
+                El nombre no puede incluir números
+            </span>
+        </mat-error>
     </mat-form-field>
 
 
     <!-- SEGUNDO NOMBRE -->
     <h3>Segundo nombre</h3>
-    <mat-form-field class="">
+    <mat-form-field class="example-full-width">
         <input matInput placeholder="Segundo nombre" minlength="2" maxlength="30" pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}"
             formControlName="lastName">
-        <small *ngIf="form.get('lastName').hasError('pattern') && form.get('lastName').dirty">
-            El nombre no puede incluir números
-        </small>
+
+        <mat-error *ngIf="form.get('lastName').invalid && (form.get('lastName').touched || form.get('lastName').dirty)">
+            <span *ngIf="form.get('lastName').hasError('minlength')">
+                Detene tener mínimo 2 caracteres.
+            </span>
+            <span *ngIf="form.get('lastName').hasError('maxlength')">
+                Detene tener maximo 30 caracteres.
+            </span>
+            <span *ngIf="form.get('lastName').hasError('pattern')">
+                El nombre no puede incluir números
+            </span>
+        </mat-error>
     </mat-form-field>
 
 
 
     <!-- PRIMER APELLIDO -->
     <h3>Primer apellido</h3>
-    <mat-form-field class="">
+    <mat-form-field class="example-full-width">
         <input matInput placeholder="Primer nombre" minlength="2" maxlength="30" required
             pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{1,30}" formControlName="firstSurname">
-        <small *ngIf="form.get('firstSurname').hasError('required') && form.get('firstSurname').touched">
-            Debe ingresar el apellido
-        </small>
-        <small *ngIf="form.get('firstSurname').hasError('minlength') && form.get('firstSurname').dirty">
-            Debe ingresar minimo 3 caracteres
-        </small>
-        <small *ngIf="form.get('firstSurname').hasError('pattern') && form.get('firstSurname').dirty">
-            El apellido no puede incluir números
-        </small>
+
+        <mat-error
+            *ngIf="form.get('firstSurname').invalid && (form.get('firstSurname').touched || form.get('firstSurname').dirty)">
+            <span *ngIf="form.get('firstSurname').hasError('required')">
+                Debe ingresar su apellido.
+            </span>
+            <span *ngIf="form.get('firstSurname').hasError('minlength')">
+                Detene tener mínimo 2 caracteres.
+            </span>
+            <span *ngIf="form.get('firstSurname').hasError('maxlength')">
+                Detene tener maximo 30 caracteres.
+            </span>
+            <span *ngIf="form.get('firstSurname').hasError('pattern')">
+                El apellido no puede incluir números
+            </span>
+        </mat-error>
     </mat-form-field>
 
 
     <!-- SEGUNDO APELLIDO -->
     <h3>Segundo apellido</h3>
-    <mat-form-field class="">
+    <mat-form-field class="example-full-width">
         <input matInput placeholder="Segundo nombre" minlength="2" maxlength="30" pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}"
             formControlName="lastSurname">
-        <small *ngIf="form.get('lastSurname').hasError('pattern') && form.get('lastSurname').dirty">
-            El apellido no puede incluir números
-        </small>
+        <mat-error
+            *ngIf="form.get('lastSurname').invalid && (form.get('lastSurname').touched || form.get('lastSurname').dirty)">
+            <span *ngIf="form.get('lastSurname').hasError('minlength')">
+                Detene tener mínimo 2 caracteres.
+            </span>
+            <span *ngIf="form.get('lastSurname').hasError('maxlength')">
+                Detene tener maximo 30 caracteres.
+            </span>
+            <span *ngIf="form.get('lastSurname').hasError('pattern')">
+                El apellido no puede incluir números
+            </span>
+        </mat-error>
     </mat-form-field>
 
 
     <!-- TELEPHONE -->
-    <h3>Telefono</h3>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Ingrese el número de teléfono" pattern="[0-9]{6,9}" 
+    <h3>Teléfono</h3>
+    <mat-form-field class="example-full-width">
+        <input matInput type="number" placeholder="Ingrese el número de teléfono" pattern="[0-9]{7,10}"
             formControlName="telephone">
-        <mat-error>
+        <mat-error
+            *ngIf="form.get('telephone').invalid && (form.get('telephone').touched || form.get('telephone').dirty)">
+            <span *ngIf="form.get('telephone').hasError('required')">
+                Debe ingresar numero de teléfono.
+            </span>
             <span *ngIf="form.get('telephone').hasError('pattern')">
-                El número tener entre 6 y 9 dígitos numéricos.
+                El número de teléfono debe tener minimo 7 y 10 dígitos numéricos.
             </span>
         </mat-error>
     </mat-form-field>
 
     <!-- CELULAR -->
     <h3>Celular</h3>
-    <mat-form-field>
+    <mat-form-field class="example-full-width">
         <input matInput type="number" placeholder="Ingrese numero de celular" required pattern="[0-9]{10,10}"
             formControlName="mobilePhone">
-        <mat-error *ngIf="form.get('mobilePhone').invalid && (form.get('mobilePhone').dirty )">
+        <mat-error
+            *ngIf="form.get('mobilePhone').invalid && (form.get('mobilePhone').touched || form.get('mobilePhone').dirty)">
             <span *ngIf="form.get('mobilePhone').hasError('required')">
                 Debe ingresar un número para registrar el celular.
             </span>
@@ -138,24 +187,30 @@
         </mat-error>
     </mat-form-field>
 
-
     <!-- MAIL -->
     <h3>Correo electrónico</h3>
-    <mat-form-field class="">
-        <input matInput placeholder="Ingrese el correo electrónico" minlength="2" maxlength="30" required
-            formControlName="mail">
-        <small *ngIf="form.get('mail').hasError('required') && form.get('mail').touched">
-            Debe ingresar el correo electrónico
-        </small>
-        <small *ngIf="form.get('mail').hasError('minlength') && form.get('mail').dirty">
-            Debe ingresar minimo 2 caracteres
-        </small>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Ingrese el correo electrónico" formControlName="mail" required maxlength="30"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            <mat-error
+            *ngIf="form.get('mail').invalid && (form.get('mail').touched || form.get('mail').dirty)">
+            <span *ngIf="form.get('mail').hasError('required') && form.get('mail').touched">
+                Debe ingresar el correo electrónico
+            </span>
+            <span *ngIf="form.get('mail').hasError('maxlength') && form.get('mail').dirty">
+                No debe exceder los 30 caracteres
+            </span>
+            <span *ngIf="form.get('mail').hasError('pattern') && form.get('mail').dirty">
+                El correo electrónico debe ser válido
+            </span>
+        </mat-error>
     </mat-form-field>
+
 
 
     <!-- COMPANY POSITION -->
     <h3>Cargo en la compañia</h3>
-    <mat-form-field class="">
+    <mat-form-field class="example-full-width">
         <input matInput placeholder="Cargo en la compañìa" minlength="2" maxlength="20" required
             pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}" formControlName="companyPosition">
         <small *ngIf="form.get('companyPosition').hasError('required') && form.get('companyPosition').touched">
@@ -172,29 +227,47 @@
 
     <!-- USER NAME -->
     <h3>Nombre de usuario</h3>
-    <mat-form-field class="">
+    <mat-form-field class="example-full-width">
         <input matInput placeholder="Cargo en la compañìa" minlength="6" maxlength="12" required
             pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{2,20}" formControlName="userName">
-        <small *ngIf="form.get('userName').hasError('required') && form.get('userName').touched">
-            Debe ingresar el nombre de usuario
-        </small>
-        <small *ngIf="form.get('userName').hasError('minlength') && form.get('userName').dirty">
-            Debe ingresar minimo 6 caracteres
-        </small>
-        <small *ngIf="form.get('userName').hasError('pattern') && form.get('userName').dirty">
-            El nombre de usuario no puede incluir números
-        </small>
+        <mat-error *ngIf="form.get('userName').invalid && (form.get('userName').touched || form.get('userName').dirty)">
+            <span *ngIf="form.get('userName').hasError('required')">
+                Debe ingresar el nombre de usuario
+            </span>
+            <span *ngIf="form.get('userName').hasError('minlength')">
+                Debe ingresar minimo 6 caracteres
+            </span>
+            <span *ngIf="form.get('userName').hasError('pattern')">
+                El nombre de usuario no puede incluir números
+            </span>
+        </mat-error>
     </mat-form-field>
 
     <!-- PASSWORD -->
     <h3>Contraseña</h3>
-    <mat-form-field>
+    <mat-form-field class="example-full-width">
         <mat-label>Ingrese su contraseña</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required
+            pattern="(?=.*[A-Z])(?=.*\d).{8,12}" minlength="8" maxlength="12"
+            title="Debe contener al menos una letra mayúscula, un número y tener entre 8 y 12 caracteres">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
+        <mat-error *ngIf="form.get('password').invalid && (form.get('password').touched || form.get('password').dirty)">
+            <span *ngIf="form.get('password').hasError('required')">
+                Debe ingresar una contraseña
+            </span>
+            <span *ngIf="form.get('password').hasError('minlength')">
+                Debe ingresar minimo 8 caracteres.
+            </span>
+            <span *ngIf="form.get('password').hasError('maxlength')">
+                Debe ingresar máximo 12 caracteres.
+            </span>
+            <span *ngIf="form.get('password').hasError('pattern')">
+                La contraseña debe tener al menos una letra mayúscula y un número
+            </span>
+        </mat-error>
     </mat-form-field>
 
 

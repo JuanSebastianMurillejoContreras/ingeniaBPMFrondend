@@ -15,6 +15,10 @@ import { ProgramComponent } from './program/program.component';
 import { ProgramEditComponent } from './program/program-edit/program-edit.component';
 import { CompanyComponent } from './company/company.component';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+import { ProgrambycompanyComponent } from './programbycompany/programbycompany.component';
+import { ScopeComponent } from './scope/scope.component';
+import { ScopeEditComponent } from './scope/scope-edit/scope-edit.component';
+import { ProgrambycompanyEditComponent } from './programbycompany/programbycompany-edit/programbycompany-edit.component';
 
 
 
@@ -133,7 +137,38 @@ export const PagesRoutes: Routes = [
         component: ProgramEditComponent,
       },
     ],
+  },
+
+  {
+    path: 'scope',
+    component: ScopeComponent,
+    children: [
+      {
+        path: 'new',
+        component: ScopeEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ScopeEditComponent,
+      },
+    ],
+  },
+
+  {
+    path: 'programbycompany',
+    component: ProgrambycompanyComponent,
+    children: [
+      {
+        path: 'new',
+        component: ProgrambycompanyEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ProgrambycompanyEditComponent,
+      },
+    ],
   }
+
 
 
 ];

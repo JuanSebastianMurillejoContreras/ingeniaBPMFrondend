@@ -29,7 +29,7 @@ export class GeneralGoalEditComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup({
       'idGeneralGoal': new FormControl(0),
-      'generalGoal': new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(1200)]),
+      'generalGoal': new FormControl('', [Validators.required]),
     });
 
     this.route.params.subscribe(data => {
@@ -46,9 +46,7 @@ export class GeneralGoalEditComponent implements OnInit {
       this.generalGoalService.findById(this.id).subscribe(data => {
         this.form = new FormGroup({
           'idGeneralGoal': new FormControl(data.idGeneralGoal),
-          'generalGoal': new FormControl(data.generalGoal, [Validators.required, Validators.minLength(2), Validators.maxLength(1200)
-      
-          ]),    
+          'generalGoal': new FormControl(data.generalGoal),    
         });
       });
     }
