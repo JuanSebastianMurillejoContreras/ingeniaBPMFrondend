@@ -3,7 +3,6 @@ import { GeneralGoal } from '../model/generalGoal';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { CompanyType } from '../model/companyType';
 import { GenericService } from './generic.service';
 
 @Injectable({

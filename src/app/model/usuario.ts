@@ -1,8 +1,8 @@
-import { Cliente } from "./company"
+import {Company } from "./company"
 
 export class Usuario{
     idUserData: number
-    client: Cliente
+    company: Company
     identityType: string
     numberIdentity: string
     firstName: string

@@ -7,16 +7,16 @@ import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Company } from 'src/app/model/company';
-import { ClienteService } from 'src/app/service/company.service';
+import { CompanyService } from 'src/app/service/company.service';
 
 @Component( {
   standalone: true,
-  selector: 'app-cliente',
-  templateUrl: './cliente.component.html',
-  styleUrls: ['./cliente.component.css'],
+  selector: 'app-company',
+  templateUrl: './company.component.html',
+  styleUrls: ['./company.component.css'],
   imports: [MaterialModule, RouterLink, RouterOutlet]
 } )
-export class ClienteComponent {
+export class CompanyComponent {
 
   displayedColumns: string[] = ['idCompany', "nit", "name", "companyType", 'actions'];
   //"logoURL", "department", "city", "address", "mail", "phone", "numberEmployee", "size", "guarded" 
@@ -28,7 +28,7 @@ export class ClienteComponent {
   constructor(
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private companyService: ClienteService
+    private companyService: CompanyService
   ) { }
 
   ngOnInit(): void {
@@ -55,13 +55,13 @@ export class ClienteComponent {
     } ) )
       .subscribe( data => {
         this.companyService.setCompanyChange( data );
-        this.companyService.setMessageChange( 'Compañia eliminado!' );
+        this.companyService.setMessageChange( 'Compañia eliminada!' );
       } )
       ;
   }
 
-  createTable( cliente: Company[] ) {
-    this.dataSource = new MatTableDataSource( cliente );
+  createTable( company: Company[] ) {
+    this.dataSource = new MatTableDataSource( company );
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

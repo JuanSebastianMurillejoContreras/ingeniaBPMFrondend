@@ -6,9 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { CompanyType } from 'src/app/model/companyType';
-import { Glossary } from 'src/app/model/glossaries';
-import { CompanyTypeService } from 'src/app/service/companyType.service';
+import { Glossary } from 'src/app/model/glossary';
 import { GlossaryService } from 'src/app/service/glossary.service';
 
 @Component({

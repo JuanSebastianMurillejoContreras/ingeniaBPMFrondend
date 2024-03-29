@@ -19,7 +19,7 @@ import { ProgramService } from 'src/app/service/program.service';
 })
 export class ProgramComponent implements OnInit {
 
-  displayedColumns: string[] = ['idProgram', "code", "name", 'scope', 'actions'];
+  displayedColumns: string[] = ['idProgram', "code", "name", 'description', 'actions'];
 
   dataSource: MatTableDataSource<Program>;
   @ViewChild( MatPaginator ) paginator: MatPaginator;

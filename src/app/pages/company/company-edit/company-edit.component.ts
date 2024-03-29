@@ -1,7 +1,6 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -12,12 +11,11 @@ import { CompanyTypeService } from 'src/app/service/companyType.service';
 
 @Component( {
   standalone: true,
-  selector: 'app-cliente-edit',
+  selector: 'app-company-edit',
   templateUrl: './company-edit.component.html',
   styleUrls: ['./company-edit.component.css'],
   imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
 } )
-
 
 export class CompanyEditComponent implements OnInit {
 
@@ -25,7 +23,7 @@ export class CompanyEditComponent implements OnInit {
   isEdit: boolean;
   form: FormGroup;
 
-  companyTypes: CompanyType[];
+  companyType: CompanyType[];
   companyTypeControl: FormControl = new FormControl();
   companyTypeFiltered$: Observable<CompanyType[]>;
 
@@ -40,19 +38,19 @@ export class CompanyEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = new FormGroup( {
-      'idClient': new FormControl( 0 ),
+      'idCompany': new FormControl( 0 ),
       'nit': new FormControl( '', [Validators.required, Validators.minLength( 8 ), Validators.maxLength( 12 )] ),
-      'name': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 40 )] ),
+      'name': new FormControl( '', [Validators.required] ),
       'companyType': this.companyTypeControl,
       'department': new FormControl( '', [Validators.required] ),
-      'city': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
-      'address': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
-      'mail': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 30 )] ),
-      'phone': new FormControl( '', [Validators.required, Validators.minLength( 9 ), Validators.maxLength( 12 )] ),
-      'numberEmployee': new FormControl( '', [Validators.required, Validators.minLength( 1 ), Validators.maxLength( 5 )] ),
-      'size': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 10 )] ),
-      'guarded': new FormControl( '', [Validators.required]),
-      'logoURL': new FormControl( '', [Validators.required, Validators.minLength( 1 ), Validators.maxLength( 80 )] ),
+      'city': new FormControl( '', [Validators.required] ),
+      'address': new FormControl( '', [Validators.required] ),
+      'mail': new FormControl( '', [Validators.required] ),
+      'phone': new FormControl( '', [Validators.required] ),
+      'numberEmployee': new FormControl( '', [Validators.required] ),
+      'size': new FormControl( '', [Validators.required] ),
+      'guarded': new FormControl( '', [Validators.required] ),
+      'logoURL': new FormControl( '', [Validators.required] ),
     } );
 
     this.loadInitialData();
@@ -67,22 +65,22 @@ export class CompanyEditComponent implements OnInit {
 
   filterCompanyType( val: any ): CompanyType[] {
     if ( !val ) {
-      return this.companyTypes;
+      return this.companyType;
     }
 
     if ( val?.idCompanyType > 0 ) {
-      return this.companyTypes.filter( el =>
+      return this.companyType.filter( el =>
         el.nameCompanyType.toLowerCase().includes( val.nameCompanyType.toLowerCase() ) );
     } else {
-      return this.companyTypes.filter( el =>
+      return this.companyType.filter( el =>
         el.nameCompanyType.toLowerCase().includes( val?.toLowerCase() ) );
     }
   }
 
 
   loadInitialData() {
-    this.companyTypeService.findAll().subscribe( data => this.companyTypes = data );
-     }
+    this.companyTypeService.findAll().subscribe( data => this.companyType = data );
+  }
 
   showCompanyType( val: any ) {
     return val ? `${val.nameCompanyType}` : val;
@@ -106,9 +104,10 @@ export class CompanyEditComponent implements OnInit {
           'numberEmployee': data.numberEmployee,
           'size': data.size,
           'guarded': data.guarded,
-          'logoURL': data.logoURL          
-        });
-      });
+          'logoURL': data.logoURL
+        } );
+
+      } );
     }
   }
 
@@ -145,11 +144,12 @@ export class CompanyEditComponent implements OnInit {
       } ) )
         .subscribe( data => {
           this.companyService.setCompanyChange( data );
-          this.companyService.setMessageChange( "Compañia creada!" )
-        } );
+          this.companyService.setMessageChange( "Compañia creada!" )          
+        } );              
     }
-    this.router.navigate( ['/pages/company'] );
+    this.router.navigate( ['/pages/company'] );  
   }
 
-
 }
+
+

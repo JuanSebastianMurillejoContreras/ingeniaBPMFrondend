@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Glossary } from '../model/glossaries';
+import { Glossary } from '../model/glossary';
 import { GenericService } from './generic.service';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment.development';
-import { Cliente } from '../model/company';
 
 @Injectable({
   providedIn: 'root'

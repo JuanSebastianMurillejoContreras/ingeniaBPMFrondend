@@ -33,7 +33,7 @@ export class ProgramEditComponent implements OnInit {
       'idProgram': new FormControl( 0 ),
       'code': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] ),
       'name': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] ),
-      'scope': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] )
+      'description': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] )
     } );
 
     this.route.params.subscribe( data => {
@@ -51,7 +51,7 @@ export class ProgramEditComponent implements OnInit {
           'idProgram': new FormControl(data.idProgram),
           'code': new FormControl(data.code),
           'name': new FormControl(data.name),
-          'scope': new FormControl(data.scope) 
+          'description': new FormControl(data.description) 
         } );
     });
   }
@@ -67,7 +67,7 @@ operate() {
   program.idProgram = this.form.value['idProgram'];
   program.code = this.form.value['code'];
   program.name = this.form.value['name'];
-  program.scope = this.form.value['scope'];
+  program.description = this.form.value['description'];
 
 
   if ( this.isEdit ) {

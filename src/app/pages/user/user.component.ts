@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Cliente } from 'src/app/model/company';
+import { Company } from 'src/app/model/company';
 import { Usuario } from 'src/app/model/usuario';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
@@ -19,13 +19,13 @@ import { UsuarioService } from 'src/app/service/usuario.service';
 })
 export class UserComponent implements OnInit {
 
-  displayedColumns: string[] = ['idUserData', "client", "numberIdentity", "firstName", "lastName", "firstSurname", "lastSurname", "userName", 'actions'];
+  displayedColumns: string[] = ['idUserData', "company", "numberIdentity", "firstName", "lastName", "firstSurname", "lastSurname", "userName", 'actions'];
 
   dataSource: MatTableDataSource<Usuario>;
   @ViewChild( MatPaginator ) paginator: MatPaginator;
   @ViewChild( MatSort ) sort: MatSort;
 
-  cliente: Cliente;
+  company: Company;
 
   constructor(
     private route: ActivatedRoute,

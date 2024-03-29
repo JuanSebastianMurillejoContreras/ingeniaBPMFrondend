@@ -4,9 +4,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Cliente } from 'src/app/model/company';
+import { Company } from 'src/app/model/company';
 import { Usuario } from 'src/app/model/usuario';
-import { ClienteService } from 'src/app/service/company.service';
+import { CompanyService } from 'src/app/service/company.service';
 import { UsuarioService } from 'src/app/service/usuario.service';
 
 @Component( {
@@ -23,14 +23,14 @@ export class UserEditComponent implements OnInit {
   form: FormGroup;
   hide = true;
 
-  client: Cliente[];
-  clientControl: FormControl = new FormControl();
-  clientFiltered$: Observable<Cliente[]>;
+  company: Company[];
+  companyControl: FormControl = new FormControl();
+  companyFiltered$: Observable<Company[]>;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private clientService: ClienteService,
+    private companyService: CompanyService,
     private usuarioService: UsuarioService,
   ) { }
 
@@ -39,7 +39,7 @@ export class UserEditComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup( {
       'idUserData': new FormControl( 0 ),
-      'client': this.clientControl,
+      'company': this.companyControl,
       'identityType': new FormControl( '', [Validators.required] ),
       'numberIdentity': new FormControl( '', [Validators.required, Validators.minLength( 7 ), Validators.maxLength( 12 )] ),
       'firstName': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 20 )] ),
@@ -57,7 +57,7 @@ export class UserEditComponent implements OnInit {
     } );
 
     this.loadInitialData();
-    this.clientFiltered$ = this.clientControl.valueChanges.pipe( map( val => this.filterClient( val ) ) );
+    this.companyFiltered$ = this.companyControl.valueChanges.pipe( map( val => this.filterCompany( val ) ) );
 
     this.route.params.subscribe( data => {
       this.id = data['id'];
@@ -66,26 +66,26 @@ export class UserEditComponent implements OnInit {
     } )
   }
 
-  filterClient( val: any ): Cliente[] {
+  filterCompany( val: any ): Company[] {
     if ( !val ) {
-      return this.client;
+      return this.company;
     }
 
     if ( val?.idClient > 0 ) {
-      return this.client.filter( el =>
+      return this.company.filter( el =>
         el.name.toLowerCase().includes( val.name.toLowerCase() ) );
     } else {
-      return this.client.filter( el =>
+      return this.company.filter( el =>
         el.name.toLowerCase().includes( val?.toLowerCase() ) );
     }
   }
 
 
   loadInitialData() {
-    this.clientService.findAll().subscribe( data => this.client = data );
+    this.companyService.findAll().subscribe( data => this.company = data );
   }
 
-  showClient( val: any ) {
+  showCompany( val: any ) {
     return val ? `${val.name}` : val;
   }
 
@@ -95,7 +95,7 @@ export class UserEditComponent implements OnInit {
       this.usuarioService.findById( this.id ).subscribe( data => {
         this.form.setValue( {
           'idUserData': data.idUserData,
-          'client': data.client,
+          'company': data.company,
           'identityType': data.identityType,
           'numberIdentity': data.numberIdentity,
           'firstName': data.firstName,
@@ -122,7 +122,7 @@ export class UserEditComponent implements OnInit {
 
     let usuario = new Usuario();
     usuario.idUserData = this.form.value['idUserData'];
-    usuario.client = this.form.value['client'];
+    usuario.company = this.form.value['company'];
     usuario.identityType = this.form.value['identityType'];
     usuario.numberIdentity = this.form.value['numberIdentity'];
     usuario.firstName = this.form.value['firstName'];

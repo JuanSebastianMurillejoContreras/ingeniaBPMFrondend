@@ -12,10 +12,9 @@
     <!-- NIT -->
     <h3>NIT</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Ingrese el NIT de la empresa" required pattern="[0-9]{8,12}"
+        <input matInput type="text" placeholder="Ingrese el NIT de la empresa" required pattern="[0-9]{8,12}"
             formControlName="nit">
-        <mat-error *ngIf="form.get('nit').invalid && (form.get('nit').dirty )">
-
+        <mat-error *ngIf="form.get('nit').invalid && (form.get('nit').touched || form.get('nit').dirty)">
             <span *ngIf="form.get('nit').hasError('required')">
                 Debe ingresar un número para registrar el NIT.
             </span>
@@ -25,23 +24,14 @@
         </mat-error>
     </mat-form-field>
 
-
-
     <!-- NOMBRE -->
     <h3>Nombre</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese el nombre de la empresa" formControlName="name" required
-            pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,40}">
-
-        <mat-error *ngIf="form.get('name').invalid && (form.get('name').dirty )">
-
+        <input matInput type="text" placeholder="Ingrese el nombre de la empresa" formControlName="name" required>
+        <mat-error *ngIf="form.get('name').invalid && (form.get('name').touched || form.get('name').dirty)">
             <span *ngIf="form.get('name').hasError('required')">
                 Debe ingresar el nombre del cliente.
             </span>
-            <span *ngIf="form.get('name').hasError('pattern')">
-                El nombre debe tener entre 2 y 40 caracteres.
-            </span>
-
         </mat-error>
 
     </mat-form-field>
@@ -49,22 +39,20 @@
     <!-- TIPO DE EMPRESA -->
     <h3>Tipo de empresa</h3>
     <mat-form-field>
-        <input matInput placeholder="Seleccione el tipo de empresa" required
-            formControlName="companyType" [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
-
-            <mat-error *ngIf="form.get('companyType').invalid && (form.get('companyType').dirty )">
-                <span *ngIf="form.get('companyType').hasError('required')">
-                    Debe seleccionar un tipo de empresa.
-                </span>
-            </mat-error>
+        <input matInput placeholder="Seleccione el tipo de empresa" required formControlName="companyType"
+            [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
+        <mat-error
+            *ngIf="form.get('companyType').invalid && (form.get('companyType').touched || form.get('companyType').dirty)">
+            <span *ngIf="form.get('companyType').hasError('required')">
+                Debe seleccionar un tipo de empresa
+            </span>
+        </mat-error>
 
         <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
             <mat-option *ngFor="let c of companyTypeFiltered$ | async" [value]="c">
                 {{c.nameCompanyType}}
-            </mat-option>           
+            </mat-option>
         </mat-autocomplete>
-
-        
     </mat-form-field>
 
 
@@ -72,7 +60,7 @@
     <!-- Esto debe corregirse, es una mala práctica-->
     <h3>Departamento</h3>
     <mat-form-field class="example-full-width">
-        <mat-label>Seleccionar el departamento</mat-label>
+        <mat-label for="department">Seleccionar el departamento</mat-label>
         <mat-select matNativeControl formControlName="department" required>
             <mat-option value="Amazonas">Amazonas</mat-option>
             <mat-option value="Antioquia">Antioquia</mat-option>
@@ -114,30 +102,56 @@
     <h3>Ciudad</h3>
     <mat-form-field class="example-full-width">
         <input matInput type="text" placeholder="Ingrese la ciudad" formControlName="city" required>
+        <mat-error *ngIf="form.get('city').invalid && (form.get('city').touched || form.get('city').dirty)">
+            <span *ngIf="form.get('city').hasError('required')">
+                Debe ingresar el nombre de la ciudad.
+            </span>
+        </mat-error>
     </mat-form-field>
 
     <!-- DIRECCION -->
     <h3>Dirección</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese la dirección" formControlName="address" required>
+        <input matInput type="text" placeholder="Ingrese la dirección" formControlName="address" required>
+        <mat-error *ngIf="form.get('address').invalid && (form.get('address').touched || form.get('address').dirty)">
+            <span *ngIf="form.get('address').hasError('required')">
+                Debe ingresar una dirección.
+            </span>
+        </mat-error>
+
     </mat-form-field>
 
     <!-- EMAIL -->
     <h3>Email</h3>
     <mat-form-field class="example-full-width">
         <input matInput type="text" placeholder="Ingrese el email" formControlName="mail" required>
+        <mat-error *ngIf="form.get('mail').invalid && (form.get('mail').touched || form.get('mail').dirty)">
+            <span *ngIf="form.get('mail').hasError('required')">
+                Debe ingresar una dirección.
+            </span>
+        </mat-error>
     </mat-form-field>
 
     <!-- TELEFONO -->
     <h3>Teléfono</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Ingrese el teléfono" formControlName="phone" required>
+        <input matInput type="text" placeholder="Ingrese el teléfono" formControlName="phone" required
+            pattern="[0-9]{6,12}">
+        <mat-error *ngIf="form.get('phone').invalid && (form.get('phone').touched || form.get('phone').dirty)">
+            <span *ngIf="form.get('phone').hasError('required')">
+                Debe registrar el número de teléfono.
+            </span>
+            <span *ngIf="form.get('phone').hasError('pattern')">
+                El teléfono debe tener entre 6 y 12 dígitos numéricos.
+            </span>
+        </mat-error>
     </mat-form-field>
+
 
     <!-- TAMAÑO -->
     <h3>Tamaño</h3>
     <mat-form-field class="example-full-width">
-        <mat-label>Ingrese el tamaño de la empresa</mat-label>
+        <mat-label for="size">Ingrese el tamaño de la empresa</mat-label>
         <mat-select matNativeControl formControlName="size" required>
             <mat-option value="Pequeña">Pequeña</mat-option>
             <mat-option value="Mediana">Mediana</mat-option>
@@ -149,14 +163,22 @@
     <!-- NUMERO EMPLEADOS -->
     <h3>Numero empleados</h3>
     <mat-form-field class="example-full-width">
-        <input matInput type="number" placeholder="Ingrese el numero de empleados" formControlName="numberEmployee" required>
+        <input matInput type="text" placeholder="Ingrese el numero de empleados" formControlName="numberEmployee"
+            required>
+        <mat-error
+            *ngIf="form.get('numberEmployee').invalid && (form.get('numberEmployee').touched || form.get('numberEmployee').dirty)">
+            <span *ngIf="form.get('numberEmployee').hasError('required')">
+                Debe registrar el número de teléfono.
+            </span>
+        </mat-error>
+
     </mat-form-field>
 
 
     <!-- VIGILADO -->
     <h3>Vigilado</h3>
     <mat-form-field class="example-full-width">
-        <mat-label>La empresa es vigilada por:</mat-label>
+        <mat-label for="    ">La empresa es vigilada por:</mat-label>
         <mat-select formControlName="guarded" required>
             <mat-option value="Secretaría de salud municipal">Secretaría de salud municipal</mat-option>
             <mat-option value="INVIMA">INVIMA</mat-option>
@@ -166,7 +188,8 @@
     <!-- LOGO URL -->
     <h3>Logo URL</h3>
     <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ingrese la url del logo de la compañía" required formControlName="logoURL">
+        <input matInput placeholder="Ingrese la url del logo de la compañía" formControlName="logoURL" maxlength="80"
+            required>
     </mat-form-field>
 
 

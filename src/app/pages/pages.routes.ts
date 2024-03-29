@@ -1,13 +1,10 @@
 import { Routes } from '@angular/router';
 import { CompanyTypeEditComponent } from './companytype/companytype-edit/companytype-edit.component';
 import { CompanyTypeComponent } from './companytype/companytype.component';
-import { ClienteComponent } from './company/cliente.component';
-import { ClienteEditComponent, CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { UserComponent } from './user/user.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
 import { GlossaryComponent } from './glossary/glossary.component';
 import { GlossaryEditComponent } from './glossary/glossary-edit/glossary-edit.component';
-import { GeneralGoalService } from '../service/generalGoal.service';
 import { GeneralGoalComponent } from './general-goal/general-goal.component';
 import { GeneralGoalEditComponent } from './general-goal/general-goal-edit/general-goal-edit.component';
 import { SpecificGoalComponent } from './specific-goal/specific-goal.component';
@@ -16,6 +13,9 @@ import { TheoreticalFrameworkComponent } from './theoretical-framework/theoretic
 import { TheoreticalFrameworkEditComponent } from './theoretical-framework/theoretical-framework-edit/theoretical-framework-edit.component';
 import { ProgramComponent } from './program/program.component';
 import { ProgramEditComponent } from './program/program-edit/program-edit.component';
+import { CompanyComponent } from './company/company.component';
+import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+
 
 
 

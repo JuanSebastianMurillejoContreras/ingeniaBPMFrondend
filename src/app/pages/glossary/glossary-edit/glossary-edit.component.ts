@@ -4,7 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Glossary } from 'src/app/model/glossaries';
+import { Glossary } from 'src/app/model/glossary';
 import { GlossaryService } from 'src/app/service/glossary.service';
 
 @Component({

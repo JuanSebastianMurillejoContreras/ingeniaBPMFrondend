@@ -13,10 +13,10 @@
     <h3>Tipo de empresa</h3>
     <mat-form-field>
         <input matInput placeholder="Seleccione la empresa a la que pertenece el usuario" required
-            formControlName="client" [matAutocomplete]="autoClient" [formControl]="clientControl">
+            formControlName="company" [matAutocomplete]="autoCompany" [formControl]="companyControl">
 
-        <mat-autocomplete #autoClient="matAutocomplete" [displayWith]="showClient">
-            <mat-option *ngFor="let c of clientFiltered$ | async" [value]="c">
+        <mat-autocomplete #autoCompany="matAutocomplete" [displayWith]="showCompany">
+            <mat-option *ngFor="let c of companyFiltered$ | async" [value]="c">
                 {{c.name}}
             </mat-option>
         </mat-autocomplete>
