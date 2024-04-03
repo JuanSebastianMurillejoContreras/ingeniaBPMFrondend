@@ -6,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Company } from 'src/app/model/company';
 import { ProgramByCompany } from 'src/app/model/programbyCompany';
 import { ProgrambycompanyService } from 'src/app/service/programbycompany.service';
 

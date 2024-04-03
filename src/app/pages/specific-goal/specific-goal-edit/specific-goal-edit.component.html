@@ -1,6 +1,9 @@
 <form class="example-container" [formGroup]="form" #frmnameSpecificGoal="ngForm" (submit)="operate()">
 
-
+    <div>
+        <h1>Objetivo específico</h1>
+        <h2>Formulario de registro</h2>
+    </div>
     <div [hidden]="true">
         <mat-form-field class="example-full-width">
             <input matInput placeholder="ID" required formControlName="idSpecificGoal">

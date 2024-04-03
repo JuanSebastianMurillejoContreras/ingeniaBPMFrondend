@@ -34,6 +34,33 @@
         </mat-autocomplete>
     </mat-form-field>
 
+   <!--- <h3>Asocie los programas a la empresa</h3>
+
+    <div class="example-container">
+        <h3>Programas Asociados</h3>
+        <div
+        cdkDropList
+        [cdkDropListData]="programs"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of programs" cdkDrag>{{item.name}}</div>
+      </div>
+    </div>
+    <div class="example-container">
+        <h3>Programas Asociados</h3>
+        <div
+        cdkDropList
+        [cdkDropListData]="programsByCompany"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of programsByCompany" cdkDrag>{{item.program.name}}</div>
+      </div>
+    </div>-->
+
+    
+
+
+    
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProgramByCompany.invalid">
         <mat-icon>done</mat-icon>
         <span>Done</span>

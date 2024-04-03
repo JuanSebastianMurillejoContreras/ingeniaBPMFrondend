@@ -30,8 +30,8 @@ export class TheoreticalFrameworkEditComponent implements OnInit {
   ngOnInit(): void {
     this.form = new FormGroup( {
       'idTheoreticalFramework': new FormControl( 0 ),
-      'generalConsiderations': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] ),
-      'specificConsiderations': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] ),
+      'generalConsiderations': new FormControl( '', [Validators.required] ),
+      'specificConsiderations': new FormControl( '', [Validators.required] ),
       'urlAnnexed': new FormControl( '', [Validators.required, Validators.minLength( 2 ), Validators.maxLength( 1200 )] )
     } );
 

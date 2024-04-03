@@ -11,6 +11,7 @@ import { ProgramByCompany } from 'src/app/model/programbyCompany';
 import { CompanyService } from 'src/app/service/company.service';
 import { ProgramService } from 'src/app/service/program.service';
 import { ProgrambycompanyService } from 'src/app/service/programbycompany.service';
+import {CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, DragDropModule, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 
 @Component( {
@@ -18,7 +19,7 @@ import { ProgrambycompanyService } from 'src/app/service/programbycompany.servic
   standalone: true,
   templateUrl: './programbycompany-edit.component.html',
   styleUrls: ['./programbycompany-edit.component.css'],
-  imports: [MaterialModule, ReactiveFormsModule, MatCardModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
+  imports: [MaterialModule, ReactiveFormsModule, MatCardModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet, CdkDropListGroup, CdkDropList, CdkDrag]
 } )
 export class ProgrambycompanyEditComponent implements OnInit {
 
@@ -26,21 +27,62 @@ export class ProgrambycompanyEditComponent implements OnInit {
   isEdit: boolean;
   form: FormGroup;
 
-  program: Program[];
-  programControl: FormControl = new FormControl();
-  programFiltered$: Observable<Program[]>;
-
   company: Company[];
   companyControl: FormControl = new FormControl();
   companyFiltered$: Observable<Company[]>;
 
+  program: Program[];
+  programControl: FormControl = new FormControl();
+  programFiltered$: Observable<Program[]>;
+
+  programs: Program[] = [];
+  programsByCompany: ProgramByCompany[];
+  draggingItem: Program | null = null;
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private programByCompany: ProgrambycompanyService,
+    private programByCompanyService: ProgrambycompanyService,
     private programService: ProgramService,
     private companyService: CompanyService
-  ) { }
+  ) {
+   }
+
+
+dropCompany(event: CdkDragDrop<any[]>) {
+  if (this.draggingItem) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        this.programs,
+        event.container.data,
+        this.programs.indexOf(this.draggingItem),
+        event.currentIndex
+      );
+    }
+    this.draggingItem = null;
+  }
+}
+  
+drop(event: CdkDragDrop<any[]>) {
+  if (event.previousContainer === event.container) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  } else {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+  }
+}
+
+dropProgram(program: Program) {
+    this.draggingItem = program;
+  }
+
 
   ngOnInit(): void {
     this.form = new FormGroup( {
@@ -91,6 +133,7 @@ export class ProgrambycompanyEditComponent implements OnInit {
   loadInitialData() {
     this.programService.findAll().subscribe( data => this.program = data );
     this.companyService.findAll().subscribe( data => this.company = data );
+    this.programByCompanyService.findAll().subscribe( data => this.programsByCompany = data)  
   }
 
   showProgram( val: any ) {
@@ -103,7 +146,7 @@ export class ProgrambycompanyEditComponent implements OnInit {
 
   initForm() {
     if ( this.isEdit ) {
-      this.programByCompany.findById( this.id ).subscribe( data => {
+      this.programByCompanyService.findById( this.id ).subscribe( data => {
         this.form.setValue( {
           'idProgramByCompany': data.idProgramByCompany,
           'program': data.program,
@@ -126,21 +169,21 @@ export class ProgrambycompanyEditComponent implements OnInit {
 
 
     if ( this.isEdit ) {
-      this.programByCompany.update( programByCompany.idProgramByCompany, programByCompany ).pipe( switchMap( () => {
-        return this.programByCompany.findAll();
+      this.programByCompanyService.update( programByCompany.idProgramByCompany, programByCompany ).pipe( switchMap( () => {
+        return this.programByCompanyService.findAll();
       } ) )
         .subscribe( data => {
-          this.programByCompany.setProgramByCompanyChange( data );
-          this.programByCompany.setMessageChange( 'Programa por empresa actualizado!' )
+          this.programByCompanyService.setProgramByCompanyChange( data );
+          this.programByCompanyService.setMessageChange( 'Programa por empresa actualizado!' )
 
         } );
     } else {
-      this.programByCompany.save( programByCompany ).pipe( switchMap( () => {
-        return this.programByCompany.findAll();
+      this.programByCompanyService.save( programByCompany ).pipe( switchMap( () => {
+        return this.programByCompanyService.findAll();
       } ) )
         .subscribe( data => {
-          this.programByCompany.setProgramByCompanyChange( data );
-          this.programByCompany.setMessageChange( "Programa por empresa asociado!" )
+          this.programByCompanyService.setProgramByCompanyChange( data );
+          this.programByCompanyService.setMessageChange( "Programa por empresa asociado!" )
         } );
     }
     this.router.navigate( ['/pages/programbycompany'] );

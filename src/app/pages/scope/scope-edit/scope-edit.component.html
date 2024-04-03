@@ -14,7 +14,7 @@
     <mat-form-field class="example-full-width">
         <mat-label>Escribe la definción</mat-label>
 
-        <textarea matInput placeholder="Alcance" required formControlName="definitionScope"></textarea>
+        <textarea matInput placeholder="Alcance" required  formControlName="definitionScope"></textarea>
 
         <div *ngIf="form.get('definitionScope').invalid && form.get('definitionScope').dirty">
             <small *ngIf="form.get('definitionScope').hasError('required')">
