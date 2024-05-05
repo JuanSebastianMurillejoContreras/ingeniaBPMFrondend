@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.development';
   providedIn: 'root'
 })
 export class GlossaryService extends GenericService<Glossary>{
+  
   private examChange: Subject<Glossary[]> = new Subject<Glossary[]>;
   private messageChange: Subject<string> = new Subject<string>;
 

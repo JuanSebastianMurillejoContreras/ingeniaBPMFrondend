@@ -1,45 +1,72 @@
-<form class="example-container" [formGroup]="form" #frmnameGlossary="ngForm" (submit)="operate()">
-
+<form class="example-container" [formGroup]="formGlossary" #frmnameGlossary="ngForm" (submit)="operate()">
+    <mat-label>
+        <div>
+            <h1>Glosario</h1>
+        </div>
+    </mat-label>
     <div [hidden]="true">
         <mat-form-field class="example-full-width">
             <input matInput placeholder="ID" required formControlName="idGlossary">
         </mat-form-field>
     </div>
 
+    <h3>Palabra</h3>
     <mat-form-field class="example-full-width, invalid">
-
-        <input matInput placeholder="Palabra" minlength="2" maxlength="50" required pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,50}"
+        <input matInput placeholder="Ingrese la palabra para registrarla en el glosario" minlength="2" maxlength="50" required pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,50}"
             formControlName="word">
-        <small *ngIf="form.get('word').hasError('required') && form.get('word').touched">
+        <small *ngIf="formGlossary.get('word').hasError('required') && formGlossary.get('word').touched">
             Debe ingresar una palabra para registrar en el glosario
         </small>
-        <small *ngIf="form.get('word').hasError('minlength') && form.get('word').dirty">
+        <small *ngIf="formGlossary.get('word').hasError('minlength') && formGlossary.get('word').dirty">
             Debe ingresar minimo 3 caracteres
         </small>
-        <small *ngIf="form.get('word').hasError('pattern') && form.get('word').dirty">
+        <small *ngIf="formGlossary.get('word').hasError('pattern') && formGlossary.get('word').dirty">
             La palabra no puede incluir números
         </small>
     </mat-form-field>
 
+    <h3>Definición</h3>
     <mat-form-field class="example-full-width, invalid">
-        <mat-label>Escribe la definción</mat-label>
+        <mat-label>Escribe la definción de la palabra registrada en el glosario</mat-label>
 
         <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" rows="10" required
                   formControlName="definition"></textarea>
 
-        <div *ngIf="form.get('definition').invalid && form.get('definition').dirty">
-            <small *ngIf="form.get('definition').hasError('required')">
+        <div *ngIf="formGlossary.get('definition').invalid && formGlossary.get('definition').dirty">
+            <small *ngIf="formGlossary.get('definition').hasError('required')">
                 Debe ingresar una definición para el glosario
             </small>
-            <small *ngIf="form.get('definition').hasError('minlength')">
+            <small *ngIf="formGlossary.get('definition').hasError('minlength')">
                 Debe ingresar mínimo 3 caracteres
             </small>
-            <small *ngIf="form.get('definition').hasError('maxlength')">
+            <small *ngIf="formGlossary.get('definition').hasError('maxlength')">
                 Debe ingresar máximo 1.200 caracteres
             </small>
         </div>
     </mat-form-field>
 
+
+    <h3>Seleccione el programa</h3>
+   <mat-form-field>
+        <input matInput placeholder="Seleccione el programa" required formControlName="program"
+            [matAutocomplete]="autoProgram" [formControl]="programControl">
+        <mat-error
+            *ngIf="formGlossaryByProgramByCompanyType.get('program').invalid && (formGlossaryByProgramByCompanyType.get('program').touched || formGlossaryByProgramByCompanyType.get('program').dirty)">
+            <span *ngIf="formGlossaryByProgramByCompanyType.get('program').hasError('required')">
+                Debe seleccionar un programa
+            </span>
+        </mat-error>
+
+        <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+            <mat-option *ngFor="let p of programFiltered$ | async" [value]="p">
+                {{p.name}}                
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+
+    <h3>Seleccione el tipo de empresa</h3>
+    
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGlossary.invalid">
         <mat-icon>done</mat-icon>

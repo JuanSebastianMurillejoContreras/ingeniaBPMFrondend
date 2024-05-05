@@ -6,8 +6,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Glossary } from 'src/app/model/glossary';
-import { GlossaryService } from 'src/app/service/glossary.service';
+import { GlossaryByProgramByCompanyType } from 'src/app/model/GlossaryByProgramByCompanyType';
+import { GlossaryByProgramByCompanyTypeService } from 'src/app/service/glossary-by-program-by-company-type.service';
 
 @Component({
   selector: 'app-glossary',
@@ -18,27 +18,27 @@ import { GlossaryService } from 'src/app/service/glossary.service';
 })
 export class GlossaryComponent implements OnInit{
 
-  displayedColumns: string[] = ['idGlossary', 'word', 'definition', 'actions'];
-  dataSource: MatTableDataSource<Glossary>;
+  displayedColumns: string[] = ['idGlossaryByProgramByCompanyType', 'glossary', 'program', 'companyType', 'actions'];
+  dataSource: MatTableDataSource<GlossaryByProgramByCompanyType>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private glossaryService: GlossaryService
+    private glossaryByProgramByCompanyTypeService: GlossaryByProgramByCompanyTypeService
   ) { }
 
   ngOnInit(): void {
-    this.glossaryService.getGlossaryChange().subscribe(data => {
+    this.glossaryByProgramByCompanyTypeService.getGlossaryByProgramByCompanyTypeChange().subscribe(data => {
       this.createTable(data);
     });
 
-    this.glossaryService.getMessageChange().subscribe(data => {
+    this.glossaryByProgramByCompanyTypeService.getMessageChange().subscribe(data => {
       this.snackBar.open(data, 'INFO', { duration: 2500, verticalPosition: "bottom", horizontalPosition: "right" });
     });
 
-    this.glossaryService.findAll().subscribe(data => {
+    this.glossaryByProgramByCompanyTypeService.findAll().subscribe(data => {
       this.createTable(data);
     });
   }
@@ -47,19 +47,19 @@ export class GlossaryComponent implements OnInit{
     this.dataSource.filter = e.target.value.trim().toLowerCase();
   }
 
-  delete(idCompanyType: number){
-    this.glossaryService.delete(idCompanyType).pipe(switchMap( ()=> {
-      return this.glossaryService.findAll();
+  delete(idGlossaryByProgramByCompanyType: number){
+    this.glossaryByProgramByCompanyTypeService.delete(idGlossaryByProgramByCompanyType).pipe(switchMap( ()=> {
+      return this.glossaryByProgramByCompanyTypeService.findAll();
     }))
     .subscribe(data => {
-      this.glossaryService.setGlossaryChange(data);
-      this.glossaryService.setMessageChange('DELETED!');
+      this.glossaryByProgramByCompanyTypeService.setGlossaryByProgramByCompanyTypeChange(data);
+      this.glossaryByProgramByCompanyTypeService.setMessageChange('DELETED!');
     })
     ;
   }
 
-  createTable(glossary: Glossary[]){
-    this.dataSource = new MatTableDataSource(glossary);    
+  createTable(glossaryByProgramByCompanyType: GlossaryByProgramByCompanyType[]){
+    this.dataSource = new MatTableDataSource(glossaryByProgramByCompanyType);    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;        
   }
