@@ -1,4 +1,4 @@
-<form class="example-container" [formGroup]="formGlossary" #frmnameGlossary="ngForm" (submit)="operate()">
+<form class="example-container" [formGroup]="form" #frmnameGlossary="ngForm" (submit)="operate()">
     <mat-label>
         <div>
             <h1>Glosario</h1>
@@ -14,13 +14,13 @@
     <mat-form-field class="example-full-width, invalid">
         <input matInput placeholder="Ingrese la palabra para registrarla en el glosario" minlength="2" maxlength="50" required pattern="[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,50}"
             formControlName="word">
-        <small *ngIf="formGlossary.get('word').hasError('required') && formGlossary.get('word').touched">
+        <small *ngIf="form.get('word').hasError('required') && form.get('word').touched">
             Debe ingresar una palabra para registrar en el glosario
         </small>
-        <small *ngIf="formGlossary.get('word').hasError('minlength') && formGlossary.get('word').dirty">
+        <small *ngIf="form.get('word').hasError('minlength') && form.get('word').dirty">
             Debe ingresar minimo 3 caracteres
         </small>
-        <small *ngIf="formGlossary.get('word').hasError('pattern') && formGlossary.get('word').dirty">
+        <small *ngIf="form.get('word').hasError('pattern') && form.get('word').dirty">
             La palabra no puede incluir números
         </small>
     </mat-form-field>
@@ -32,14 +32,14 @@
         <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" rows="10" required
                   formControlName="definition"></textarea>
 
-        <div *ngIf="formGlossary.get('definition').invalid && formGlossary.get('definition').dirty">
-            <small *ngIf="formGlossary.get('definition').hasError('required')">
+        <div *ngIf="form.get('definition').invalid && form.get('definition').dirty">
+            <small *ngIf="form.get('definition').hasError('required')">
                 Debe ingresar una definición para el glosario
             </small>
-            <small *ngIf="formGlossary.get('definition').hasError('minlength')">
+            <small *ngIf="form.get('definition').hasError('minlength')">
                 Debe ingresar mínimo 3 caracteres
             </small>
-            <small *ngIf="formGlossary.get('definition').hasError('maxlength')">
+            <small *ngIf="form.get('definition').hasError('maxlength')">
                 Debe ingresar máximo 1.200 caracteres
             </small>
         </div>
@@ -51,8 +51,8 @@
         <input matInput placeholder="Seleccione el programa" required formControlName="program"
             [matAutocomplete]="autoProgram" [formControl]="programControl">
         <mat-error
-            *ngIf="formGlossaryByProgramByCompanyType.get('program').invalid && (formGlossaryByProgramByCompanyType.get('program').touched || formGlossaryByProgramByCompanyType.get('program').dirty)">
-            <span *ngIf="formGlossaryByProgramByCompanyType.get('program').hasError('required')">
+            *ngIf="form.get('program').invalid && (form.get('program').touched || form.get('program').dirty)">
+            <span *ngIf="form.get('program').hasError('required')">
                 Debe seleccionar un programa
             </span>
         </mat-error>
