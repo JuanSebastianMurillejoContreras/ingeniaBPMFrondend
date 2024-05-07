@@ -4,29 +4,30 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Glossary } from 'src/app/model/glossary';
+import { GlossaryByProgramByCompanyType } from 'src/app/model/GlossaryByProgramByCompanyType';
 import { Program } from 'src/app/model/program';
 import { GlossaryByProgramByCompanyTypeService } from 'src/app/service/glossary-by-program-by-company-type.service';
 import { GlossaryService } from 'src/app/service/glossary.service';
 import { ProgramService } from 'src/app/service/program.service';
 
-@Component( {
+@Component({
   standalone: true,
   selector: 'app-glossary-edit',
   templateUrl: './glossary-edit.component.html',
   styleUrls: ['./glossary-edit.component.css'],
 
   imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
-} )
+})
 export class GlossaryEditComponent implements OnInit {
 
   id: number;
   isEdit: boolean;
+  idProgram: number;
+  isEditIdProgram: boolean;
 
-form: FormGroup
+  form: FormGroup
 
-  formGlossary: FormGroup;
-  formGlossaryByProgramByCompanyType: FormGroup;
+  glossaryByProgramByCompanyType: GlossaryByProgramByCompanyType[]; 
 
   program: Program[];
   programControl: FormControl = new FormControl();
@@ -35,37 +36,36 @@ form: FormGroup
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private glossaryService: GlossaryService,
     private programService: ProgramService,
     private glossaryByProgramByCompanyTypeService: GlossaryByProgramByCompanyTypeService,
-    private _formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
-      'idGlossary': new FormControl( 0 ),
-      'word': new FormControl( '', [Validators.required, Validators.minLength( 3 ), Validators.maxLength( 50 )] ),
-      'definition': new FormControl( '', [Validators.required, Validators.minLength( 3 ), Validators.maxLength( 1200 )] ), 
-      program: this.programControl           
-    } );
+      'idGlossaryByProgramByCompanyType': new FormControl(0),
+      'glossaryWord': new FormControl('', [Validators.required]),
+      'glossaryDefinition': new FormControl('', [Validators.required]),
+      'programName': this.programControl,
+      'companyType': new FormControl('', [Validators.required]),
+    });
 
     this.loadInitialData()
     this.programFiltered$ = this.programControl.valueChanges.pipe(map(val => this.filterProgram(val)));
 
-    this.route.params.subscribe( data => {
+    this.route.params.subscribe(data => {
       this.id = data['id'];
       this.isEdit = data['id'] != null;
       this.initForm();
-    } )
-
+    })
   }
+
 
   filterProgram( val: any ): Program[] {
     if ( !val ) {
       return this.program;
     }
 
-    if ( val?.idProgram > 0 ) {
+    if ( val?.idClient > 0 ) {
       return this.program.filter( el =>
         el.name.toLowerCase().includes( val.name.toLowerCase() ) );
     } else {
@@ -74,69 +74,63 @@ form: FormGroup
     }
   }
 
-
   loadInitialData() {
-    this.programService.findAll().subscribe( data => this.program = data );    
+    this.programService.findAll().subscribe(data => this.program = data);
   }
 
-  showProgram( val: any ) {
+  showProgram(val: any) {
     return val ? `${val.name}` : val;
   }
 
   initForm() {
-    if ( this.isEdit ) {
-      this.glossaryService.findById( this.id ).subscribe( data => {
-        this.formGlossary.setValue( {
-          'idGlossary': data.idGlossary,
-          'word': data.word,
-          'definition': data.definition,
-        } );
-      });
-    }
-    if ( this.isEdit ) {
-      this.glossaryByProgramByCompanyTypeService.findById( this.id ).subscribe( data => {
-        this.formGlossaryByProgramByCompanyType.setValue( {
-          'idGlossaryByProgramByCompanyType': data.idGlossaryByProgramByCompanyType,
-          'program': data.program,
-          'companyType': data.companyType,
-          'glossary': data.glossary
+      if (this.isEdit) {
+        this.glossaryByProgramByCompanyTypeService.findById(this.id).subscribe(data => {
+          this.form.setValue({
+            'idGlossaryByProgramByCompanyType': data.idGlossaryByProgramByCompanyType,
+    'glossaryWord': data.glossary.word,
+    'glossaryDefinition': data.glossary.definition,
+    'programName': data.program.name || '', // Verifica si es nulo o indefinido
+    'companyType': data.companyType.nameCompanyType
+            
+          })
+          console.log(data.program.name)
         })
-      })
+       
+      }
     }
-  }
-
-  get f() {
-    return this.formGlossary.controls;
-    return this.formGlossaryByProgramByCompanyType.controls;
-  }
+   
 
   operate() {
-    if ( this.formGlossary.invalid ) { return; }
-    let glossary = new Glossary();
-    glossary.idGlossary = this.formGlossary.value['idGlossary'];
-    glossary.word = this.formGlossary.value['word'];
-    glossary.definition = this.formGlossary.value['definition'];
+    if (this.form.invalid) { return; }
+    let glossaryByProgramByCompanyType = new GlossaryByProgramByCompanyType();
+    glossaryByProgramByCompanyType.idGlossaryByProgramByCompanyType = this.form.value['idGlossaryByProgramByCompanyType'];
+    glossaryByProgramByCompanyType.glossary = this.form.value['glossaryWord'];
+    glossaryByProgramByCompanyType.program = this.form.value['programName'];
+    glossaryByProgramByCompanyType.companyType = this.form.value['companyType'];
+    
 
 
-    if ( this.isEdit ) {
-      this.glossaryService.update( glossary.idGlossary, glossary ).pipe( switchMap( () => {
-        return this.glossaryService.findAll();
-      } ) )
-        .subscribe( data => {
-          this.glossaryService.setGlossaryChange( data );
-          this.glossaryService.setMessageChange( 'Palabra actualizada!' )
+    if (this.isEdit) {
+      this.glossaryByProgramByCompanyTypeService.update(glossaryByProgramByCompanyType.idGlossaryByProgramByCompanyType, glossaryByProgramByCompanyType).pipe(switchMap(() => {
+        return this.glossaryByProgramByCompanyTypeService.findAll();
+      }))
+        .subscribe(data => {
+          this.glossaryByProgramByCompanyTypeService.setGlossaryByProgramByCompanyTypeChange(data);
+          this.glossaryByProgramByCompanyTypeService.setMessageChange('Glosario Actualizado!')
 
-        } );
+        });
     } else {
-      this.glossaryService.save( glossary ).pipe( switchMap( () => {
-        return this.glossaryService.findAll();
-      } ) )
-        .subscribe( data => {
-          this.glossaryService.setGlossaryChange( data );
-          this.glossaryService.setMessageChange( "Palabra creada!" )
-        } );
+      this.glossaryByProgramByCompanyTypeService.save(glossaryByProgramByCompanyType).pipe(switchMap(() => {
+        return this.glossaryByProgramByCompanyTypeService.findAll();
+      }))
+        .subscribe(data => {
+          this.glossaryByProgramByCompanyTypeService.setGlossaryByProgramByCompanyTypeChange(data);
+          this.glossaryByProgramByCompanyTypeService.setMessageChange("Glosario creado!")
+        });
     }
-    this.router.navigate( ['/pages/glossary'] );
+    this.router.navigate(['/pages/glossary']);
   }
 
 }
+
+
