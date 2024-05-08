@@ -5,7 +5,10 @@ import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/route
 import { Observable, map, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
 import { GlossaryByProgramByCompanyType } from 'src/app/model/GlossaryByProgramByCompanyType';
+import { CompanyType } from 'src/app/model/companyType';
+import { Glossary } from 'src/app/model/glossary';
 import { Program } from 'src/app/model/program';
+import { CompanyTypeService } from 'src/app/service/companyType.service';
 import { GlossaryByProgramByCompanyTypeService } from 'src/app/service/glossary-by-program-by-company-type.service';
 import { GlossaryService } from 'src/app/service/glossary.service';
 import { ProgramService } from 'src/app/service/program.service';
@@ -27,16 +30,22 @@ export class GlossaryEditComponent implements OnInit {
 
   form: FormGroup
 
-  glossaryByProgramByCompanyType: GlossaryByProgramByCompanyType[]; 
-
-  program: Program[];
+  program1: Program[];
   programControl: FormControl = new FormControl();
   programFiltered$: Observable<Program[]>;
+
+  companyType: CompanyType[];
+  companyTypeControl: FormControl = new FormControl();
+  companyTypeFiltered$: Observable<CompanyType[]>;
+
+  glossary: Glossary[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private programService: ProgramService,
+    private companyTypeService: CompanyTypeService,
+    private glossaryService: GlossaryService,
     private glossaryByProgramByCompanyTypeService: GlossaryByProgramByCompanyTypeService,
   ) { }
 
@@ -45,12 +54,13 @@ export class GlossaryEditComponent implements OnInit {
       'idGlossaryByProgramByCompanyType': new FormControl(0),
       'glossaryWord': new FormControl('', [Validators.required]),
       'glossaryDefinition': new FormControl('', [Validators.required]),
-      'programName': this.programControl,
-      'companyType': new FormControl('', [Validators.required]),
+      'program': this.programControl,
+      'companyType': this.companyTypeControl
     });
 
     this.loadInitialData()
-    this.programFiltered$ = this.programControl.valueChanges.pipe(map(val => this.filterProgram(val)));
+    //this.programFiltered$ = this.programControl.valueChanges.pipe(map(val => this.filterProgram(val)));
+    //this.companyTypeFiltered$ = this.companyTypeControl.valueChanges.pipe(map(val => this.filterCompanyType(val)));
 
     this.route.params.subscribe(data => {
       this.id = data['id'];
@@ -60,54 +70,77 @@ export class GlossaryEditComponent implements OnInit {
   }
 
 
-  filterProgram( val: any ): Program[] {
-    if ( !val ) {
-      return this.program;
+  filterProgram(val: any): Program[] {
+    if (!val) {
+      return this.program1;
     }
 
-    if ( val?.idClient > 0 ) {
-      return this.program.filter( el =>
-        el.name.toLowerCase().includes( val.name.toLowerCase() ) );
+    if (val?.idClient > 0) {
+      return this.program1.filter(el =>
+        el.name.toLowerCase().includes(val.name.toLowerCase()));
     } else {
-      return this.program.filter( el =>
-        el.name.toLowerCase().includes( val?.toLowerCase() ) );
+      console.log(val)
+      return this.program1.filter(el =>
+        el.name.toLowerCase().includes(val?.toLowerCase()));
+    }
+  }
+  filterCompanyType(val: any): CompanyType[] {
+    if (!val) {
+      return this.companyType;
+    }
+
+    if (val?.idcompanyType > 0) {
+      return this.companyType.filter(el =>
+        el.nameCompanyType.toLowerCase().includes(val.nameCompanyType.toLowerCase()));
+    } else {
+      console.log(val)
+      return this.companyType.filter(el =>
+        el.nameCompanyType.toLowerCase().includes(val?.toLowerCase()));
     }
   }
 
   loadInitialData() {
-    this.programService.findAll().subscribe(data => this.program = data);
+    this.programService.findAll().subscribe(data => this.program1 = data);
+    this.companyTypeService.findAll().subscribe(data => this.companyType = data);
+    this.glossaryService.findAll().subscribe(data => this.glossary = data);
   }
 
   showProgram(val: any) {
     return val ? `${val.name}` : val;
   }
 
+  showCompanyType(val: any) {
+    return val ? `${val.nameCompanyType}` : val;
+  }
+
   initForm() {
-      if (this.isEdit) {
-        this.glossaryByProgramByCompanyTypeService.findById(this.id).subscribe(data => {
-          this.form.setValue({
-            'idGlossaryByProgramByCompanyType': data.idGlossaryByProgramByCompanyType,
-    'glossaryWord': data.glossary.word,
-    'glossaryDefinition': data.glossary.definition,
-    'programName': data.program.name || '', // Verifica si es nulo o indefinido
-    'companyType': data.companyType.nameCompanyType
-            
-          })
-          console.log(data.program.name)
+    if (this.isEdit) {
+      this.glossaryByProgramByCompanyTypeService.findById(this.id).subscribe(data => {
+        this.form.setValue({
+          'idGlossaryByProgramByCompanyType': data.idGlossaryByProgramByCompanyType,
+          'glossaryWord': data.glossary.word,
+          'glossaryDefinition': data.glossary.definition,
+          'program': data.program,
+          'companyType': data.companyType
         })
-       
-      }
+        //console.log(data)
+      })
+
     }
-   
+  }
+
 
   operate() {
-    if (this.form.invalid) { return; }
+    if (this.form.invalid) {
+      return;
+    }
     let glossaryByProgramByCompanyType = new GlossaryByProgramByCompanyType();
     glossaryByProgramByCompanyType.idGlossaryByProgramByCompanyType = this.form.value['idGlossaryByProgramByCompanyType'];
     glossaryByProgramByCompanyType.glossary = this.form.value['glossaryWord'];
-    glossaryByProgramByCompanyType.program = this.form.value['programName'];
+    glossaryByProgramByCompanyType.glossary = this.form.value['glossaryDefinition'];
+    glossaryByProgramByCompanyType.program = this.form.value['program'];
     glossaryByProgramByCompanyType.companyType = this.form.value['companyType'];
-    
+    console.log("glossaryByProgramByCompanyType" + glossaryByProgramByCompanyType)
 
 
     if (this.isEdit) {
@@ -117,8 +150,8 @@ export class GlossaryEditComponent implements OnInit {
         .subscribe(data => {
           this.glossaryByProgramByCompanyTypeService.setGlossaryByProgramByCompanyTypeChange(data);
           this.glossaryByProgramByCompanyTypeService.setMessageChange('Glosario Actualizado!')
-
         });
+
     } else {
       this.glossaryByProgramByCompanyTypeService.save(glossaryByProgramByCompanyType).pipe(switchMap(() => {
         return this.glossaryByProgramByCompanyTypeService.findAll();
@@ -128,6 +161,9 @@ export class GlossaryEditComponent implements OnInit {
           this.glossaryByProgramByCompanyTypeService.setMessageChange("Glosario creado!")
         });
     }
+
+
+
     this.router.navigate(['/pages/glossary']);
   }
 
