@@ -1,0 +1,79 @@
+
+<form class="example-container" [formGroup]="form" #frmnameGlossaryByProgramByCompanyType="ngForm" (submit)="operate()">
+    <mat-label>
+        <div>
+            <h1>Glosario por programa por compañia</h1>
+        </div>
+    </mat-label>
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idGlossaryByProgramByCompanyType">
+        </mat-form-field>
+    </div>
+
+    <h3>Palabra</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione la palabra" required formControlName="glossary"
+            [matAutocomplete]="autoGlossary" [formControl]="glossaryControl">
+        <mat-error
+            *ngIf="form.get('glossary').invalid && (form.get('glossary').touched || form.get('glossary').dirty)">
+            <span *ngIf="form.get('glossary').hasError('required')">
+                Debe seleccionar una palabra
+            </span>
+        </mat-error>
+
+        <mat-autocomplete #autoGlossary="matAutocomplete" [displayWith]="showGlossary">
+            <mat-option *ngFor="let g of glossary" [value]="g.idGlossary">
+                {{g.word}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+
+    <h3>Programa</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione el tipo de empresa" required formControlName="program"
+            [matAutocomplete]="autoProgram" [formControl]="programControl">
+        <mat-error
+            *ngIf="form.get('program').invalid && (form.get('program').touched || form.get('program').dirty)">
+            <span *ngIf="form.get('program').hasError('required')">
+                Debe seleccionar un programa
+            </span>
+        </mat-error>
+
+        <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+            <mat-option *ngFor="let p of program" [value]="p.idProgram">
+                {{p.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <h3>Tipo de empresa</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione el tipo de empresa" required formControlName="companyType"
+            [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
+        <mat-error
+            *ngIf="form.get('companyType').invalid && (form.get('companyType').touched || form.get('companyType').dirty)">
+            <span *ngIf="form.get('companyType').hasError('required')">
+                Debe seleccionar un tipo de empresa
+            </span>
+        </mat-error>
+
+        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+            <mat-option *ngFor="let c of companyType" [value]="c.idCompanyType">
+                {{c.nameCompanyType}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGlossaryByProgramByCompanyType.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/glossarybyprogrambycompanytype">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

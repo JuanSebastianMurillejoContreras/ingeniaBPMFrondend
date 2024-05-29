@@ -19,6 +19,9 @@ import { ProgrambycompanyComponent } from './programbycompany/programbycompany.c
 import { ScopeComponent } from './scope/scope.component';
 import { ScopeEditComponent } from './scope/scope-edit/scope-edit.component';
 import { ProgrambycompanyEditComponent } from './programbycompany/programbycompany-edit/programbycompany-edit.component';
+import { GlossaryByProgramByCompanyType } from '../model/GlossaryByProgramByCompanyType';
+import { GlossarybyprogrambycompanytypeComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype.component';
+import { GlossarybyprogrambycompanytypeEditComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype-edit/glossarybyprogrambycompanytype-edit.component';
 
 
 
@@ -77,6 +80,20 @@ export const PagesRoutes: Routes = [
       {
         path: 'edit/:id',
         component: GlossaryEditComponent,
+      },
+    ],
+  },
+  {
+    path: 'glossarybyprogrambycompanytype',
+    component: GlossarybyprogrambycompanytypeComponent,
+    children: [
+      {
+        path: 'new',
+        component: GlossarybyprogrambycompanytypeEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: GlossarybyprogrambycompanytypeEditComponent,
       },
     ],
   },

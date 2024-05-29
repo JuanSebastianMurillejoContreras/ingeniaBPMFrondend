@@ -21,6 +21,7 @@ import { DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/mate
 import { CustomDateAdapter } from './custom-adapter';
 import {MatListModule} from '@angular/material/list'; 
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 @NgModule( {
@@ -47,7 +48,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatDatepickerModule,
     MatNativeDateModule,
     MatListModule,
-    MatGridListModule
+    MatGridListModule,
+    MatStepperModule
     
   ],
   providers: [

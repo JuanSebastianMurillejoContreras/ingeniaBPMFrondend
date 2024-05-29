@@ -6,13 +6,10 @@
 
 .example-container>* {
     width: 100%;
-    border-radius: 10px !important; 
+    border-radius: 100px; 
 }
-
-.example-full-width {
-    width: 100%;
-  }
 
 .invalid {
     color: red;
 }
+

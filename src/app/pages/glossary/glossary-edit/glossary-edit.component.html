@@ -1,4 +1,5 @@
-<form class="example-container" [formGroup]="form" #frmnameGlossary="ngForm" (submit)="operate()">
+
+  <form class="example-container" [formGroup]="form" #frmnameGlossary="ngForm" (submit)="operate()">
     <mat-label>
         <div>
             <h1>Glosario</h1>
@@ -6,21 +7,21 @@
     </mat-label>
     <div [hidden]="true">
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="ID" required formControlName="idGlossaryByProgramByCompanyType">
+            <input matInput placeholder="ID" required formControlName="idGlossary">
         </mat-form-field>
     </div>
 
     <h3>Palabra</h3>
     <mat-form-field class="example-full-width, invalid">
         <input matInput placeholder="Ingrese la palabra para registrarla en el glosario" minlength="2" maxlength="50"
-            required formControlName="glossaryWord">
-        <small *ngIf="form.get('glossaryWord').hasError('required') && form.get('glossaryWord').touched">
+            required formControlName="Word">
+        <small *ngIf="form.get('Word').hasError('required') && form.get('Word').touched">
             Debe ingresar una palabra para registrar en el glosario
         </small>
-        <small *ngIf="form.get('glossaryWord').hasError('minlength') && form.get('glossaryWord').dirty">
+        <small *ngIf="form.get('Word').hasError('minlength') && form.get('Word').dirty">
             Debe ingresar minimo 3 caracteres
         </small>
-        <small *ngIf="form.get('glossaryWord').hasError('pattern') && form.get('glossaryWord').dirty">
+        <small *ngIf="form.get('Word').hasError('pattern') && form.get('Word').dirty">
             La palabra no puede incluir números
         </small>
     </mat-form-field>
@@ -29,61 +30,21 @@
     <mat-form-field class="example-full-width, invalid">
         <mat-label>Escribe la definción de la palabra registrada en el glosario</mat-label>
 
-        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" rows="10" required
-            formControlName="glossaryDefinition"></textarea>
+        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" required
+            formControlName="definition"></textarea>
 
-        <div *ngIf="form.get('glossaryDefinition').invalid && form.get('glossaryDefinition').dirty">
-            <small *ngIf="form.get('glossaryDefinition').hasError('required')">
+        <div *ngIf="form.get('definition').invalid && form.get('definition').dirty">
+            <small *ngIf="form.get('definition').hasError('required')">
                 Debe ingresar una definición para el glosario
             </small>
-            <small *ngIf="form.get('glossaryDefinition').hasError('minlength')">
+            <small *ngIf="form.get('definition').hasError('minlength')">
                 Debe ingresar mínimo 3 caracteres
             </small>
-            <small *ngIf="form.get('glossaryDefinition').hasError('maxlength')">
+            <small *ngIf="form.get('definition').hasError('maxlength')">
                 Debe ingresar máximo 1.200 caracteres
             </small>
         </div>
     </mat-form-field>
-
-
-    <h3>Seleccione el tipo de programa</h3>
-    <mat-form-field>
-        <input matInput placeholder="Seleccione el tipo de programa" required formControlName="program"
-            [matAutocomplete]="autoProgram" [formControl]="programControl">
-        <mat-error
-            *ngIf="form.get('program').invalid && (form.get('program').touched || form.get('program').dirty)">
-            <span *ngIf="form.get('program').hasError('required')">
-                Debe seleccionar un tipo de programa
-            </span>
-        </mat-error>
-
-        <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
-            <mat-option *ngFor="let c of program1" [value]="c.idProgram">
-                {{c.name}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-
-    <!-- TIPO DE EMPRESA -->
-    <h3>Seleccione el tipo de empresa</h3>
-    <mat-form-field>
-        <input matInput placeholder="Seleccione el tipo de empresa" required formControlName="companyType"
-            [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
-        <mat-error
-            *ngIf="form.get('companyType').invalid && (form.get('companyType').touched || form.get('companyType').dirty)">
-            <span *ngIf="form.get('companyType').hasError('required')">
-                Debe seleccionar un tipo de empresa
-            </span>
-        </mat-error>
-
-        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
-            <mat-option *ngFor="let c of companyType" [value]="c.idCompanyType">
-                {{c.nameCompanyType}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
-
-
 
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGlossary.invalid">

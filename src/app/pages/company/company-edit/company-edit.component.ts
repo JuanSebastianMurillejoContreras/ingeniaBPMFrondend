@@ -54,7 +54,7 @@ export class CompanyEditComponent implements OnInit {
     } );
 
     this.loadInitialData();
-    this.companyTypeFiltered$ = this.companyTypeControl.valueChanges.pipe( map( val => this.filterCompanyType( val ) ) );
+    //this.companyTypeFiltered$ = this.companyTypeControl.valueChanges.pipe( map( val => this.filterCompanyType( val ) ) );
 
     this.route.params.subscribe( data => {
       this.id = data['id'];
