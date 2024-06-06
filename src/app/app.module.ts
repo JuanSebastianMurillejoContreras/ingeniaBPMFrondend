@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { TheoreticalFrameworkByProgramByCompanyTypeEditComponent } from './pages/theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type-edit/theoretical-framework-by-program-by-company-type-edit.component';
 
 @NgModule({
   declarations: [

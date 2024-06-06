@@ -18,7 +18,7 @@ import { GlossaryService } from 'src/app/service/glossary.service';
 })
 export class GlossaryComponent implements OnInit{
 
-  displayedColumns: string[] = ['idGlossary', 'word', 'definition','actions'];
+  displayedColumns: string[] = ['idGlossary', 'word','actions'];
   dataSource: MatTableDataSource<Glossary>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

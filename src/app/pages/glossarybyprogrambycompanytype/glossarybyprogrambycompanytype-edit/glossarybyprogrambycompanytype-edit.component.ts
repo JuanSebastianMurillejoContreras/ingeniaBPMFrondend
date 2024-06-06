@@ -155,7 +155,6 @@ export class GlossarybyprogrambycompanytypeEditComponent implements OnInit {
     glossaryByProgramByCompanyType.program = this.form.value['program'];
     glossaryByProgramByCompanyType.companyType = this.form.value['companyType']      
 
-console.log(glossaryByProgramByCompanyType)
 
     if (this.isEdit) {
       this.glossaryByProgramByCompanyTypeService.update(glossaryByProgramByCompanyType.idGlossaryByProgramByCompanyType, glossaryByProgramByCompanyType)
@@ -165,7 +164,6 @@ console.log(glossaryByProgramByCompanyType)
         .subscribe(data => {
           this.glossaryByProgramByCompanyTypeService.setGlossaryByProgramByCompanyTypeChange(data);
           this.glossaryByProgramByCompanyTypeService.setMessageChange('Glosario Actualizado!')
-          console.log(glossaryByProgramByCompanyType)
         });
 
     } else {

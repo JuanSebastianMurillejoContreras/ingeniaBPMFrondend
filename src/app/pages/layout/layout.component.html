@@ -43,14 +43,11 @@
             <!---CLIENTE--------------------------------------------------------------------->
             <mat-accordion>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-
                     <mat-expansion-panel-header>
-
                         <mat-panel-title>
                             1. CLIENTE
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-
                     <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
                         routerLink="/pages/companytype" style="cursor: pointer">
                         <mat-icon class="icon-menu">
@@ -81,9 +78,7 @@
             <!---PROGRAMA--------------------------------------------------------------------->
             <mat-accordion>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-
                     <mat-expansion-panel-header>
-
                         <mat-panel-title>
                             2. DISEÑO DEL PROGRAMA
                             <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
@@ -99,50 +94,104 @@
                     </button>
                     <mat-divider></mat-divider>
 
-                    <mat-divider></mat-divider>
-                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/generalgoal" style="cursor: pointer">
-                        <mat-icon class="icon-menu">
-                            <img src="assets/icons/generalgoal.png" width="20" height="20">
-                        </mat-icon>
-                        <span>2.2 Objetivo general</span>
-                    </button>
+                    
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-icon class="icon-menu">
+                                    <img src="assets/icons/specificgoal.png" width="20" height="20">
+                                </mat-icon>
+                                2.2 Objetivo
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/generalgoal" style="cursor: pointer">
+                            <span>2.2.1 General</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/specificgoal" style="cursor: pointer">
+                            <span>2.2.2 Específico</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/" style="cursor: pointer">
+                            <span>2.2.3 Asociar</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                    </mat-expansion-panel>
+
+                 
+
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <img src="assets/icons/book.png" width="20" height="20">
+                                <span>2.3 Alcance </span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/scope" style="cursor: pointer">
+                            2.3.1 Alcance
+                        </button>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/" style="cursor: pointer">
+                            2.3.2 Asociar
+                        </button>
+                        <mat-divider></mat-divider>
+                    </mat-expansion-panel>
+
+
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <img src="assets/icons/book.png" width="20" height="20">
+                                2.4 Glosario
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/glossary" style="cursor: pointer">
+                            <span>2.4.1 Glosario</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/glossarybyprogrambycompanytype" style="cursor: pointer">
+                            <span>2.4.2 Asociar</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                    </mat-expansion-panel>
+
+                
+
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <img src="assets/icons/book.png" width="20" height="20">
+                                2.5 Marco teórico
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/theoreticalframework" style="cursor: pointer">
+                            <span>2.5.1 Marco teórico</span>
+                        </button>
+                        <mat-divider></mat-divider>
+                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
+                            (click)="sidenav.toggle()" routerLink="/pages/theoreticalframeworkbyprogrambycompanytype" style="cursor: pointer">
+                            <span>2.5.2 Asociar</span>
+                        </button>
+                        <mat-divider></mat-divider>
+
+                    </mat-expansion-panel>
+
 
                     <mat-divider></mat-divider>
-                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/specificgoal" style="cursor: pointer">
-                        <mat-icon class="icon-menu">
-                            <img src="assets/icons/specificgoal.png" width="20" height="20">
-                        </mat-icon>
-                        <span>2.3 Objetivo específico</span>
-                    </button>
 
-                    <mat-divider></mat-divider>
-                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/scope" style="cursor: pointer">
-                        <mat-icon class="icon-menu">
-                            <img src="assets/icons/specificgoal.png" width="20" height="20">
-                        </mat-icon>
-                        <span>2.4 Alcance </span>
-                    </button>
 
-                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/glossary" style="cursor: pointer">
-                        <mat-icon class="icon-menu">
-                            <img src="assets/icons/book.png" width="20" height="20">
-                        </mat-icon>
-                        <span>2.5 Glosario</span>
-                    </button>
-
-                    <mat-divider></mat-divider>
-                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
-                        routerLink="/pages/theoreticalframework" style="cursor: pointer">
-                        <mat-icon class="icon-menu">
-                            <img src="assets/icons/theory.png" width="20" height="20">
-                        </mat-icon>
-                        <span>2.6 Marco teórico</span>
-                    </button>
-                    <mat-divider></mat-divider>
 
                     <mat-divider></mat-divider>
                     <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
@@ -153,7 +202,7 @@
                         <span>2.7 Programas por empresa</span>
                     </button>
                     <mat-divider></mat-divider>
-                    
+
                 </mat-expansion-panel>
             </mat-accordion>
 
@@ -226,14 +275,14 @@
                             3. EJECUCION
                             <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
                         </mat-panel-title>
-                    </mat-expansion-panel-header>                    
+                    </mat-expansion-panel-header>
                     <mat-divider></mat-divider>
 
                 </mat-expansion-panel>
             </mat-accordion>
 
-             <!---REPORTES--------------------------------------------------------------------->
-             <mat-accordion>
+            <!---REPORTES--------------------------------------------------------------------->
+            <mat-accordion>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
 
                     <mat-expansion-panel-header>
@@ -241,7 +290,7 @@
                             3. REPORTES
                             <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
                         </mat-panel-title>
-                    </mat-expansion-panel-header>                    
+                    </mat-expansion-panel-header>
                     <mat-divider></mat-divider>
 
                 </mat-expansion-panel>

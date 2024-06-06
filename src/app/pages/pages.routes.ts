@@ -22,6 +22,8 @@ import { ProgrambycompanyEditComponent } from './programbycompany/programbycompa
 import { GlossaryByProgramByCompanyType } from '../model/GlossaryByProgramByCompanyType';
 import { GlossarybyprogrambycompanytypeComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype.component';
 import { GlossarybyprogrambycompanytypeEditComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype-edit/glossarybyprogrambycompanytype-edit.component';
+import { TheoreticalFrameworkByProgramByCompanyTypeComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type.component';
+import { TheoreticalFrameworkByProgramByCompanyTypeEditComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type-edit/theoretical-framework-by-program-by-company-type-edit.component';
 
 
 
@@ -140,6 +142,22 @@ export const PagesRoutes: Routes = [
       },
     ],
   },
+
+  {
+    path: 'theoreticalframeworkbyprogrambycompanytype',
+    component: TheoreticalFrameworkByProgramByCompanyTypeComponent,
+    children: [
+      {
+        path: 'new',
+        component: TheoreticalFrameworkByProgramByCompanyTypeEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: TheoreticalFrameworkByProgramByCompanyTypeEditComponent,
+      },
+    ],
+  },
+
 
   {
     path: 'program',
