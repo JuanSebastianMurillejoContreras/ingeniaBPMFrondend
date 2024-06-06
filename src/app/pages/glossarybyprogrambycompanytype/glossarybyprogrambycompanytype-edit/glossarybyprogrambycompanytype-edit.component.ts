@@ -55,7 +55,7 @@ export class GlossarybyprogrambycompanytypeEditComponent implements OnInit {
       'idGlossaryByProgramByCompanyType': new FormControl(0),
       'glossary': this.glossaryControl,
       'program': this.programControl,
-      'companyType': this.programControl
+      'companyType': this.companyTypeControl
     });
 
     this.loadInitialData()
@@ -155,10 +155,11 @@ export class GlossarybyprogrambycompanytypeEditComponent implements OnInit {
     glossaryByProgramByCompanyType.program = this.form.value['program'];
     glossaryByProgramByCompanyType.companyType = this.form.value['companyType']      
 
-console.log(glossaryByProgramByCompanyType.program)
+console.log(glossaryByProgramByCompanyType)
 
     if (this.isEdit) {
-      this.glossaryByProgramByCompanyTypeService.update(glossaryByProgramByCompanyType.idGlossaryByProgramByCompanyType, glossaryByProgramByCompanyType).pipe(switchMap(() => {
+      this.glossaryByProgramByCompanyTypeService.update(glossaryByProgramByCompanyType.idGlossaryByProgramByCompanyType, glossaryByProgramByCompanyType)
+      .pipe(switchMap(() => {
         return this.glossaryByProgramByCompanyTypeService.findAll();
       }))
         .subscribe(data => {
@@ -168,7 +169,8 @@ console.log(glossaryByProgramByCompanyType.program)
         });
 
     } else {
-      this.glossaryByProgramByCompanyTypeService.save(glossaryByProgramByCompanyType).pipe(switchMap(() => {
+      this.glossaryByProgramByCompanyTypeService.save(glossaryByProgramByCompanyType)
+      .pipe(switchMap(() => {
         return this.glossaryByProgramByCompanyTypeService.findAll();
       }))
         .subscribe(data => {

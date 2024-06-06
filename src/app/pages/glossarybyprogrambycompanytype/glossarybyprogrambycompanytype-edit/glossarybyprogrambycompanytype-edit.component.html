@@ -21,9 +21,8 @@
                 Debe seleccionar una palabra
             </span>
         </mat-error>
-
         <mat-autocomplete #autoGlossary="matAutocomplete" [displayWith]="showGlossary">
-            <mat-option *ngFor="let g of glossary" [value]="g.idGlossary">
+            <mat-option *ngFor="let g of glossary" [value]="g">
                 {{g.word}}
             </mat-option>
         </mat-autocomplete>
@@ -42,7 +41,7 @@
         </mat-error>
 
         <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
-            <mat-option *ngFor="let p of program" [value]="p.idProgram">
+            <mat-option *ngFor="let p of program" [value]="p">
                 {{p.name}}
             </mat-option>
         </mat-autocomplete>
@@ -60,7 +59,7 @@
         </mat-error>
 
         <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
-            <mat-option *ngFor="let c of companyType" [value]="c.idCompanyType">
+            <mat-option *ngFor="let c of companyType" [value]="c">
                 {{c.nameCompanyType}}
             </mat-option>
         </mat-autocomplete>
