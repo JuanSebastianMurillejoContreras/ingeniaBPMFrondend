@@ -49,7 +49,7 @@
         </mat-error>
 
         <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
-            <mat-option *ngFor="let c of companyType" [value]="c">
+            <mat-option *ngFor="let c of companyTypeFiltered$ | async" [value]="c">
                 {{c.nameCompanyType}}
             </mat-option>
         </mat-autocomplete>

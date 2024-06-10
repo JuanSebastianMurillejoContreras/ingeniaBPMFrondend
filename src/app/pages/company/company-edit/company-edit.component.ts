@@ -2,7 +2,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, startWith, switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
 import { Company } from 'src/app/model/company';
 import { CompanyType } from 'src/app/model/companyType';
@@ -54,29 +54,24 @@ export class CompanyEditComponent implements OnInit {
     } );
 
     this.loadInitialData();
-    //this.companyTypeFiltered$ = this.companyTypeControl.valueChanges.pipe( map( val => this.filterCompanyType( val ) ) );
+    this.companyTypeFiltered$ = this.companyTypeControl.valueChanges.pipe(startWith(''), map( val => this.filterCompanyType( val ) ) );
 
-    this.route.params.subscribe( data => {
+     this.route.params.subscribe( data => {
       this.id = data['id'];
       this.isEdit = data['id'] != null;
       this.initForm();
     } )
   }
 
-  filterCompanyType( val: any ): CompanyType[] {
-    if ( !val ) {
-      return this.companyType;
+  filterCompanyType(val: any): CompanyType[] {
+    if (!val || typeof val !== 'string') {
+      return [];
     }
 
-    if ( val?.idCompanyType > 0 ) {
-      return this.companyType.filter( el =>
-        el.nameCompanyType.toLowerCase().includes( val.nameCompanyType.toLowerCase() ) );
-    } else {
-      return this.companyType.filter( el =>
-        el.nameCompanyType.toLowerCase().includes( val?.toLowerCase() ) );
-    }
+    return this.companyType.filter(el =>
+      el.nameCompanyType.toLowerCase().includes(val.toLowerCase())
+    );
   }
-
 
   loadInitialData() {
     this.companyTypeService.findAll().subscribe( data => this.companyType = data );

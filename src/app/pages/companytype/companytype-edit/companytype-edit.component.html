@@ -1,17 +1,22 @@
 
 <form class="example-container" [formGroup]="form" #frmnameCompanyType="ngForm" (submit)="operate()">
 
+    <div>
+        <h1>Tipo de empresa</h1>
+        <h2>Formulario de registro</h2>
+    </div>
+
     <div [hidden]="true">
         <mat-form-field class="example-full-width">
             <input matInput placeholder="ID" required formControlName="idCompanyType">
         </mat-form-field>
     </div>
 
+    <h3>Nombre tipo de empresa</h3>
     <mat-form-field class="example-full-width, invalid">
-     
-        <input matInput placeholder="Name" minlength="2" maxlength="30" required pattern= "[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}" formControlName="nameCompanyType">
+        <input matInput placeholder="Tipo de empresa" minlength="2" maxlength="30" required pattern= "[a-zA-ZáéíóúÁÉÍÓÚ\s]{1,30}" formControlName="nameCompanyType">
         <small *ngIf="form.get('nameCompanyType').hasError('required') && form.get('nameCompanyType').touched">
-            Debe ingresar un nombre para registrar el tipo de compañia
+            Debe ingresar un nombre para registrar el tipo de empresa
         </small>
         <small *ngIf="form.get('nameCompanyType').hasError('minlength') && form.get('nameCompanyType').dirty">
             Debe ingresar minimo 3 caracteres

@@ -1,51 +1,51 @@
 .table-container {
-  
-    margin: 20px; /* Espacio alrededor de la tabla */
-  }
-  
-  table {
-    margin: 0 auto; /* Centra la tabla horizontalmente */
-    border-collapse: collapse; /* Fusiona los bordes de las celdas */
-    width: 100%; /* Ancho de la tabla al 100% del contenedor */
-    background-color: #ffffff; /* Color de fondo de la tabla */
-    border-radius: 80px; /* Bordes redondeados para la tabla */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para la tabla */
-  }
-  
-  
-  /* Estilo para las celdas de la tabla */
-  td, th {
-    text-align: center; /* Centra el texto horizontalmente en las celdas */
-    padding: 12px; /* Espacio interno alrededor del contenido de la celda */
-    border: 1px solid #dddddd; /* Bordes suaves para las celdas */
-  }
-  
-  /* Estilo para la fila de encabezado */
-  th {
-    background-color: #ffd700; /* Color amarillo para las celdas del encabezado */
-    color: #333333; /* Color del texto del encabezado */
-    padding: 12px; /* Espacio interno alrededor del contenido del encabezado */
-    border: 1px solid #dddddd; /* Bordes suaves para las celdas */
-  }
-  
-  /* Estilo para las filas de la tabla */
-  tr:nth-child(even) {
-    background-color: #f9f9f9; /* Color de fondo para las filas pares */
-  }
-  
-  /* Estilo para las filas de la tabla cuando pasas el mouse por encima */
-  tr:hover {
-    background-color: #f9f9f9; /* Color de fondo cuando pasas el mouse por encima */
-  }
-  
-  .add_color_button{
-    background-color: #ffd700;
-    color: black
-  }
+  margin: 150px;/* Espacio alrededor de la tabla */
+}
 
-  #fixedButton {
-    position: fixed;
-    bottom: 20px; /* Puedes ajustar la posición según tus necesidades */
-    right: 20px; /* Puedes ajustar la posición según tus necesidades */
-    z-index: 1000; /* Ajusta el z-index según sea necesario para que el botón esté por encima de otros elementos */
-  }
+
+table {
+  margin: 0 auto; /* Centra la tabla horizontalmente */
+  border-collapse: collapse; /* Fusiona los bordes de las celdas */
+  width: 100%; /* Ancho de la tabla al 100% del contenedor */
+  background-color: #ffffff; /* Color de fondo de la tabla */
+  border-radius: 80px; /* Bordes redondeados para la tabla */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para la tabla */
+}
+
+
+/* Estilo para las celdas de la tabla */
+td, th {
+  text-align: center; /* Centra el texto horizontalmente en las celdas */
+  padding: 12px; /* Espacio interno alrededor del contenido de la celda */
+  border: 1px solid #dddddd; /* Bordes suaves para las celdas */
+}
+
+/* Estilo para la fila de encabezado */
+th {
+  background-color: #ffd700; /* Color amarillo para las celdas del encabezado */
+  color: #333333; /* Color del texto del encabezado */
+  padding: 12px; /* Espacio interno alrededor del contenido del encabezado */
+  border: 1px solid #dddddd; /* Bordes suaves para las celdas */
+}
+
+/* Estilo para las filas de la tabla */
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Color de fondo para las filas pares */
+}
+
+/* Estilo para las filas de la tabla cuando pasas el mouse por encima */
+tr:hover {
+  background-color: #f9f9f9; /* Color de fondo cuando pasas el mouse por encima */
+}
+
+.add_color_button{
+  background-color: #ffd700;
+  color: black
+}
+
+#fixedButton {
+  position: fixed;
+  bottom: 20px; /* Puedes ajustar la posición según tus necesidades */
+  right: 20px; /* Puedes ajustar la posición según tus necesidades */
+  z-index: 1000; /* Ajusta el z-index según sea necesario para que el botón esté por encima de otros elementos */
+}

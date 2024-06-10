@@ -1,8 +1,7 @@
 <form class="example-container" [formGroup]="form" #frmnameGeneralGoal="ngForm" (submit)="operate()">
-
     <div>
-        <h1>Objetivo general</h1>
-        <h2>Formulario de registro</h2>
+        <h1>Formulario de registro</h1>
+        <h2>Objetivo General</h2>
     </div>
 
     <div [hidden]="true">
@@ -12,18 +11,31 @@
     </div>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Escribe la definción</mat-label>
-
-        <textarea matInput placeholder="Definición" required
-                  formControlName="generalGoal"></textarea>
-
+        <mat-label>Objetivo general</mat-label>
+        <textarea matInput placeholder="Objetivo general" required formControlName="generalGoal"></textarea>
         <div *ngIf="form.get('generalGoal').invalid && form.get('generalGoal').dirty">
             <small *ngIf="form.get('generalGoal').hasError('required')">
-                Debe ingresar una definición para el objetivo general
+                Debe ingresar un objetivo general
             </small>
         </div>
     </mat-form-field>
 
+    <h2>Objetivos específicos</h2>
+    <div formArrayName="lstSpecificGoal" class="example-full-width">
+        <div *ngFor="let specificGoal of specificGoals.controls; let i=index" [formGroupName]="i">
+            <h3>Objetivo específico {{ i + 1 }}</h3>
+            <mat-form-field appearance="fill">
+                <mat-label>Objetivo específico</mat-label>
+                <textarea matInput placeholder="Objetivo específico" formControlName="specificGoal" minlength="3"
+                    maxlength="1200" required></textarea>
+                    <button  class="button-spacing" mat-raised-button color="accent" style="float: right"
+                    (click)="removeSpecificGoal(i)">Quitar</button>
+            </mat-form-field>
+          
+        </div>
+        <button  class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+            (click)="addSpecificGoal()">Agregar</button>
+    </div>
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGeneralGoal.invalid">
         <mat-icon>done</mat-icon>

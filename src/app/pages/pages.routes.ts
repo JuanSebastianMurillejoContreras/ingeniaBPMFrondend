@@ -7,8 +7,6 @@ import { GlossaryComponent } from './glossary/glossary.component';
 import { GlossaryEditComponent } from './glossary/glossary-edit/glossary-edit.component';
 import { GeneralGoalComponent } from './general-goal/general-goal.component';
 import { GeneralGoalEditComponent } from './general-goal/general-goal-edit/general-goal-edit.component';
-import { SpecificGoalComponent } from './specific-goal/specific-goal.component';
-import { SpecificGoalEditComponent } from './specific-goal/specific-goal-edit/specific-goal-edit.component';
 import { TheoreticalFrameworkComponent } from './theoretical-framework/theoretical-framework.component';
 import { TheoreticalFrameworkEditComponent } from './theoretical-framework/theoretical-framework-edit/theoretical-framework-edit.component';
 import { ProgramComponent } from './program/program.component';
@@ -24,6 +22,9 @@ import { GlossarybyprogrambycompanytypeComponent } from './glossarybyprogrambyco
 import { GlossarybyprogrambycompanytypeEditComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype-edit/glossarybyprogrambycompanytype-edit.component';
 import { TheoreticalFrameworkByProgramByCompanyTypeComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type.component';
 import { TheoreticalFrameworkByProgramByCompanyTypeEditComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type-edit/theoretical-framework-by-program-by-company-type-edit.component';
+import { GeneralGoalByProgramByCompanyType } from '../model/generalGoalByProgramByCompanyType';
+import { GeneralGoalByProgramByCompanyTypeComponent } from './general-goal-by-program-by-company-type/general-goal-by-program-by-company-type.component';
+import { GeneralGoalByProgramByCompanyTypeEditComponent } from './general-goal-by-program-by-company-type/general-goal-by-program-by-company-type-edit/general-goal-by-program-by-company-type-edit.component';
 
 
 
@@ -113,17 +114,18 @@ export const PagesRoutes: Routes = [
       },
     ],
   },
+  
   {
-    path: 'specificgoal',
-    component: SpecificGoalComponent,
+    path: 'generalgoalbyprogrambycompanytype',
+    component: GeneralGoalByProgramByCompanyTypeComponent,
     children: [
       {
         path: 'new',
-        component: SpecificGoalEditComponent,
+        component: GeneralGoalByProgramByCompanyTypeEditComponent,
       },
       {
         path: 'edit/:id',
-        component: SpecificGoalEditComponent,
+        component: GeneralGoalByProgramByCompanyTypeEditComponent,
       },
     ],
   },

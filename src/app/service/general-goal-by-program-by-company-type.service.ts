@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SpecificGoal } from '../model/specificGoal';
+import { GeneralGoalByProgramByCompanyType } from '../model/generalGoalByProgramByCompanyType';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
@@ -8,19 +8,20 @@ import { GenericService } from './generic.service';
 @Injectable({
   providedIn: 'root'
 })
-export class SpecificGoalService extends GenericService<SpecificGoal>{
-  private examChange: Subject<SpecificGoal[]> = new Subject<SpecificGoal[]>;
+export class GeneralGoalByProgramByCompanyTypeService extends GenericService<GeneralGoalByProgramByCompanyType>{
+
+  private examChange: Subject<GeneralGoalByProgramByCompanyType[]> = new Subject<GeneralGoalByProgramByCompanyType[]>;
   private messageChange: Subject<string> = new Subject<string>;
 
   constructor(protected override http: HttpClient) {
-    super(http, `${environment.HOST}/specificgoals`);
+    super(http, `${environment.HOST}/generalgoalbyprogrambycompanytypes`);
   }
 
-  setSpecificGoalChange(data: SpecificGoal[]){
+  setGeneralGoalByProgramByCompanyTypeChange(data: GeneralGoalByProgramByCompanyType[]){
     this.examChange.next(data);
   }
 
-  getSpecificGoalChange(){
+  getGeneralGoalByProgramByCompanyTypeChangeChange(){
     return this.examChange.asObservable();
   }
 
@@ -32,4 +33,3 @@ export class SpecificGoalService extends GenericService<SpecificGoal>{
     return this.messageChange.asObservable();
   }
 }
-

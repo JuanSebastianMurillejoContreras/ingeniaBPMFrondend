@@ -3,11 +3,9 @@
 <div class="table-container">
 
     <div [hidden]="checkChildren()">
-        <mat-label>
-            <div>
-                <h1>Empresas</h1>
-            </div>
-        </mat-label>
+        <div>
+            <h1>Empresa</h1>
+        </div>
         <mat-form-field>
             <mat-label>Buscar</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Buscar compañía" #input>

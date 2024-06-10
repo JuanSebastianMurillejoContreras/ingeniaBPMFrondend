@@ -92,37 +92,18 @@
                         </mat-icon>
                         <span>2.1 Nombre del programa</span>
                     </button>
+
                     <mat-divider></mat-divider>
 
-                    
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                        <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <mat-icon class="icon-menu">
-                                    <img src="assets/icons/specificgoal.png" width="20" height="20">
-                                </mat-icon>
-                                2.2 Objetivo
-                            </mat-panel-title>
-                        </mat-expansion-panel-header>
-                        <mat-divider></mat-divider>
-                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
-                            (click)="sidenav.toggle()" routerLink="/pages/generalgoal" style="cursor: pointer">
-                            <span>2.2.1 General</span>
-                        </button>
-                        <mat-divider></mat-divider>
-                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
-                            (click)="sidenav.toggle()" routerLink="/pages/specificgoal" style="cursor: pointer">
-                            <span>2.2.2 Específico</span>
-                        </button>
-                        <mat-divider></mat-divider>
-                        <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
-                            (click)="sidenav.toggle()" routerLink="/pages/" style="cursor: pointer">
-                            <span>2.2.3 Asociar</span>
-                        </button>
-                        <mat-divider></mat-divider>
-                    </mat-expansion-panel>
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/generalgoal" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/specificgoal.png" width="20" height="20">
+                        </mat-icon>
+                        <span>2.2.1 Objetivos</span>
+                    </button>
 
-                 
+                    <mat-divider></mat-divider>
 
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
@@ -159,13 +140,14 @@
                         </button>
                         <mat-divider></mat-divider>
                         <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
-                            (click)="sidenav.toggle()" routerLink="/pages/glossarybyprogrambycompanytype" style="cursor: pointer">
+                            (click)="sidenav.toggle()" routerLink="/pages/glossarybyprogrambycompanytype"
+                            style="cursor: pointer">
                             <span>2.4.2 Asociar</span>
                         </button>
                         <mat-divider></mat-divider>
                     </mat-expansion-panel>
 
-                
+
 
                     <mat-expansion-panel hideToggle>
                         <mat-expansion-panel-header>
@@ -181,7 +163,8 @@
                         </button>
                         <mat-divider></mat-divider>
                         <button class="myButton" [routerLinkActive]="['active']" mat-menu-item
-                            (click)="sidenav.toggle()" routerLink="/pages/theoreticalframeworkbyprogrambycompanytype" style="cursor: pointer">
+                            (click)="sidenav.toggle()" routerLink="/pages/theoreticalframeworkbyprogrambycompanytype"
+                            style="cursor: pointer">
                             <span>2.5.2 Asociar</span>
                         </button>
                         <mat-divider></mat-divider>
