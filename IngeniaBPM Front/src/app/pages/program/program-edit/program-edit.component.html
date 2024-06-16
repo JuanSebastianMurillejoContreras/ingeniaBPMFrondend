@@ -1,0 +1,60 @@
+<form class="example-container" [formGroup]="form" #frmnameProgram="ngForm" (submit)="operate()">
+
+    <h1>Marco teórico</h1>
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idProgram">
+        </mat-form-field>
+    </div>
+
+    <!-- Code -->
+    <h2>Código</h2>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Código" formControlName="code" required>
+        <mat-error *ngIf="form.get('code').invalid && (form.get('code').dirty )">
+            <span *ngIf="form.get('code').hasError('required')">
+                Debe ingresar el código.
+            </span>
+        </mat-error>
+    </mat-form-field>
+
+
+    <!-- Code -->
+    <h2>Nombre del programa</h2>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nombre" formControlName="name" required>
+        <mat-error *ngIf="form.get('name').invalid && (form.get('name').dirty )">
+            <span *ngIf="form.get('name').hasError('required')">
+                Debe ingresar el nombre
+            </span>
+        </mat-error>
+    </mat-form-field>
+
+
+
+    <!-- DESCRIPTION -->
+    <h2>Descripción</h2>
+    <mat-form-field class="example-full-width">
+        <mat-label>Descripción del programa</mat-label>
+        <textarea matInput placeholder="Descripción del programa" rows="10" required
+            formControlName="description"></textarea>
+
+        <div *ngIf="form.get('description').invalid && form.get('description').dirty">
+            <small *ngIf="form.get('description').hasError('required')">
+                Debe ingresar una descripción.
+            </small>
+        </div>
+    </mat-form-field>
+
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProgram.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/program">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

@@ -1,0 +1,23 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    margin: 40px; /* Espacio alrededor de la tabla */
+}
+
+.invalid {
+    color: red;
+}
+
+/* Asegura que los mat-form-fields y textareas ocupen el ancho completo */
+mat-form-field, textarea {
+    width: 100%;
+    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho total */
+}
+
+mat-expansion-panel {
+    margin-top: 10px;
+}
+
+.button-spacing {
+    margin: 5px 0;
+}
