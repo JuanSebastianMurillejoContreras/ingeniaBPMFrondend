@@ -115,9 +115,8 @@ export class GlossarybyprogrambycompanytypeEditComponent implements OnInit {
     this.glossaryService.findAll().subscribe( data => this.glossary = data );
     this.programService.findAll().subscribe( data => this.program = data );
     this.companyTypeService.findAll().subscribe( data => this.companyType = data );
-
-    
   }
+  
   showGlossary( val: any ) {
     return val ? `${val.word}` : val;
   }

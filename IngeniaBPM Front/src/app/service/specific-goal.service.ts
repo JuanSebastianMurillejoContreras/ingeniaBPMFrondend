@@ -10,19 +10,19 @@ import { GenericService } from './generic.service';
 })
 export class SpecificGoalService extends GenericService<SpecificGoal> {
 
-  private goalChange: Subject<SpecificGoal[]> = new Subject<SpecificGoal[]>();
+  private SpecificGoalChange: Subject<SpecificGoal[]> = new Subject<SpecificGoal[]>();
   private messageChange: Subject<string> = new Subject<string>();
 
   constructor(protected override http: HttpClient) {
     super(http, `${environment.HOST}/specificgoals`);
   }
 
-  setGoalChange(data: SpecificGoal[]) {
-    this.goalChange.next(data);
+  setSpecificGoalChange(data: SpecificGoal[]) {
+    this.SpecificGoalChange.next(data);
   }
 
-  getGoalChange() {
-    return this.goalChange.asObservable();
+  getSpecificGoalChange() {
+    return this.SpecificGoalChange.asObservable();
   }
 
   setMessageChange(data: string) {

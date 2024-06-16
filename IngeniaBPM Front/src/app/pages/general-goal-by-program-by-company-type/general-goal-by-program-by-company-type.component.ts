@@ -32,7 +32,7 @@ export class GeneralGoalByProgramByCompanyTypeComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.generalGoalByProgramByCompanyTypeService.getGeneralGoalByProgramByCompanyTypeChangeChange().subscribe(data => {
+    this.generalGoalByProgramByCompanyTypeService.getGeneralGoalByProgramByCompanyTypeChange().subscribe(data => {
       this.createTable(data);
     });
 

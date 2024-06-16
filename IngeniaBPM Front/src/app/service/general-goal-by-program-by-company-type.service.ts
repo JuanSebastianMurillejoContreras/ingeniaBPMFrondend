@@ -21,7 +21,7 @@ export class GeneralGoalByProgramByCompanyTypeService extends GenericService<Gen
     this.examChange.next(data);
   }
 
-  getGeneralGoalByProgramByCompanyTypeChangeChange(){
+  getGeneralGoalByProgramByCompanyTypeChange(){
     return this.examChange.asObservable();
   }
 

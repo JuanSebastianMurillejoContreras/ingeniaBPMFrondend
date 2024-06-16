@@ -27,13 +27,57 @@
             <mat-form-field appearance="fill">
                 <mat-label>Objetivo específico</mat-label>
                 <textarea matInput placeholder="Objetivo específico" formControlName="specificGoal" required></textarea>
-                    <button  class="button-spacing" mat-raised-button color="accent" style="float: right"
+                <button class="button-spacing" mat-raised-button color="accent" style="float: right"
                     (click)="removeSpecificGoal(i)">Quitar</button>
             </mat-form-field>
-          
+
         </div>
-        <button  class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
             (click)="addSpecificGoal()">Agregar</button>
+    </div>
+
+    <h2>Programas y tipos de empresas</h2>
+    <div formArrayName="lstGeneralGoalByProgramByCompanyType" class="example-full-width">
+
+        <div *ngFor="let generalGoalByProgramByCompanyType of generalGoalByProgramByCompanyType.controls; let i=index"
+            [formGroupName]="i">
+            <h3>Programa {{ i + 1 }}</h3>
+            <mat-form-field appearance="fill">
+
+                <mat-label>Seleccione un programa</mat-label>
+
+                <input matInput placeholder="Seleccione un programa" required formControlName="program"
+                    [matAutocomplete]="autoProgram" [formControl]="programControl">
+
+                <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+                    <mat-option *ngFor="let p of program " [value]="p">
+                        {{p.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <h3>Tipo de empresa {{ i + 1 }}</h3>
+            <mat-form-field appearance="fill">
+
+                <mat-label>Seleccione un tipo de empresa</mat-label>
+
+                <input matInput placeholder="Seleccione el tipo de empresa" required formControlName="companyType"
+                    [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
+
+                <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+                    <mat-option *ngFor="let c of companyType " [value]="c">
+                        {{c.nameCompanyType}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+            (click)="removegeneralGoalByProgramByCompanyType(i)">Quitar</button>
+
+
+        </div>
+        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+            (click)="addgeneralGoalByProgramByCompanyType()">Agregar</button>
     </div>
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGeneralGoal.invalid">

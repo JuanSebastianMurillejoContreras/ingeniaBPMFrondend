@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { GeneralGoal } from '../model/generalGoal';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { GenericService } from './generic.service';
 import { SpecificGoalService } from './specific-goal.service';
-import { SpecificGoal } from '../model/specificGoal';
+import { GeneralGoalByProgramByCompanyTypeService } from './general-goal-by-program-by-company-type.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeneralGoalService extends GenericService<GeneralGoal>{
 
-  private examChange: Subject<GeneralGoal[]> = new Subject<GeneralGoal[]>;
+  private GeneralGoalChange: Subject<GeneralGoal[]> = new Subject<GeneralGoal[]>;
   private messageChange: Subject<string> = new Subject<string>;
   private specificGoalService: SpecificGoalService;
+  private generalGoalByProgramByCompanyTypeServide: GeneralGoalByProgramByCompanyTypeService;
 
   constructor(protected override http: HttpClient) {
     super(http, `${environment.HOST}/generalgoals`);
@@ -22,16 +23,19 @@ export class GeneralGoalService extends GenericService<GeneralGoal>{
   }
 
   setGeneralGoalChange(data: GeneralGoal[]){
-    this.examChange.next(data);
+    this.GeneralGoalChange.next(data);
   }
 
   getGeneralGoalChange(){
-    return this.examChange.asObservable();
+    return this.GeneralGoalChange.asObservable();
   }
-
 
   removeSpecificGoal(id: number): any {
     return this.specificGoalService.delete(id);
+  }
+
+  removeGeneralGoalByProgramByCompanyType(id: number): any {
+    return this.generalGoalByProgramByCompanyTypeServide.delete(id);
   }
 
   setMessageChange(data: string){
