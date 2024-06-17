@@ -40,7 +40,7 @@
     <h3>Tipo de empresa</h3>
     <mat-form-field>
         <input matInput placeholder="Seleccione el tipo de empresa" required formControlName="companyType"
-            [matAutocomplete]="autoCompanyType" [formControl]="companyTypeControl">
+            [matAutocomplete]="autoCompanyType">
         <mat-error
             *ngIf="form.get('companyType').invalid && (form.get('companyType').touched || form.get('companyType').dirty)">
             <span *ngIf="form.get('companyType').hasError('required')">
