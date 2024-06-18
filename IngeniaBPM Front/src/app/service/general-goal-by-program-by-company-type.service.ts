@@ -9,6 +9,9 @@ import { GenericService } from './generic.service';
   providedIn: 'root'
 })
 export class GeneralGoalByProgramByCompanyTypeService extends GenericService<GeneralGoalByProgramByCompanyType>{
+  listIdGeneralGoal(idGeneralGoal: any): any {
+    throw new Error('Method not implemented.');
+  }
 
   private examChange: Subject<GeneralGoalByProgramByCompanyType[]> = new Subject<GeneralGoalByProgramByCompanyType[]>;
   private messageChange: Subject<string> = new Subject<string>;

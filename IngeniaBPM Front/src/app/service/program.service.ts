@@ -9,6 +9,9 @@ import { GenericService } from './generic.service';
   providedIn: 'root'
 })
 export class ProgramService extends GenericService<Program>{
+  list(): any {
+    throw new Error('Method not implemented.');
+  }
   private examChange: Subject<Program[]> = new Subject<Program[]>;
   private messageChange: Subject<string> = new Subject<string>;
 

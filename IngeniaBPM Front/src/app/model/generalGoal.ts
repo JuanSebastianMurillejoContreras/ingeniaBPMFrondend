@@ -9,6 +9,7 @@ export class GeneralGoal {
   }
   
   export interface SpecificGoal {
+    idGeneralGoal: any;
     idSpecificGoal: number;
     specificGoal: string;
   }

@@ -9,6 +9,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CompanyTypeService extends GenericService<CompanyType>{
+  list(): any {
+    throw new Error('Method not implemented.');
+  }
 
   private examChange: Subject<CompanyType[]> = new Subject<CompanyType[]>;
   private messageChange: Subject<string> = new Subject<string>;

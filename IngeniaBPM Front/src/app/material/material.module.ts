@@ -22,6 +22,7 @@ import { CustomDateAdapter } from './custom-adapter';
 import {MatListModule} from '@angular/material/list'; 
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatStepperModule} from '@angular/material/stepper';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -50,7 +51,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatNativeDateModule,
     MatListModule,
     MatGridListModule,
-    MatStepperModule
+    MatStepperModule,
+    DragDropModule
     
   ],
   providers: [
