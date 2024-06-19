@@ -1,35 +1,36 @@
 import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormArray, FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { CdkDrag, CdkDragDrop, CdkDropList, CdkDropListGroup, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop'; // Importar las clases necesarias
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, forkJoin, of } from 'rxjs';
 import { catchError, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { MaterialModule } from 'src/app/material/material.module';
 import { CompanyType } from 'src/app/model/companyType';
-import { GeneralGoal, SpecificGoal } from 'src/app/model/generalGoal';
-import { GeneralGoalByProgramByCompanyType } from 'src/app/model/generalGoalByProgramByCompanyType';
+import { GeneralGoal, GeneralGoalByCompanyType, GeneralGoalByProgram, SpecificGoal } from 'src/app/model/generalGoal';
 import { Program } from 'src/app/model/program';
 import { CompanyTypeService } from 'src/app/service/companyType.service';
-import { GeneralGoalByProgramByCompanyTypeService } from 'src/app/service/general-goal-by-program-by-company-type.service';
 import { GeneralGoalService } from 'src/app/service/generalGoal.service';
 import { ProgramService } from 'src/app/service/program.service';
 import { SpecificGoalService } from 'src/app/service/specific-goal.service';
+import { GeneralGoalByCompanyTypeService } from 'src/app/service/generalgoalbycompanytype.service';
+import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogram.service';
 
 @Component({
   selector: 'app-general-goal-edit',
   standalone: true,
   templateUrl: './general-goal-edit.component.html',
   styleUrls: ['./general-goal-edit.component.css'],
-  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet, CdkDropListGroup, CdkDropList, CdkDrag]
+  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
 
 }) export class GeneralGoalEditComponent implements OnInit {
 
   id: number;
   isEdit: boolean;
   form: FormGroup;
+
   idsToDeleteSpecificGoal: number[] = [];
-  idsToDeleteGeneralGoalByProgramByCompanyTypeService: number[] = [];
+  idsToDeleteGeneralGoalByProgramService: number[] = [];
+  idsToDeleteGeneralGoalByCompanyTypeService: number[] = [];
 
   companyType: CompanyType[];
   companyTypeControl: FormControl = new FormControl();
@@ -39,8 +40,9 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
   programControl: FormControl = new FormControl();
   programFiltered$: Observable<Program[]>;
 
+  generalGoalByProgram: GeneralGoalByProgram[];
 
-  generalGoalByProgramByCompanyType: GeneralGoalByProgramByCompanyType[];
+  generalGoalByCompanyType: GeneralGoalByCompanyType[];
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +50,8 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
     private router: Router,
     private generalGoalService: GeneralGoalService,
     private specificGoalService: SpecificGoalService,
-    private generalGoalByProgramByCompanyTypeService: GeneralGoalByProgramByCompanyTypeService,
+    private generalGoalByProgramService: GeneralGoalByProgramService,
+    private generalGoalByCompanyTypeService: GeneralGoalByCompanyTypeService,
     private companyTypeService: CompanyTypeService,
     private programService: ProgramService
   ) { }
@@ -58,7 +61,8 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
       idGeneralGoal: [0],
       generalGoal: ['', Validators.required],
       lstSpecificGoal: this.fb.array([]),
-      lstGeneralGoalByProgramByCompanyType: this.fb.array([])
+      lstGeneralGoalByProgram: this.fb.array([]),
+      lstGeneralGoalByCompanyType: this.fb.array([])
     });
 
     this.loadInitialData();
@@ -72,70 +76,6 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
     });
   }
 
-   dropProgram(event: CdkDragDrop<any[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-    }
-  }
-
- 
-  dropCompanyType(event: CdkDragDrop<any[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
-
-  dropGeneralGoalByProgramByCompanyType(event: CdkDragDrop<any[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );console.log(  event.previousContainer.data)
-    }
-    this.updateFormArray();
-  }
-
-    setGeneralGoalByProgramByCompanyType(generalGoalByProgramByCompanyType: GeneralGoalByProgramByCompanyType[]) {
-    const lstGeneralGoalByProgramByCompanyType = this.form.get('lstGeneralGoalByProgramByCompanyType') as FormArray;
-
-    generalGoalByProgramByCompanyType.forEach(programByCompany => {
-      lstGeneralGoalByProgramByCompanyType.push(this.fb.group({
-        idGeneralGoalByProgramByCompanyType: [programByCompany.idGeneralGoalByProgramByCompanyType],
-        program: [programByCompany.program, Validators.required],
-        companyType: [programByCompany.companyType, Validators.required]
-      }));
-      //console.log(programByCompany)
-    });
-  }
-
-
-  updateFormArray() {
-    const lstGeneralGoalByProgramByCompanyType = this.form.get('lstGeneralGoalByProgramByCompanyType') as FormArray;
-    lstGeneralGoalByProgramByCompanyType.clear();
-
-    this.program.forEach((program, index) => {
-      if (this.companyType[index]) {
-        lstGeneralGoalByProgramByCompanyType.push(this.fb.group({
-          idGeneralGoalByProgramByCompanyType: [0],
-          program: [program.name, Validators.required],
-          companyType: [this.companyType[index].nameCompanyType, Validators.required]
-        }));
-      }
-    });
-  }
 
   filterProgram(val: any): Program[] {
     if (!val || typeof val !== 'string') {
@@ -162,7 +102,6 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
   loadInitialData() {
     this.programService.findAll().subscribe(data => this.program = data);
     this.companyTypeService.findAll().subscribe(data => this.companyType = data);
-    this.generalGoalByProgramByCompanyTypeService.findAll().subscribe(data => this.generalGoalByProgramByCompanyType = data);
   }
 
   showProgram(val: any) {
@@ -183,7 +122,7 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
           generalGoal: data.generalGoal,
         });
         this.setSpecificGoals(data.lstSpecificGoal);
-        this.setGeneralGoalByProgramByCompanyType(data.lstGeneralGoalByProgramByCompanyType);
+        this.setGeneralGoalByProgram(data.lstGeneralGoalByProgram);
       });
     }
   }
@@ -198,14 +137,24 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
     });
   }
 
+  setGeneralGoalByProgram(generalGoalByProgram: GeneralGoalByProgram[]) {
+    const lstGeneralGoalByProgram = this.form.get('lstGeneralGoalByProgram') as FormArray;
+    generalGoalByProgram.forEach(generalGoalByProgram => {
+      lstGeneralGoalByProgram.push(this.fb.group({
+        idGeneralGoalByProgram: [generalGoalByProgram.idGeneralGoalByProgram],
+        program: [generalGoalByProgram.program, Validators.required]
+      }));
+    });
+  }
+
 
 
   get specificGoals() {
     return this.form.get('lstSpecificGoal') as FormArray;
   }
 
-  get generalGoalByProgramByCompanyTypes() {
-    return this.form.get('lstGeneralGoalByProgramByCompanyType') as FormArray;
+  get generalGoalByPrograms() {
+    return this.form.get('lstGeneralGoalByProgram') as FormArray;
   }
 
 
@@ -216,15 +165,13 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
     }));
   }
 
-  addgeneralGoalByProgramByCompanyType() {
-    this.generalGoalByProgramByCompanyTypes.push(this.fb.group({
-      idGeneralGoalByProgramByCompanyType: [0],
-      program: ['', Validators.required],
-      companyType: ['', Validators.required]
+  addgeneralGoalByProgram() {
+    this.generalGoalByPrograms.push(this.fb.group({
+      idGeneralGoalByProgram: [0],
+      GeneralGoal: ['', Validators.required],
+      program:['', Validators.required]
     }));
   }
-
-  
 
   removeSpecificGoal(index: number) {
     const goal = this.specificGoals.at(index).value;
@@ -235,16 +182,16 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
   }
 
 
-  removeGeneralGoalByProgramByCompanyType(index: number) {
-    const generalGoalByProgramByCompanyType = this.generalGoalByProgramByCompanyTypes.at(index).value;
-    if (generalGoalByProgramByCompanyType.idGeneralGoalByProgramByCompanyType) {
-      this.idsToDeleteGeneralGoalByProgramByCompanyTypeService.push(generalGoalByProgramByCompanyType.idGeneralGoalByProgramByCompanyType);
+  removeGeneralGoalByProgram(index: number) {
+    const generalGoalByProgram = this.generalGoalByPrograms.at(index).value;
+    if (generalGoalByProgram.idGeneralGoalByProgramByCompanyType) {
+      this.idsToDeleteGeneralGoalByProgramService.push(generalGoalByProgram.idGeneralGoalByProgram);
     }
-    this.generalGoalByProgramByCompanyTypes.removeAt(index);
+    this.generalGoalByPrograms.removeAt(index);
   }
 
 
-operate() {
+  operate() {
     if (this.form.invalid) {
       return;
     }
@@ -253,7 +200,7 @@ operate() {
 
     forkJoin([
       this.deleteSpecificGoals(),
-      this.deleteGeneralGoalByProgramByCompanyType()
+      this.deleteGeneralGoalByProgram()
     ]).pipe(
       switchMap(() => this.saveOrUpdateGeneralGoal(generalGoal)),
       catchError(error => {
@@ -275,14 +222,14 @@ operate() {
     return forkJoin(deleteSpecificGoals$);
   }
 
-  deleteGeneralGoalByProgramByCompanyType(): Observable<any> {
-    if (this.idsToDeleteGeneralGoalByProgramByCompanyTypeService.length === 0) {
-      return of(null); // No general goals by program and company type to delete
+  deleteGeneralGoalByProgram(): Observable<any> {
+    if (this.idsToDeleteGeneralGoalByProgramService.length === 0) {
+      return of(null);
     }
-    const deleteGeneralGoalByProgramByCompanyType$ = this.idsToDeleteGeneralGoalByProgramByCompanyTypeService.map(id =>
-      this.generalGoalByProgramByCompanyTypeService.delete(id)
+    const deleteGeneralGoalByProgram$ = this.idsToDeleteGeneralGoalByProgramService.map(id =>
+      this.generalGoalByProgramService.delete(id)
     );
-    return forkJoin(deleteGeneralGoalByProgramByCompanyType$);
+    return forkJoin(deleteGeneralGoalByProgram$);
   }
 
   saveOrUpdateGeneralGoal(generalGoal: GeneralGoal): Observable<any> {
@@ -309,25 +256,6 @@ operate() {
     this.router.navigate(['/pages/generalgoal']);
   }
 
-  addIdToDeleteSpecificGoal(id: number) {
-    if (!this.idsToDeleteSpecificGoal.includes(id)) {
-      this.idsToDeleteSpecificGoal.push(id);
-    }
-  }
 
-  removeIdToDeleteSpecificGoal(index: number) {
-    this.idsToDeleteSpecificGoal.splice(index, 1);
-  }
-
-  addIdToDeleteGeneralGoal(id: number) {
-    if (!this.idsToDeleteGeneralGoalByProgramByCompanyTypeService.includes(id)) {
-      this.idsToDeleteGeneralGoalByProgramByCompanyTypeService.push(id);
-    }
-  }
-
-  removeIdToDeleteGeneralGoal(index: number) {
-    this.idsToDeleteGeneralGoalByProgramByCompanyTypeService.splice(index, 1);
-  }
-  
 
 }

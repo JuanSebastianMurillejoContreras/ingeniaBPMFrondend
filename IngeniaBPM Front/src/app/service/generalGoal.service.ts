@@ -5,7 +5,8 @@ import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { GenericService } from './generic.service';
 import { SpecificGoalService } from './specific-goal.service';
-import { GeneralGoalByProgramByCompanyTypeService } from './general-goal-by-program-by-company-type.service';
+import { GeneralGoalByProgramService } from './generalgoalbyprogram.service';
+import { GeneralGoalByCompanyTypeService } from './generalgoalbycompanytype.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,8 @@ export class GeneralGoalService extends GenericService<GeneralGoal>{
   private GeneralGoalChange: Subject<GeneralGoal[]> = new Subject<GeneralGoal[]>;
   private messageChange: Subject<string> = new Subject<string>;
   private specificGoalService: SpecificGoalService;
-  private generalGoalByProgramByCompanyTypeServide: GeneralGoalByProgramByCompanyTypeService;
+  private generalGoalByProgramService: GeneralGoalByProgramService;
+  private generalGoalByCompanyTypeService: GeneralGoalByCompanyTypeService;
 
   constructor(protected override http: HttpClient) {
     super(http, `${environment.HOST}/generalgoals`);
@@ -37,8 +39,12 @@ export class GeneralGoalService extends GenericService<GeneralGoal>{
     return this.specificGoalService.delete(id);
   }
 
-  removeGeneralGoalByProgramByCompanyType(id: number): any {
-    return this.generalGoalByProgramByCompanyTypeServide.delete(id);
+  removeGeneralGoalByProgram(id: number): any {
+    return this.generalGoalByProgramService.delete(id);
+  }
+
+  removeGeneralGoalByCompanyType(id: number): any {
+    return this.generalGoalByCompanyTypeService.delete(id);
   }
 
   setMessageChange(data: string){

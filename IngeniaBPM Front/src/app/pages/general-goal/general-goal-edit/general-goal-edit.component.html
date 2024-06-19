@@ -30,16 +30,15 @@
                 <button class="button-spacing" mat-raised-button color="accent" style="float: right"
                     (click)="removeSpecificGoal(i)">Quitar</button>
             </mat-form-field>
-
         </div>
-        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
             (click)="addSpecificGoal()">Agregar</button>
     </div>
 
 
-    <h2>Programas y tipos de empresas</h2>
+    <h2>Programas</h2>
     <div formArrayName="lstGeneralGoalByProgramByCompanyType" class="example-full-width">
-        <div *ngFor="let control of generalGoalByProgramByCompanyTypes.controls; let i = index" [formGroupName]="i">
+        <div *ngFor="let control of generalGoalByPrograms.controls; let i = index" [formGroupName]="i">
             <h3>Programa {{ i + 1 }}</h3>
 
             <mat-form-field appearance="fill">
@@ -53,10 +52,18 @@
                         {{ p.name }}
                     </mat-option>
                 </mat-autocomplete>
-
+                <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                (click)="removeGeneralGoalByProgram(i)">Quitar</button>
             </mat-form-field>
-
-
+           
+        </div>
+        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
+            (click)="addgeneralGoalByProgram()">Agregar</button>
+    </div>
+<!---
+    <h2>Tipos de empresas</h2>
+    <div formArrayName="lstGeneralGoalByProgramByCompanyType" class="example-full-width">
+        <div *ngFor="let control of generalGoalByPrograms.controls; let i = index" [formGroupName]="i">
             <h3>Tipo de empresa {{ i + 1 }}</h3>
             <mat-form-field appearance="fill">
                 <mat-label>Seleccione un tipo de empresa</mat-label>
@@ -73,73 +80,10 @@
             <button class="button-spacing" mat-raised-button color="accent" style="float: right"
                 (click)="removeGeneralGoalByProgramByCompanyType(i)">Quitar</button>
         </div>
-        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
             (click)="addgeneralGoalByProgramByCompanyType()">Agregar</button>
     </div>
-    <div>
-        <div cdkDropListGroup>
-            <div class="example-container-draganddrop">
-                <h2>Programas</h2>
-                <div cdkDropList [cdkDropListData]="program" class="example-list-draganddrop"
-                    (cdkDropListDropped)="dropProgram($event)">
-                    <div class="example-box" *ngFor="let p of program" cdkDrag>{{p.name}}</div>
-                </div>
-            </div>
-
-            <div class="example-container-draganddrop">
-                <h2>Programas vinculados</h2>
-                <div cdkDropList [cdkDropListData]="generalGoalByProgramByCompanyType" class="example-list-draganddrop"
-                    (cdkDropListDropped)="dropGeneralGoalByProgramByCompanyType($event)">
-                    <div class="example-box" *ngFor="let c of generalGoalByProgramByCompanyType" cdkDrag>
-                        {{c.program.name}}</div>
-                </div>
-            </div>
-        </div>
-
-        <div cdkDropListGroup>
-            <div class="example-container-draganddrop">
-                <h2>Programas</h2>
-                <div cdkDropList [cdkDropListData]="program" class="example-list-draganddrop"
-                    (cdkDropListDropped)="dropProgram($event)">
-                    <div class="example-box" *ngFor="let p of program" cdkDrag>{{p.name}}</div>
-                </div>
-            </div>
-
-            <div class="example-container-draganddrop">
-                <h2>Programas vinculados</h2>
-                <div cdkDropList [cdkDropListData]="generalGoalByProgramByCompanyTypes.controls"
-                    class="example-list-draganddrop"
-                    (cdkDropListDropped)="dropGeneralGoalByProgramByCompanyType($event)">
-                    <div class="example-box" *ngFor="let c of generalGoalByProgramByCompanyTypes.controls" cdkDrag>
-                        {{c.value.program}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--- 
-        <div cdkDropListGroup>
-            <div class="example-container-draganddrop">
-                <h2>Tipo de empresa</h2>
-                <div cdkDropList [cdkDropListData]="companyType" class="example-list-draganddrop"
-                    (cdkDropListDropped)="dropCompanyType($event)">
-                    <div class="example-box" *ngFor="let c of companyType" cdkDrag>{{c.nameCompanyType}}</div>
-                </div>
-            </div>
-
-            <div class="example-container-draganddrop">
-                <h2>Tipo de empresa vinculada</h2>
-                <div cdkDropList [cdkDropListData]="generalGoalByProgramByCompanyType" class="example-list-draganddrop"
-                    (cdkDropListDropped)="dropGeneralGoalByProgramByCompanyType($event)">
-                    <div class="example-box" *ngFor="let c of generalGoalByProgramByCompanyType" cdkDrag>
-                        {{c.companyType.nameCompanyType}}</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    -->
+-->
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGeneralGoal.invalid">
         <mat-icon>done</mat-icon>

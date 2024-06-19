@@ -1,11 +1,13 @@
 import { CompanyType } from "./companyType";
+import { generalGoalByCompanyType } from "./generalGoalByCompanyType";
 import { Program } from "./program";
 
 export class GeneralGoal {
     idGeneralGoal: number;
     generalGoal: string;
     lstSpecificGoal: SpecificGoal[];
-    lstGeneralGoalByProgramByCompanyType: GeneralGoalByProgramByCompanyType[];
+    lstGeneralGoalByProgram: GeneralGoalByProgram[];
+    lstGeneralGoalByCompanyType: generalGoalByCompanyType[];
   }
   
   export interface SpecificGoal {
@@ -14,9 +16,16 @@ export class GeneralGoal {
     specificGoal: string;
   }
 
-  export interface GeneralGoalByProgramByCompanyType{
-    idGeneralGoalByProgramByCompanyType: number;
+  export interface GeneralGoalByProgram{
+    idGeneralGoalByProgram: number;
+    GeneralGoal: GeneralGoal;
     program: Program;
-    companyType: CompanyType;
-    generalGoal: GeneralGoal;
+   
+}
+
+export interface GeneralGoalByCompanyType{
+  idGeneralGoalByCompanyType: number;
+  GeneralGoal: GeneralGoal;
+  companyType: CompanyType;
+ 
 }
