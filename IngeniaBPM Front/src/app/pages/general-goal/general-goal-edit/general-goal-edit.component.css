@@ -1,7 +1,8 @@
 .example-container {
     display: flex;
     flex-direction: column;
-    margin: 40px; /* Espacio alrededor de la tabla */
+    margin: 40px;
+    /* Espacio alrededor de la tabla */
 }
 
 .invalid {
@@ -9,9 +10,11 @@
 }
 
 /* Asegura que los mat-form-fields y textareas ocupen el ancho completo */
-mat-form-field, textarea {
+mat-form-field,
+textarea {
     width: 100%;
-    box-sizing: border-box; /* Asegura que el padding y el border se incluyan en el ancho total */
+    box-sizing: border-box;
+    /* Asegura que el padding y el border se incluyan en el ancho total */
 }
 
 mat-expansion-panel {
@@ -19,8 +22,7 @@ mat-expansion-panel {
 }
 
 .button-spacing {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
     margin: 5px 0;
 }
-

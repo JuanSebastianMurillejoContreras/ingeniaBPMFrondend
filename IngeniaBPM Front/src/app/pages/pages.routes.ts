@@ -22,11 +22,6 @@ import { GlossarybyprogrambycompanytypeComponent } from './glossarybyprogrambyco
 import { GlossarybyprogrambycompanytypeEditComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype-edit/glossarybyprogrambycompanytype-edit.component';
 import { TheoreticalFrameworkByProgramByCompanyTypeComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type.component';
 import { TheoreticalFrameworkByProgramByCompanyTypeEditComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type-edit/theoretical-framework-by-program-by-company-type-edit.component';
-import { GeneralGoalByProgramByCompanyTypeComponent } from './general-goal-by-program-by-company-type/general-goal-by-program-by-company-type.component';
-import { GeneralGoalByProgramByCompanyTypeEditComponent } from './general-goal-by-program-by-company-type/general-goal-by-program-by-company-type-edit/general-goal-by-program-by-company-type-edit.component';
-
-
-
 
 export const PagesRoutes: Routes = [
   {

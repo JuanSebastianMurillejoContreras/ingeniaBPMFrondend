@@ -14,6 +14,7 @@ import { ProgramService } from 'src/app/service/program.service';
 import { SpecificGoalService } from 'src/app/service/specific-goal.service';
 import { GeneralGoalByCompanyTypeService } from 'src/app/service/generalgoalbycompanytype.service';
 import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogram.service';
+import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType';
 
 @Component({
   selector: 'app-general-goal-edit',
@@ -55,7 +56,6 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     private companyTypeService: CompanyTypeService,
     private programService: ProgramService
   ) { }
-
   ngOnInit(): void {
     this.form = this.fb.group({
       idGeneralGoal: [0],
@@ -81,7 +81,6 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     if (!val || typeof val !== 'string') {
       return [];
     }
-
     return this.program.filter(el =>
       el.name.toLowerCase().includes(val.toLowerCase())
     );
@@ -92,7 +91,6 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     if (!val || typeof val !== 'string') {
       return [];
     }
-
     return this.companyType.filter(el =>
       el.nameCompanyType.toLowerCase().includes(val.toLowerCase())
     );
@@ -113,7 +111,6 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     return val ? `${val.nameCompanyType}` : val;
   }
 
-
   initForm() {
     if (this.isEdit) {
       this.generalGoalService.findById(this.id).subscribe(data => {
@@ -123,6 +120,7 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
         });
         this.setSpecificGoals(data.lstSpecificGoal);
         this.setGeneralGoalByProgram(data.lstGeneralGoalByProgram);
+        this.setGeneralGoalByCompanyType(data.lstGeneralGoalByCompanyType);
       });
     }
   }
@@ -147,6 +145,15 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     });
   }
 
+  setGeneralGoalByCompanyType(generalGoalByCompanyType: generalGoalByCompanyType[]) {
+    const lstGeneralGoalByProgram = this.form.get('lstGeneralGoalByCompanyType') as FormArray;
+    generalGoalByCompanyType.forEach(generalGoalByCompanyType => {
+      lstGeneralGoalByProgram.push(this.fb.group({
+        idGeneralGoalByCompanyType: [generalGoalByCompanyType.idGeneralGoalByCompanyType],
+        companyType: [generalGoalByCompanyType.companyType, Validators.required]
+      }));
+    });
+  }
 
 
   get specificGoals() {
@@ -157,6 +164,9 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     return this.form.get('lstGeneralGoalByProgram') as FormArray;
   }
 
+  get generalGoalByCompanyTypes() {
+    return this.form.get('lstGeneralGoalByCompanyType') as FormArray;
+  }
 
   addSpecificGoal() {
     this.specificGoals.push(this.fb.group({
@@ -168,8 +178,16 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
   addgeneralGoalByProgram() {
     this.generalGoalByPrograms.push(this.fb.group({
       idGeneralGoalByProgram: [0],
-      GeneralGoal: ['', Validators.required],
-      program:['', Validators.required]
+      generalGoal: ['', Validators.required],
+      program: ['', Validators.required]
+    }));
+  }
+
+  addgeneralGoalByCompanyType() {
+    this.generalGoalByCompanyTypes.push(this.fb.group({
+      idGeneralGoalByCompanyType: [0],
+      generalGoal: ['', Validators.required],
+      companyType: ['', Validators.required]
     }));
   }
 
@@ -190,9 +208,24 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     this.generalGoalByPrograms.removeAt(index);
   }
 
+  removeGeneralGoalByCompanyType(index: number) {
+    const generalGoalByCompanyType = this.generalGoalByCompanyTypes.at(index).value;
+    if (generalGoalByCompanyType.idGeneralGoalByCompanyType) {
+      this.idsToDeleteGeneralGoalByCompanyTypeService.push(generalGoalByCompanyType.idGeneralGoalByCompanyType);
+    }
+    this.generalGoalByCompanyTypes.removeAt(index);
+  }
+
 
   operate() {
     if (this.form.invalid) {
+      console.log('Form is invalid:', this.form);
+      Object.keys(this.form.controls).forEach(key => {
+        const controlErrors = this.form.get(key).errors;
+        if (controlErrors) {
+          console.log('Key control: ' + key + ', errors:', controlErrors);
+        }
+      });
       return;
     }
 
@@ -200,7 +233,8 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
 
     forkJoin([
       this.deleteSpecificGoals(),
-      this.deleteGeneralGoalByProgram()
+      this.deleteGeneralGoalByProgram(),
+      this.deleteGeneralGoalByCompanyType()
     ]).pipe(
       switchMap(() => this.saveOrUpdateGeneralGoal(generalGoal)),
       catchError(error => {
@@ -232,6 +266,16 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
     return forkJoin(deleteGeneralGoalByProgram$);
   }
 
+  deleteGeneralGoalByCompanyType(): Observable<any> {
+    if (this.idsToDeleteGeneralGoalByCompanyTypeService.length === 0) {
+      return of(null);
+    }
+    const deleteGeneralGoalByCompanyType$ = this.idsToDeleteGeneralGoalByCompanyTypeService.map(id =>
+      this.generalGoalByCompanyTypeService.delete(id)
+    );
+    return forkJoin(deleteGeneralGoalByCompanyType$);
+  }
+
   saveOrUpdateGeneralGoal(generalGoal: GeneralGoal): Observable<any> {
     if (this.isEdit) {
       return this.generalGoalService.update(generalGoal.idGeneralGoal, generalGoal).pipe(
@@ -255,7 +299,5 @@ import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogra
   navigateToGeneralGoalList() {
     this.router.navigate(['/pages/generalgoal']);
   }
-
-
 
 }

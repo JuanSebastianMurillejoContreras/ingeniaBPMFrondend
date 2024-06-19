@@ -35,9 +35,9 @@
             (click)="addSpecificGoal()">Agregar</button>
     </div>
 
-
+<div>
     <h2>Programas</h2>
-    <div formArrayName="lstGeneralGoalByProgramByCompanyType" class="example-full-width">
+    <div formArrayName="lstGeneralGoalByProgram" class="example-full-width">
         <div *ngFor="let control of generalGoalByPrograms.controls; let i = index" [formGroupName]="i">
             <h3>Programa {{ i + 1 }}</h3>
 
@@ -52,18 +52,17 @@
                         {{ p.name }}
                     </mat-option>
                 </mat-autocomplete>
-                <button class="button-spacing" mat-raised-button color="accent" style="float: right"
-                (click)="removeGeneralGoalByProgram(i)">Quitar</button>
             </mat-form-field>
-           
+            <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                (click)="removeGeneralGoalByProgram(i)">Quitar</button>
         </div>
         <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
             (click)="addgeneralGoalByProgram()">Agregar</button>
     </div>
-<!---
+
     <h2>Tipos de empresas</h2>
-    <div formArrayName="lstGeneralGoalByProgramByCompanyType" class="example-full-width">
-        <div *ngFor="let control of generalGoalByPrograms.controls; let i = index" [formGroupName]="i">
+    <div formArrayName="lstGeneralGoalByCompanyType" class="example-full-width">
+        <div *ngFor="let control of generalGoalByCompanyTypes.controls; let i = index" [formGroupName]="i">
             <h3>Tipo de empresa {{ i + 1 }}</h3>
             <mat-form-field appearance="fill">
                 <mat-label>Seleccione un tipo de empresa</mat-label>
@@ -72,18 +71,18 @@
 
                 <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
                     <mat-option *ngFor="let c of companyType" [value]="c">
-                        {{ c.nameCompanyType }}
+                        {{ c.nameCompanyType}}
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
 
             <button class="button-spacing" mat-raised-button color="accent" style="float: right"
-                (click)="removeGeneralGoalByProgramByCompanyType(i)">Quitar</button>
+                (click)="removeGeneralGoalByCompanyType(i)">Quitar</button>
         </div>
         <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
-            (click)="addgeneralGoalByProgramByCompanyType()">Agregar</button>
+            (click)="addgeneralGoalByCompanyType()">Agregar</button>
     </div>
--->
+</div>
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGeneralGoal.invalid">
         <mat-icon>done</mat-icon>
