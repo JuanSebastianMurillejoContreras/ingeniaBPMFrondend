@@ -1,8 +1,8 @@
 .example-container {
     display: flex;
     flex-direction: column;
-    margin: 40px;
-    /* Espacio alrededor de la tabla */
+    margin: 50px;
+  
 }
 
 .invalid {
@@ -18,7 +18,7 @@ textarea {
 }
 
 mat-expansion-panel {
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 .button-spacing {
@@ -26,3 +26,5 @@ mat-expansion-panel {
     flex-direction: column;
     margin: 5px 0;
 }
+
+

@@ -1,9 +1,8 @@
-import { AsyncPipe, CommonModule, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormArray, FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
-import { Observable, forkJoin, of } from 'rxjs';
-import { catchError, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { Observable, forkJoin, map, of, startWith, switchMap, tap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
 import { CompanyType } from 'src/app/model/companyType';
 import { GeneralGoal, GeneralGoalByCompanyType, GeneralGoalByProgram, SpecificGoal } from 'src/app/model/generalGoal';
@@ -15,13 +14,14 @@ import { SpecificGoalService } from 'src/app/service/specific-goal.service';
 import { GeneralGoalByCompanyTypeService } from 'src/app/service/generalgoalbycompanytype.service';
 import { GeneralGoalByProgramService } from 'src/app/service/generalgoalbyprogram.service';
 import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-general-goal-edit',
   standalone: true,
   templateUrl: './general-goal-edit.component.html',
   styleUrls: ['./general-goal-edit.component.css'],
-  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
+  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet, MatCardModule]
 
 }) export class GeneralGoalEditComponent implements OnInit {
 
@@ -86,7 +86,6 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
     );
   }
 
-
   filterCompanyType(val: any): CompanyType[] {
     if (!val || typeof val !== 'string') {
       return [];
@@ -105,7 +104,6 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
   showProgram(val: any) {
     return val ? `${val.name}` : val;
   }
-
 
   showCompanyType(val: any) {
     return val ? `${val.nameCompanyType}` : val;
@@ -127,10 +125,10 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
 
   setSpecificGoals(specificGoal: SpecificGoal[]) {
     const lstSpecificGoal = this.form.get('lstSpecificGoal') as FormArray;
-    specificGoal.forEach(specific => {
+    specificGoal.forEach(specificGoal => {
       lstSpecificGoal.push(this.fb.group({
-        idSpecificGoal: [specific.idSpecificGoal],
-        specificGoal: [specific.specificGoal, Validators.required]
+        idSpecificGoal: [specificGoal.idSpecificGoal],
+        specificGoal: [specificGoal.specificGoal, Validators.required]
       }));
     });
   }
@@ -168,6 +166,7 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
     return this.form.get('lstGeneralGoalByCompanyType') as FormArray;
   }
 
+
   addSpecificGoal() {
     this.specificGoals.push(this.fb.group({
       idSpecificGoal: [0],
@@ -178,15 +177,14 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
   addgeneralGoalByProgram() {
     this.generalGoalByPrograms.push(this.fb.group({
       idGeneralGoalByProgram: [0],
-      generalGoal: ['', Validators.required],
       program: ['', Validators.required]
     }));
+    
   }
 
   addgeneralGoalByCompanyType() {
     this.generalGoalByCompanyTypes.push(this.fb.group({
       idGeneralGoalByCompanyType: [0],
-      generalGoal: ['', Validators.required],
       companyType: ['', Validators.required]
     }));
   }
@@ -202,7 +200,7 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
 
   removeGeneralGoalByProgram(index: number) {
     const generalGoalByProgram = this.generalGoalByPrograms.at(index).value;
-    if (generalGoalByProgram.idGeneralGoalByProgramByCompanyType) {
+    if (generalGoalByProgram.idGeneralGoalByProgram) {
       this.idsToDeleteGeneralGoalByProgramService.push(generalGoalByProgram.idGeneralGoalByProgram);
     }
     this.generalGoalByPrograms.removeAt(index);
@@ -216,39 +214,9 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
     this.generalGoalByCompanyTypes.removeAt(index);
   }
 
-
-  operate() {
-    if (this.form.invalid) {
-      console.log('Form is invalid:', this.form);
-      Object.keys(this.form.controls).forEach(key => {
-        const controlErrors = this.form.get(key).errors;
-        if (controlErrors) {
-          console.log('Key control: ' + key + ', errors:', controlErrors);
-        }
-      });
-      return;
-    }
-
-    const generalGoal: GeneralGoal = this.form.value;
-
-    forkJoin([
-      this.deleteSpecificGoals(),
-      this.deleteGeneralGoalByProgram(),
-      this.deleteGeneralGoalByCompanyType()
-    ]).pipe(
-      switchMap(() => this.saveOrUpdateGeneralGoal(generalGoal)),
-      catchError(error => {
-        console.error('Error during delete operations', error);
-        return of(null); // Continue even if delete operations fail
-      })
-    ).subscribe(() => {
-      this.navigateToGeneralGoalList();
-    });
-  }
-
   deleteSpecificGoals(): Observable<any> {
     if (this.idsToDeleteSpecificGoal.length === 0) {
-      return of(null); // No specific goals to delete
+      return of(null);
     }
     const deleteSpecificGoals$ = this.idsToDeleteSpecificGoal.map(id =>
       this.specificGoalService.delete(id)
@@ -295,6 +263,27 @@ import { generalGoalByCompanyType } from 'src/app/model/generalGoalByCompanyType
       );
     }
   }
+
+  operate() {
+    if (this.form.invalid) {
+      return;
+    }
+
+    const generalGoal: GeneralGoal = this.form.value;
+
+    forkJoin([
+      this.deleteSpecificGoals(),
+      this.deleteGeneralGoalByProgram(),
+      this.deleteGeneralGoalByCompanyType()
+    ]).pipe(
+      switchMap(() => this.saveOrUpdateGeneralGoal(generalGoal)),
+    ).subscribe(() => {
+      this.navigateToGeneralGoalList();
+    });
+  }
+
+
+
 
   navigateToGeneralGoalList() {
     this.router.navigate(['/pages/generalgoal']);

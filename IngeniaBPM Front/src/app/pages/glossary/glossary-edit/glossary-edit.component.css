@@ -1,18 +1,28 @@
 .example-container {
     display: flex;
     flex-direction: column;
-    margin: 100px; /* Espacio alrededor de la tabla */
+    margin: 50px;
+  
 }
-
-.example-container>* {
-    width: 100%;
-    border-radius: 10px !important; 
-}
-
-.example-full-width {
-    width: 100%;
-  }
 
 .invalid {
     color: red;
+}
+
+/* Asegura que los mat-form-fields y textareas ocupen el ancho completo */
+mat-form-field,
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    /* Asegura que el padding y el border se incluyan en el ancho total */
+}
+
+mat-expansion-panel {
+    margin-top: 0px;
+}
+
+.button-spacing {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
 }

@@ -14,14 +14,14 @@
     <h3>Palabra</h3>
     <mat-form-field class="example-full-width, invalid">
         <input matInput placeholder="Ingrese la palabra para registrarla en el glosario" minlength="2" maxlength="50"
-            required formControlName="Word">
-        <small *ngIf="form.get('Word').hasError('required') && form.get('Word').touched">
+            required formControlName="word">
+        <small *ngIf="form.get('word').hasError('required') && form.get('word').touched">
             Debe ingresar una palabra para registrar en el glosario
         </small>
-        <small *ngIf="form.get('Word').hasError('minlength') && form.get('Word').dirty">
+        <small *ngIf="form.get('word').hasError('minlength') && form.get('word').dirty">
             Debe ingresar minimo 3 caracteres
         </small>
-        <small *ngIf="form.get('Word').hasError('pattern') && form.get('Word').dirty">
+        <small *ngIf="form.get('word').hasError('pattern') && form.get('word').dirty">
             La palabra no puede incluir números
         </small>
     </mat-form-field>
@@ -45,6 +45,66 @@
             </small>
         </div>
     </mat-form-field>
+
+    <div>
+        <h2>Programas</h2>
+        <div formArrayName="lstGlossaryByProgram" class="example-full-width">
+            <div *ngFor="let control of glossaryByPrograms.controls; let i = index" [formGroupName]="i">
+
+                <mat-form-field>
+                    <mat-label>Seleccione un programa</mat-label>
+
+                    <input matInput placeholder="Seleccione un programa" formControlName="program" required
+                        [matAutocomplete]="autoProgram">
+
+                    <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+                        <mat-option *ngFor="let p of program" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                        (click)="removeGlossaryByProgram(i)">Quitar</button>
+                </mat-form-field>
+
+            </div>
+            <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                (click)="addGlossaryByProgram()">Agregar programas</button>
+        </div>
+    </div>
+
+
+    <div>
+        <div>
+            <h2>Tipos de empresas</h2>
+            <div formArrayName="lstGlossaryByCompanyType" class="example-full-width">
+                <div *ngFor="let control of glossaryByCompanyTypes.controls; let i = index" [formGroupName]="i">
+
+                    <mat-form-field appearance="fill">
+
+                        <mat-label>Seleccione un tipo de empresa</mat-label>
+                        <input matInput placeholder="Seleccione el tipo de empresa" required
+                            formControlName="companyType" [matAutocomplete]="autoCompanyType">
+
+                        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+                            <mat-option *ngFor="let c of companyType" [value]="c">
+                                {{ c.nameCompanyType}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                            (click)="removeGlossaryByCompanyType(i)">Quitar</button>
+                    </mat-form-field>
+                </div>
+                <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                    (click)="addGlossaryByCompanyType()">Agregar tipo de empresa</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGlossary.invalid">

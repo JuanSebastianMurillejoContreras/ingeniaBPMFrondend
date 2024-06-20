@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GlossaryByProgramByCompanyType } from '../model/GlossaryByProgramByCompanyType';
+import { GlossaryByCompanyType } from '../model/GlossaryByCompanyType';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
@@ -8,20 +8,20 @@ import { GenericService } from './generic.service';
 @Injectable({
   providedIn: 'root'
 })
-export class GlossaryByProgramByCompanyTypeService extends GenericService<GlossaryByProgramByCompanyType>{
+export class GlossaryByCompanyTypeService extends GenericService<GlossaryByCompanyType>{
 
-  private examChange: Subject<GlossaryByProgramByCompanyType[]> = new Subject<GlossaryByProgramByCompanyType[]>;
+  private examChange: Subject<GlossaryByCompanyType[]> = new Subject<GlossaryByCompanyType[]>;
   private messageChange: Subject<string> = new Subject<string>;
 
   constructor(protected override http: HttpClient) {
-    super(http, `${environment.HOST}/glossaryByProgramByCompanyTypes`);
+    super(http, `${environment.HOST}/glossarybycompanytypes`);
   }
 
-  setGlossaryByProgramByCompanyTypeChange(data: GlossaryByProgramByCompanyType[]){
+  setGlossaryByCompanyTypeChange(data: GlossaryByCompanyType[]){
     this.examChange.next(data);
   }
 
-  getGlossaryByProgramByCompanyTypeChange(){
+  getGlossaryByCompanyTypeChange(){
     return this.examChange.asObservable();
   }
 
@@ -33,4 +33,3 @@ export class GlossaryByProgramByCompanyTypeService extends GenericService<Glossa
     return this.messageChange.asObservable();
   }
 }
-

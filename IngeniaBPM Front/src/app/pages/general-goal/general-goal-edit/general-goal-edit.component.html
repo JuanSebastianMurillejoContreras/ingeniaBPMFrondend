@@ -20,77 +20,97 @@
         </div>
     </mat-form-field>
 
-    <h2>Objetivos específicos</h2>
-    <div formArrayName="lstSpecificGoal" class="example-full-width">
-        <div *ngFor="let specificGoal of specificGoals.controls; let i=index" [formGroupName]="i">
-            <h3>Objetivo específico {{ i + 1 }}</h3>
-            <mat-form-field appearance="fill">
-                <mat-label>Objetivo específico</mat-label>
-                <textarea matInput placeholder="Objetivo específico" formControlName="specificGoal" required></textarea>
-                <button class="button-spacing" mat-raised-button color="accent" style="float: right"
-                    (click)="removeSpecificGoal(i)">Quitar</button>
-            </mat-form-field>
+    <div></div>
+
+    <div>
+        <h2>Objetivos específicos</h2>
+        <div formArrayName="lstSpecificGoal" class="example-full-width">
+            <div *ngFor="let specificGoal of specificGoals.controls; let i=index" [formGroupName]="i">
+                <h3>Objetivo específico {{ i + 1 }}</h3>
+                <mat-form-field appearance="fill">
+                    <mat-label>Objetivo específico</mat-label>
+
+                    <textarea matInput placeholder="Objetivo específico" formControlName="specificGoal"
+                        required>
+                    </textarea>
+
+                    <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                        (click)="removeSpecificGoal(i)">Quitar</button>
+                        
+                </mat-form-field>
+            </div>
+            <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                (click)="addSpecificGoal()">Agregar objetivos específicos</button>
         </div>
-        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
-            (click)="addSpecificGoal()">Agregar</button>
     </div>
 
-<div>
-    <h2>Programas</h2>
-    <div formArrayName="lstGeneralGoalByProgram" class="example-full-width">
-        <div *ngFor="let control of generalGoalByPrograms.controls; let i = index" [formGroupName]="i">
-            <h3>Programa {{ i + 1 }}</h3>
 
-            <mat-form-field appearance="fill">
-                <mat-label>Seleccione un programa</mat-label>
+    <div>
+        <h2>Programas</h2>
+        <div formArrayName="lstGeneralGoalByProgram" class="example-full-width">
+            <div *ngFor="let control of generalGoalByPrograms.controls; let i = index" [formGroupName]="i">
 
-                <input matInput placeholder="Seleccione un programa" formControlName="program" required
-                    [matAutocomplete]="autoProgram">
+                <mat-form-field>
+                    <mat-label>Seleccione un programa</mat-label>
 
-                <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
-                    <mat-option *ngFor="let p of program" [value]="p">
-                        {{ p.name }}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
-            <button class="button-spacing" mat-raised-button color="accent" style="float: right"
-                (click)="removeGeneralGoalByProgram(i)">Quitar</button>
+                    <input matInput placeholder="Seleccione un programa" formControlName="program" required
+                        [matAutocomplete]="autoProgram">
+
+                    <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+                        <mat-option *ngFor="let p of program" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                        (click)="removeGeneralGoalByProgram(i)">Quitar</button>
+                </mat-form-field>
+
+            </div>
+            <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                (click)="addgeneralGoalByProgram()">Agregar programas</button>
         </div>
-        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
-            (click)="addgeneralGoalByProgram()">Agregar</button>
     </div>
 
-    <h2>Tipos de empresas</h2>
-    <div formArrayName="lstGeneralGoalByCompanyType" class="example-full-width">
-        <div *ngFor="let control of generalGoalByCompanyTypes.controls; let i = index" [formGroupName]="i">
-            <h3>Tipo de empresa {{ i + 1 }}</h3>
-            <mat-form-field appearance="fill">
-                <mat-label>Seleccione un tipo de empresa</mat-label>
-                <input matInput placeholder="Seleccione el tipo de empresa" required formControlName="companyType"
-                    [matAutocomplete]="autoCompanyType">
 
-                <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
-                    <mat-option *ngFor="let c of companyType" [value]="c">
-                        {{ c.nameCompanyType}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
+    <div>
+        <div>
+            <h2>Tipos de empresas</h2>
+            <div formArrayName="lstGeneralGoalByCompanyType" class="example-full-width">
+                <div *ngFor="let control of generalGoalByCompanyTypes.controls; let i = index" [formGroupName]="i">
 
-            <button class="button-spacing" mat-raised-button color="accent" style="float: right"
-                (click)="removeGeneralGoalByCompanyType(i)">Quitar</button>
+                    <mat-form-field appearance="fill">
+
+                        <mat-label>Seleccione un tipo de empresa</mat-label>
+                        <input matInput placeholder="Seleccione el tipo de empresa" required
+                            formControlName="companyType" [matAutocomplete]="autoCompanyType">
+
+                        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+                            <mat-option *ngFor="let c of companyType" [value]="c">
+                                {{ c.nameCompanyType}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                            (click)="removeGeneralGoalByCompanyType(i)">Quitar</button>
+                    </mat-form-field>
+                </div>
+                <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                    (click)="addgeneralGoalByCompanyType()">Agregar tipo de
+                    empresa</button>
+            </div>
         </div>
-        <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: right"
-            (click)="addgeneralGoalByCompanyType()">Agregar</button>
     </div>
-</div>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGeneralGoal.invalid">
-        <mat-icon>done</mat-icon>
-        <span>Done</span>
-    </button>
+   
+        <button mat-raised-button color="primary" type="submit" [disabled]="frmnameGeneralGoal.invalid">
+            <mat-icon>done</mat-icon>
+            <span>Done</span>
+        </button>
 
-    <button mat-raised-button color="accent" type="button" routerLink="/pages/generalgoal">
-        <mat-icon>cancel</mat-icon>
-        <span>Cancel</span>
-    </button>
+        <button mat-raised-button color="accent" type="button" routerLink="/pages/generalgoal">
+            <mat-icon>cancel</mat-icon>
+            <span>Cancel</span>
+        </button>
+  
 </form>

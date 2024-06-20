@@ -17,9 +17,6 @@ import { ProgrambycompanyComponent } from './programbycompany/programbycompany.c
 import { ScopeComponent } from './scope/scope.component';
 import { ScopeEditComponent } from './scope/scope-edit/scope-edit.component';
 import { ProgrambycompanyEditComponent } from './programbycompany/programbycompany-edit/programbycompany-edit.component';
-import { GlossaryByProgramByCompanyType } from '../model/GlossaryByProgramByCompanyType';
-import { GlossarybyprogrambycompanytypeComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype.component';
-import { GlossarybyprogrambycompanytypeEditComponent } from './glossarybyprogrambycompanytype/glossarybyprogrambycompanytype-edit/glossarybyprogrambycompanytype-edit.component';
 import { TheoreticalFrameworkByProgramByCompanyTypeComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type.component';
 import { TheoreticalFrameworkByProgramByCompanyTypeEditComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type-edit/theoretical-framework-by-program-by-company-type-edit.component';
 
@@ -80,20 +77,7 @@ export const PagesRoutes: Routes = [
       },
     ],
   },
-  {
-    path: 'glossarybyprogrambycompanytype',
-    component: GlossarybyprogrambycompanytypeComponent,
-    children: [
-      {
-        path: 'new',
-        component: GlossarybyprogrambycompanytypeEditComponent,
-      },
-      {
-        path: 'edit/:id',
-        component: GlossarybyprogrambycompanytypeEditComponent,
-      },
-    ],
-  },
+
   {
     path: 'generalgoal',
     component: GeneralGoalComponent,
