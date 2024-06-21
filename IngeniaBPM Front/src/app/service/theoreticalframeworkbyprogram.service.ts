@@ -5,24 +5,25 @@ import { environment } from 'src/environments/environment.development';
 import { GenericService } from './generic.service';
 import { TheoreticalFramework } from '../model/theoreticalFramework';
 import { TheoreticalFrameworkByProgramByCompanyType } from '../model/TheoreticalFrameworkByProgramByCompanyType';
+import { TheoreticalFrameworkByProgram } from '../model/TheoreticalFrameworkByProgram';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TheoreticalFrameworkByProgramByCompanyTypeService extends GenericService<TheoreticalFrameworkByProgramByCompanyType>{
+export class TheoreticalFrameworkByProgramService extends GenericService<TheoreticalFrameworkByProgram>{
 
-  private examChange: Subject<TheoreticalFrameworkByProgramByCompanyType[]> = new Subject<TheoreticalFrameworkByProgramByCompanyType[]>;
+  private examChange: Subject<TheoreticalFrameworkByProgram[]> = new Subject<TheoreticalFrameworkByProgram[]>;
   private messageChange: Subject<string> = new Subject<string>;
 
   constructor(protected override http: HttpClient) {
-    super(http, `${environment.HOST}/theoriticalframeworkbyprogrambycompanytypes`);
+    super(http, `${environment.HOST}/theoreticalframeworkbyprograms`);
   }
 
-  setTheoreticalFrameworkByProgramByCompanyTypeChange(data: TheoreticalFrameworkByProgramByCompanyType[]){
+  setTheoreticalFrameworkByProgramChange(data: TheoreticalFrameworkByProgram[]){
     this.examChange.next(data);
   }
 
-  getTheoreticalFrameworkByProgramByCompanyTypeChange(){
+  getTheoreticalFrameworkByProgramChange(){
     return this.examChange.asObservable();
   }
 

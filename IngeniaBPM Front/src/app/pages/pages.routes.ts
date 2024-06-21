@@ -17,8 +17,6 @@ import { ProgrambycompanyComponent } from './programbycompany/programbycompany.c
 import { ScopeComponent } from './scope/scope.component';
 import { ScopeEditComponent } from './scope/scope-edit/scope-edit.component';
 import { ProgrambycompanyEditComponent } from './programbycompany/programbycompany-edit/programbycompany-edit.component';
-import { TheoreticalFrameworkByProgramByCompanyTypeComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type.component';
-import { TheoreticalFrameworkByProgramByCompanyTypeEditComponent } from './theoretical-framework-by-program-by-company-type/theoretical-framework-by-program-by-company-type-edit/theoretical-framework-by-program-by-company-type-edit.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -107,22 +105,6 @@ export const PagesRoutes: Routes = [
       },
     ],
   },
-
-  {
-    path: 'theoreticalframeworkbyprogrambycompanytype',
-    component: TheoreticalFrameworkByProgramByCompanyTypeComponent,
-    children: [
-      {
-        path: 'new',
-        component: TheoreticalFrameworkByProgramByCompanyTypeEditComponent,
-      },
-      {
-        path: 'edit/:id',
-        component: TheoreticalFrameworkByProgramByCompanyTypeEditComponent,
-      },
-    ],
-  },
-
 
   {
     path: 'program',
