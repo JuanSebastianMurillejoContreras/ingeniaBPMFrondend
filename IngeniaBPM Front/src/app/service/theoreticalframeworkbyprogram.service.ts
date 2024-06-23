@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { GenericService } from './generic.service';
-import { TheoreticalFramework } from '../model/theoreticalFramework';
-import { TheoreticalFrameworkByProgramByCompanyType } from '../model/TheoreticalFrameworkByProgramByCompanyType';
 import { TheoreticalFrameworkByProgram } from '../model/TheoreticalFrameworkByProgram';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TheoreticalFrameworkByProgramService extends GenericService<TheoreticalFrameworkByProgram>{
+
+  listIdTheoreticalFramework(idTheoreticalFramework: any): any {
+    throw new Error('Method not implemented.');
+  }
 
   private examChange: Subject<TheoreticalFrameworkByProgram[]> = new Subject<TheoreticalFrameworkByProgram[]>;
   private messageChange: Subject<string> = new Subject<string>;

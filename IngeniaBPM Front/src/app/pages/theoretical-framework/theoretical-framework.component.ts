@@ -19,7 +19,7 @@ import { TheoreticalFrameworkService } from 'src/app/service/theoretical-framewo
 })
 export class TheoreticalFrameworkComponent implements OnInit {
 
-  displayedColumns: string[] = ['idTheoreticalFramework', 'generalConsiderations', 'specificConsiderations', 'urlAnnexed', 'actions'];
+  displayedColumns: string[] = ['idTheoreticalFramework', 'generalConsiderations', 'actions'];
   dataSource: MatTableDataSource<TheoreticalFramework>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

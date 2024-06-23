@@ -8,7 +8,11 @@ import { GenericService } from './generic.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ProcedurebyprogramService extends GenericService<ProcedureByProgram>{
+export class ProcedureByProgramService extends GenericService<ProcedureByProgram>{
+
+  listIdProcedure(idProcedure: any): any {
+    throw new Error('Method not implemented.');
+  }
 
   private examChange: Subject<ProcedureByProgram[]> = new Subject<ProcedureByProgram[]>;
   private messageChange: Subject<string> = new Subject<string>;
@@ -16,7 +20,6 @@ export class ProcedurebyprogramService extends GenericService<ProcedureByProgram
   constructor(protected override http: HttpClient) {
     super(http, `${environment.HOST}/procedurebyprograms`);
   }
-
 
   setProcedureByProgramChange(data: ProcedureByProgram[]){
     this.examChange.next(data);

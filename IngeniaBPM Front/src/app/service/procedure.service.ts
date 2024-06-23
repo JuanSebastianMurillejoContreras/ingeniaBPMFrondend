@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { GenericService } from './generic.service';
+import { ProcedureByProgramService } from './procedurebyprogram.service';
+import { ProcedureByCompanyTypeService } from './procedurebycompanytype.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +14,13 @@ export class ProcedureService extends GenericService<Procedure>{
 
   private examChange: Subject<Procedure[]> = new Subject<Procedure[]>;
   private messageChange: Subject<string> = new Subject<string>;
+  private procedureByProgramService: ProcedureByProgramService;
+  private procedureByCompanyTypeService: ProcedureByCompanyTypeService;
+
 
   constructor(protected override http: HttpClient) {
     super(http, `${environment.HOST}/procedures`);
   }
-
 
   setProcedureChange(data: Procedure[]){
     this.examChange.next(data);
@@ -24,6 +28,14 @@ export class ProcedureService extends GenericService<Procedure>{
 
   getProcedureChange(){
     return this.examChange.asObservable();
+  }
+
+  removeProcedureByProgram(id: number): any {
+    return this.procedureByProgramService.delete(id);
+  }
+
+  removeProcedureByCompanyType(id: number): any {
+    return this.procedureByCompanyTypeService.delete(id);
   }
 
   setMessageChange(data: string){

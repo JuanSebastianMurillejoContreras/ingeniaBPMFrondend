@@ -17,6 +17,8 @@ import { ProgrambycompanyComponent } from './programbycompany/programbycompany.c
 import { ScopeComponent } from './scope/scope.component';
 import { ScopeEditComponent } from './scope/scope-edit/scope-edit.component';
 import { ProgrambycompanyEditComponent } from './programbycompany/programbycompany-edit/programbycompany-edit.component';
+import { ProcedureComponent } from './procedure/procedure.component';
+import { ProcedureEditComponent } from './procedure/procedure-edit/procedure-edit.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -149,8 +151,22 @@ export const PagesRoutes: Routes = [
         component: ProgrambycompanyEditComponent,
       },
     ],
-  }
+  },
 
+  {
+    path: 'procedure',
+    component: ProcedureComponent,
+    children: [
+      {
+        path: 'new',
+        component: ProcedureEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ProcedureEditComponent,
+      },
+    ],
+  },
 
 
 ];

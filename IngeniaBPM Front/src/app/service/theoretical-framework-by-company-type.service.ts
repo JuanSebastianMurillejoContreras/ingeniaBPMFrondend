@@ -9,6 +9,10 @@ import { GenericService } from './generic.service';
 })
 export class TheoreticalFrameworkByCompanyTypeService extends GenericService<TheoreticalFrameworkByCompanyTypeService>{
 
+  listIdTheoreticalFramework(idTheoreticalFramework: any): any {
+    throw new Error('Method not implemented.');
+  }
+
   private examChange: Subject<TheoreticalFrameworkByCompanyTypeService[]> = new Subject<TheoreticalFrameworkByCompanyTypeService[]>;
   private messageChange: Subject<string> = new Subject<string>;
 

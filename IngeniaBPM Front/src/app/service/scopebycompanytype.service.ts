@@ -8,7 +8,7 @@ import { GenericService } from './generic.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ScopebycompanytypeService  extends GenericService<ScopeByCompanyType>{
+export class ScopeByCompanyTypeService  extends GenericService<ScopeByCompanyType>{
 
   private examChange: Subject<ScopeByCompanyType[]> = new Subject<ScopeByCompanyType[]>;
   private messageChange: Subject<string> = new Subject<string>;

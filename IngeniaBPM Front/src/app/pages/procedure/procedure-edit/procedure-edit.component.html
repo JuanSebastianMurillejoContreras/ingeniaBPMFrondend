@@ -1,1 +1,197 @@
-<p>procedure-edit works!</p>
+<form class="example-container" [formGroup]="form" #frmnameProcedure="ngForm" (submit)="operate()">
+    <mat-label>
+        <div>
+            <h1>Glosario</h1>
+        </div>
+    </mat-label>
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idProcedure">
+        </mat-form-field>
+    </div>
+
+    <h3>Código</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <input matInput placeholder="Ingrese la palabra para registrarla en el glosario" minlength="2" maxlength="50"
+            required formControlName="code">
+        <small *ngIf="form.get('code').hasError('required') && form.get('code').touched">
+            Debe ingresar una palabra para registrar en el glosario
+        </small>
+        <small *ngIf="form.get('code').hasError('minlength') && form.get('code').dirty">
+            Debe ingresar minimo 3 caracteres
+        </small>
+        <small *ngIf="form.get('code').hasError('pattern') && form.get('code').dirty">
+            La palabra no puede incluir números
+        </small>
+    </mat-form-field>
+
+    <h3>Nombre</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Escribe el nombre del procedimiento</mat-label>
+
+        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" required
+            formControlName="name"></textarea>
+
+        <div *ngIf="form.get('name').invalid && form.get('name').dirty">
+            <small *ngIf="form.get('name').hasError('required')">
+                Debe ingresar una definición para el glosario
+            </small>
+            <small *ngIf="form.get('name').hasError('minlength')">
+                Debe ingresar mínimo 3 caracteres
+            </small>
+            <small *ngIf="form.get('name').hasError('maxlength')">
+                Debe ingresar máximo 1.200 caracteres
+            </small>
+        </div>
+    </mat-form-field>
+
+    <h3>Descripcion</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Escribe el nombre del procedimiento</mat-label>
+
+        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" required
+            formControlName="description"></textarea>
+
+        <div *ngIf="form.get('description').invalid && form.get('description').dirty">
+            <small *ngIf="form.get('description').hasError('required')">
+                Debe ingresar una definición para el glosario
+            </small>
+            <small *ngIf="form.get('description').hasError('minlength')">
+                Debe ingresar mínimo 3 caracteres
+            </small>
+            <small *ngIf="form.get('description').hasError('maxlength')">
+                Debe ingresar máximo 1.200 caracteres
+            </small>
+        </div>
+    </mat-form-field>
+
+    <h3>Frecuencia</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Frecuencia del procedimiento</mat-label>
+
+        <textarea matInput placeholder="Definición" minlength="3" maxlength="1200" required
+            formControlName="frequency"></textarea>
+
+        <div *ngIf="form.get('frequency').invalid && form.get('frequency').dirty">
+            <small *ngIf="form.get('frequency').hasError('required')">
+                Debe ingresar una frequencia para el procedimiento
+            </small>
+            <small *ngIf="form.get('frequency').hasError('minlength')">
+                Debe ingresar mínimo 3 caracteres
+            </small>
+            <small *ngIf="form.get('frequency').hasError('maxlength')">
+                Debe ingresar máximo 1.200 caracteres
+            </small>
+        </div>
+    </mat-form-field>
+
+    <h3>Responsable</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Escribe el nombre del procedimiento</mat-label>
+
+        <textarea matInput placeholder="responsible" minlength="3" maxlength="1200" required
+            formControlName="responsible"></textarea>
+
+        <div *ngIf="form.get('responsible').invalid && form.get('responsible').dirty">
+            <small *ngIf="form.get('responsible').hasError('required')">
+                Debe ingresar una definición para el glosario
+            </small>
+            <small *ngIf="form.get('responsible').hasError('minlength')">
+                Debe ingresar mínimo 3 caracteres
+            </small>
+            <small *ngIf="form.get('responsible').hasError('maxlength')">
+                Debe ingresar máximo 1.200 caracteres
+            </small>
+        </div>
+    </mat-form-field>
+
+    <h3>Observaciones</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Escribe las observaciones del procedimiento</mat-label>
+
+        <textarea matInput placeholder="Observaciones del procedimiento" minlength="3" maxlength="1200" required
+            formControlName="observations"></textarea>
+
+        <div *ngIf="form.get('observations').invalid && form.get('observations').dirty">
+            <small *ngIf="form.get('observations').hasError('required')">
+                Debe ingresar una definición para el glosario
+            </small>
+            <small *ngIf="form.get('observations').hasError('minlength')">
+                Debe ingresar mínimo 3 caracteres
+            </small>
+            <small *ngIf="form.get('observations').hasError('maxlength')">
+                Debe ingresar máximo 1.200 caracteres
+            </small>
+        </div>
+    </mat-form-field>
+    <div>
+        <h2>Programas</h2>
+        <div formArrayName="lstProcedureByProgram" class="example-full-width">
+            <div *ngFor="let control of procedureByPrograms.controls; let i = index" [formGroupName]="i">
+
+                <mat-form-field>
+                    <mat-label>Seleccione un programa</mat-label>
+
+                    <input matInput placeholder="Seleccione un programa" formControlName="program" required
+                        [matAutocomplete]="autoProgram">
+
+                    <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+                        <mat-option *ngFor="let p of program" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                        (click)="removeProcedureByProgram(i)">Quitar</button>
+                </mat-form-field>
+
+            </div>
+            <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                (click)="addProcedureByProgram()">Agregar programas</button>
+        </div>
+    </div>
+
+
+    <div>
+        <div>
+            <h2>Tipos de empresas</h2>
+            <div formArrayName="lstProcedureByCompanyType" class="example-full-width">
+                <div *ngFor="let control of procedureByCompanyTypes.controls; let i = index" [formGroupName]="i">
+
+                    <mat-form-field appearance="fill">
+
+                        <mat-label>Seleccione un tipo de empresa</mat-label>
+                        <input matInput placeholder="Seleccione el tipo de empresa" required
+                            formControlName="companyType" [matAutocomplete]="autoCompanyType">
+
+                        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+                            <mat-option *ngFor="let c of companyType" [value]="c">
+                                {{ c.nameCompanyType}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                            (click)="removeProcedureByCompanyType(i)">Quitar</button>
+                    </mat-form-field>
+                </div>
+                <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                    (click)="addProcedureByCompanyType()">Agregar tipo de empresa</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProcedure.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/procedure">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

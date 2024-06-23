@@ -23,7 +23,67 @@
         </div>
     </mat-form-field>
 
+    <div>
+        <h2>Programas</h2>
+        <div formArrayName="lstScopeByProgram" class="example-full-width">
+            <div *ngFor="let control of scopeByPrograms.controls; let i = index" [formGroupName]="i">
 
+                <mat-form-field>
+                    <mat-label>Seleccione un programa</mat-label>
+
+                    <input matInput placeholder="Seleccione un programa" formControlName="program" required
+                        [matAutocomplete]="autoProgram">
+
+                    <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+                        <mat-option *ngFor="let p of program" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                        (click)="removeScopeByProgram(i)">Quitar</button>
+                </mat-form-field>
+
+            </div>
+            <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                (click)="addScopeByProgram()">Agregar programas</button>
+        </div>
+    </div>
+
+
+    <div>
+        <div>
+            <h2>Tipos de empresas</h2>
+            <div formArrayName="lstScopeByCompanyType" class="example-full-width">
+                <div *ngFor="let control of scopeByCompanyTypes.controls; let i = index" [formGroupName]="i">
+
+                    <mat-form-field appearance="fill">
+
+                        <mat-label>Seleccione un tipo de empresa</mat-label>
+                        <input matInput placeholder="Seleccione el tipo de empresa" required
+                            formControlName="companyType" [matAutocomplete]="autoCompanyType">
+
+                        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+                            <mat-option *ngFor="let c of companyType" [value]="c">
+                                {{ c.nameCompanyType}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                            (click)="removeScopeByCompanyType(i)">Quitar</button>
+                    </mat-form-field>
+                </div>
+                <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                    (click)="addScopeByCompanyType()">Agregar tipo de empresa</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameScope.invalid">
         <mat-icon>done</mat-icon>
         <span>Done</span>

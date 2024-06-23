@@ -9,6 +9,7 @@ import { GenericService } from './generic.service';
   providedIn: 'root'
 })
 export class GeneralGoalByProgramService extends GenericService<GeneralGoalByProgram>{
+ 
   listIdGeneralGoal(idGeneralGoal: any): any {
     throw new Error('Method not implemented.');
   }

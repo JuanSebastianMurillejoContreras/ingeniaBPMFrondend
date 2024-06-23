@@ -60,6 +60,69 @@
 
     </mat-form-field>
 
+
+
+    <div>
+        <h2>Programas</h2>
+        <div formArrayName="lstTheoreticalFrameworkByProgram" class="example-full-width">
+            <div *ngFor="let control of theoreticalFrameworkByPrograms.controls; let i = index" [formGroupName]="i">
+
+                <mat-form-field>
+                    <mat-label>Seleccione un programa</mat-label>
+
+                    <input matInput placeholder="Seleccione un programa" formControlName="program" required
+                        [matAutocomplete]="autoProgram">
+
+                    <mat-autocomplete #autoProgram="matAutocomplete" [displayWith]="showProgram">
+                        <mat-option *ngFor="let p of program" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                        (click)="removeTheoreticalFrameworkByProgram(i)">Quitar</button>
+                </mat-form-field>
+
+            </div>
+            <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                (click)="addTheoreticalFrameworkByProgram()">Agregar programas</button>
+        </div>
+    </div>
+
+
+    <div>
+        <div>
+            <h2>Tipos de empresas</h2>
+            <div formArrayName="lstTheoreticalFrameworkByCompanyType" class="example-full-width">
+                <div *ngFor="let control of theoreticalFrameworkByCompanyTypes.controls; let i = index" [formGroupName]="i">
+
+                    <mat-form-field appearance="fill">
+
+                        <mat-label>Seleccione un tipo de empresa</mat-label>
+                        <input matInput placeholder="Seleccione el tipo de empresa" required
+                            formControlName="companyType" [matAutocomplete]="autoCompanyType">
+
+                        <mat-autocomplete #autoCompanyType="matAutocomplete" [displayWith]="showCompanyType">
+                            <mat-option *ngFor="let c of companyType" [value]="c">
+                                {{ c.nameCompanyType}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                            (click)="removeTheoreticalFrameworkByCompanyType(i)">Quitar</button>
+                    </mat-form-field>
+                </div>
+                <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                    (click)="addTheoreticalFrameworkByCompanyType()">Agregar tipo de empresa</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameTheoreticalFramework.invalid">
         <mat-icon>done</mat-icon>
         <span>Done</span>

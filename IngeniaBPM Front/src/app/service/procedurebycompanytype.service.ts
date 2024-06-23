@@ -8,7 +8,11 @@ import { ProcedureByCompanyType } from '../model/ProcedureByCompanyType';
 @Injectable({
   providedIn: 'root'
 })
-export class ProcedurebycompanytypeService extends GenericService<ProcedureByCompanyType>{
+export class ProcedureByCompanyTypeService extends GenericService<ProcedureByCompanyType>{
+  
+  listIdProcedure(idProcedure: any): any {
+    throw new Error('Method not implemented.');
+  }
 
   private examChange: Subject<ProcedureByCompanyType[]> = new Subject<ProcedureByCompanyType[]>;
   private messageChange: Subject<string> = new Subject<string>;
