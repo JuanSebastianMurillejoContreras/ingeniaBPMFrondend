@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Procedure } from '../model/procedure';
+import { Procedure } from '../model/Procedure';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';

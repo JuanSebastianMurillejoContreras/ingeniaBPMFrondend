@@ -1,27 +1,31 @@
-import { Injectable } from '@angular/core';
-import { ScopeByCompanyType } from '../model/ScopeByCompanyType';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { VariableByProcedure } from '../model/variable';
 import { GenericService } from './generic.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScopeByCompanyTypeService  extends GenericService<ScopeByCompanyType>{
+export class VariableByProcedureService extends GenericService<VariableByProcedure>{
+  
+  listIdProcedure(idProcedure: any): any {
+    throw new Error('Method not implemented.');
+  }
 
-  private examChange: Subject<ScopeByCompanyType[]> = new Subject<ScopeByCompanyType[]>;
+  private examChange: Subject<VariableByProcedure[]> = new Subject<VariableByProcedure[]>;
   private messageChange: Subject<string> = new Subject<string>;
 
   constructor(protected override http: HttpClient) {
-    super(http, `${environment.HOST}/scopebycompanytypes`);
+    super(http, `${environment.HOST}/variablebyprocedures`);
   }
 
-  setScopeChange(data: ScopeByCompanyType[]){
+  setVariableByProcedureChange(data: VariableByProcedure[]){
     this.examChange.next(data);
   }
 
-  getScopeChange(){
+  getVariableByProcedureChange(){
     return this.examChange.asObservable();
   }
 

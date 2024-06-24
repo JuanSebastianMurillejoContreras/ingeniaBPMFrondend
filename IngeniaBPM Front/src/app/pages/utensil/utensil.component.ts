@@ -6,63 +6,61 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Procedure } from 'src/app/model/Procedure';
-import { ProcedureService } from 'src/app/service/procedure.service';
+import { Utensil } from 'src/app/model/Utensil';
+import { UtensilService } from 'src/app/service/utensil.service';
 
 @Component({
+  selector: 'app-utensil',
   standalone: true,
-  selector: 'app-procedure',
-  templateUrl: './procedure.component.html',
-  styleUrls: ['./procedure.component.css'],
+  templateUrl: './utensil.component.html',
+  styleUrls: ['./utensil.component.css'],
   imports:[MaterialModule, RouterLink, RouterOutlet]
 })
-export class ProcedureComponent  implements OnInit{
+export class UtensilComponent implements OnInit {
 
-  displayedColumns: string[] = ['idProcedure', 'code', 'name','actions'];
-  dataSource: MatTableDataSource<Procedure>;
+  displayedColumns: string[] = ['idUtensil', 'utensilName', 'actions'];
+  dataSource: MatTableDataSource<Utensil>;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
 
   constructor(
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private procedure: ProcedureService,
+    private utensilService: UtensilService
   ) { }
 
   ngOnInit(): void {
-    this.procedure.getProcedureChange().subscribe(data => {
+    this.utensilService.getUtensilChange().subscribe(data => {
       this.createTable(data);
     });
 
-    this.procedure.getMessageChange().subscribe(data => {
+    this.utensilService.getMessageChange().subscribe(data => {
       this.snackBar.open(data, 'INFO', { duration: 2500, verticalPosition: "bottom", horizontalPosition: "right" });
     });
 
-    this.procedure.findAll().subscribe(data => {
+    this.utensilService.findAll().subscribe(data => {
       this.createTable(data);
     });
- 
   }
-
 
   applyFilter(e: any) {
     this.dataSource.filter = e.target.value.trim().toLowerCase();
   }
 
-  delete(idProcedure: number){
-    this.procedure.delete(idProcedure).pipe(switchMap( ()=> {
-      return this.procedure.findAll();
+  delete(idCompanyType: number){
+    this.utensilService.delete(idCompanyType).pipe(switchMap( ()=> {
+      return this.utensilService.findAll();
     }))
     .subscribe(data => {
-      this.procedure.setProcedureChange(data);
-      this.procedure.setMessageChange('DELETED!');
+      this.utensilService.setUtensilChange(data);
+      this.utensilService.setMessageChange('DELETED!');
     })
     ;
   }
 
-  createTable(procedure: Procedure[]){
-    this.dataSource = new MatTableDataSource(procedure);    
+  createTable(utensil: Utensil[]){
+    this.dataSource = new MatTableDataSource(utensil);    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;        
   }
@@ -70,4 +68,6 @@ export class ProcedureComponent  implements OnInit{
   checkChildren(): boolean{
     return this.route.children.length > 0;
   }
+
 }
+

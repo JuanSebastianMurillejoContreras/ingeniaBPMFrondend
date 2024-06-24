@@ -6,63 +6,61 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { MaterialModule } from 'src/app/material/material.module';
-import { Procedure } from 'src/app/model/Procedure';
-import { ProcedureService } from 'src/app/service/procedure.service';
+import { Variable } from 'src/app/model/variable';
+import { VariableService } from 'src/app/service/variable.service';
 
 @Component({
+  selector: 'app-variable',
   standalone: true,
-  selector: 'app-procedure',
-  templateUrl: './procedure.component.html',
-  styleUrls: ['./procedure.component.css'],
+  templateUrl: './variable.component.html',
+  styleUrls: ['./variable.component.css'],
   imports:[MaterialModule, RouterLink, RouterOutlet]
 })
-export class ProcedureComponent  implements OnInit{
+export class VariableComponent implements OnInit {
 
-  displayedColumns: string[] = ['idProcedure', 'code', 'name','actions'];
-  dataSource: MatTableDataSource<Procedure>;
+  displayedColumns: string[] = ['idVariable', 'variableName', 'actions'];
+  dataSource: MatTableDataSource<Variable>;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
 
   constructor(
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private procedure: ProcedureService,
+    private variableService: VariableService
   ) { }
 
   ngOnInit(): void {
-    this.procedure.getProcedureChange().subscribe(data => {
+    this.variableService.getVariableChange().subscribe(data => {
       this.createTable(data);
     });
 
-    this.procedure.getMessageChange().subscribe(data => {
+    this.variableService.getMessageChange().subscribe(data => {
       this.snackBar.open(data, 'INFO', { duration: 2500, verticalPosition: "bottom", horizontalPosition: "right" });
     });
 
-    this.procedure.findAll().subscribe(data => {
+    this.variableService.findAll().subscribe(data => {
       this.createTable(data);
     });
- 
   }
-
 
   applyFilter(e: any) {
     this.dataSource.filter = e.target.value.trim().toLowerCase();
   }
 
-  delete(idProcedure: number){
-    this.procedure.delete(idProcedure).pipe(switchMap( ()=> {
-      return this.procedure.findAll();
+  delete(idCompanyType: number){
+    this.variableService.delete(idCompanyType).pipe(switchMap( ()=> {
+      return this.variableService.findAll();
     }))
     .subscribe(data => {
-      this.procedure.setProcedureChange(data);
-      this.procedure.setMessageChange('DELETED!');
+      this.variableService.setVariableChange(data);
+      this.variableService.setMessageChange('DELETED!');
     })
     ;
   }
 
-  createTable(procedure: Procedure[]){
-    this.dataSource = new MatTableDataSource(procedure);    
+  createTable(variable: Variable[]){
+    this.dataSource = new MatTableDataSource(variable);    
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;        
   }
@@ -70,4 +68,6 @@ export class ProcedureComponent  implements OnInit{
   checkChildren(): boolean{
     return this.route.children.length > 0;
   }
+
 }
+

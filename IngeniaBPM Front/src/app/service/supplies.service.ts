@@ -1,28 +1,35 @@
-import { Injectable } from '@angular/core';
-import { ScopeByCompanyType } from '../model/ScopeByCompanyType';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { Supplies } from '../model/Supplies';
 import { GenericService } from './generic.service';
+import { SuppliesByProcedureService } from './supplies-by-procedure.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScopeByCompanyTypeService  extends GenericService<ScopeByCompanyType>{
+export class SuppliesService extends GenericService<Supplies>{
 
-  private examChange: Subject<ScopeByCompanyType[]> = new Subject<ScopeByCompanyType[]>;
+  private examChange: Subject<Supplies[]> = new Subject<Supplies[]>;
   private messageChange: Subject<string> = new Subject<string>;
+  private suppliesByProcedureService: SuppliesByProcedureService;
+
 
   constructor(protected override http: HttpClient) {
-    super(http, `${environment.HOST}/scopebycompanytypes`);
+    super(http, `${environment.HOST}/supplies`);
   }
 
-  setScopeChange(data: ScopeByCompanyType[]){
+  setSuppliesChange(data: Supplies[]){
     this.examChange.next(data);
   }
 
-  getScopeChange(){
+  getSuppliesChange(){
     return this.examChange.asObservable();
+  }
+
+  removeSuppliesByProgram(id: number): any {
+    return this.suppliesByProcedureService.delete(id);
   }
 
   setMessageChange(data: string){
@@ -32,5 +39,4 @@ export class ScopeByCompanyTypeService  extends GenericService<ScopeByCompanyTyp
   getMessageChange(){
     return this.messageChange.asObservable();
   }
-  
 }

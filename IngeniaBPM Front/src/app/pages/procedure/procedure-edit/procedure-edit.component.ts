@@ -7,7 +7,7 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { ProcedureByCompanyType } from 'src/app/model/ProcedureByCompanyType';
 import { CompanyType } from 'src/app/model/companyType';
 import { GeneralGoalByCompanyType } from 'src/app/model/generalGoal';
-import { Procedure, ProcedureByProgram } from 'src/app/model/procedure';
+import { Procedure, ProcedureByProgram } from 'src/app/model/Procedure';
 import { Program } from 'src/app/model/program';
 import { CompanyTypeService } from 'src/app/service/companyType.service';
 import { ProcedureService } from 'src/app/service/procedure.service';

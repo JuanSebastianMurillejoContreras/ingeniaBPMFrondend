@@ -1,0 +1,63 @@
+<form class="example-container" [formGroup]="form" #frmnameSupplies="ngForm" (submit)="operate()">
+
+    <div>
+        <h1>Alcance</h1>
+        <h2>Formulario de registro</h2>
+    </div>
+
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idSupplies">
+        </mat-form-field>
+    </div>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Escribe la Supplies</mat-label>
+
+        <textarea matInput placeholder="Supplies" required  formControlName="suppliesName"></textarea>
+
+        <div *ngIf="form.get('suppliesName').invalid && form.get('suppliesName').dirty">
+            <small *ngIf="form.get('suppliesName').hasError('required')">
+                Debe ingresar la supplies. 
+            </small>
+        </div>
+    </mat-form-field>
+
+    <div>
+        <h2>Procedimiento</h2>
+        <div formArrayName="lstSuppliesByProcedure" class="example-full-width">
+            <div *ngFor="let control of suppliesByProcedures.controls; let i = index" [formGroupName]="i">
+
+                <mat-form-field>
+                    <mat-label>Seleccione un procedimiento</mat-label>
+
+                    <input matInput placeholder="Seleccione un procedimiento" formControlName="procedure" required
+                        [matAutocomplete]="autoProcedure">
+
+                    <mat-autocomplete #autoProcedure="matAutocomplete" [displayWith]="showProcedure">
+                        <mat-option *ngFor="let p of procedure" [value]="p">
+                            {{ p.name }}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                    <button class="button-spacing" mat-raised-button color="accent" style="float: right"
+                        (click)="removeSuppliesByProcedure(i)">Quitar</button>
+                </mat-form-field>
+
+            </div>
+            <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
+                (click)="addSuppliesByProcedure()">Agregar programas</button>
+        </div>
+    </div>
+
+    
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameSupplies.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/supplies">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+</form>

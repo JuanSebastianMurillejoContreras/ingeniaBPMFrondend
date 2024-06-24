@@ -19,6 +19,12 @@ import { ScopeEditComponent } from './scope/scope-edit/scope-edit.component';
 import { ProgrambycompanyEditComponent } from './programbycompany/programbycompany-edit/programbycompany-edit.component';
 import { ProcedureComponent } from './procedure/procedure.component';
 import { ProcedureEditComponent } from './procedure/procedure-edit/procedure-edit.component';
+import { VariableComponent } from './variable/variable.component';
+import { VariableEditComponent } from './variable/variable-edit/variable-edit.component';
+import { UtensilComponent } from './utensil/utensil.component';
+import { UtensilEditComponent } from './utensil/utensil-edit/utensil-edit.component';
+import { SuppliesComponent } from './supplies/supplies.component';
+import { SuppliesEditComponent } from './supplies/supplies-edit/supplies-edit.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -167,6 +173,54 @@ export const PagesRoutes: Routes = [
       },
     ],
   },
+  
+  {
+    path: 'variable',
+    component: VariableComponent,
+    children: [
+      {
+        path: 'new',
+        component: VariableEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: VariableEditComponent,
+      },
+    ],
+  },
+
+  {
+    path: 'utensil',
+    component: UtensilComponent,
+    children: [
+      {
+        path: 'new',
+        component: UtensilEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: UtensilEditComponent,
+      },
+    ],
+  },
+
+  {
+    path: 'supplies',
+    component: SuppliesComponent,
+    children: [
+      {
+        path: 'new',
+        component: SuppliesEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: SuppliesEditComponent,
+      },
+    ],
+  },
+
+  
+
 
 
 ];

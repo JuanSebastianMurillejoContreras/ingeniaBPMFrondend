@@ -1,28 +1,35 @@
 import { Injectable } from '@angular/core';
-import { ScopeByCompanyType } from '../model/ScopeByCompanyType';
+import { VariableByProcedureService } from './variable-by-procedure.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { Variable } from '../model/variable';
 import { GenericService } from './generic.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScopeByCompanyTypeService  extends GenericService<ScopeByCompanyType>{
+export class VariableService extends GenericService<Variable>{
 
-  private examChange: Subject<ScopeByCompanyType[]> = new Subject<ScopeByCompanyType[]>;
+  private examChange: Subject<Variable[]> = new Subject<Variable[]>;
   private messageChange: Subject<string> = new Subject<string>;
+  private variableByProcedureService: VariableByProcedureService;
+
 
   constructor(protected override http: HttpClient) {
-    super(http, `${environment.HOST}/scopebycompanytypes`);
+    super(http, `${environment.HOST}/variables`);
   }
 
-  setScopeChange(data: ScopeByCompanyType[]){
+  setVariableChange(data: Variable[]){
     this.examChange.next(data);
   }
 
-  getScopeChange(){
+  getVariableChange(){
     return this.examChange.asObservable();
+  }
+
+  removeVariableByProgram(id: number): any {
+    return this.variableByProcedureService.delete(id);
   }
 
   setMessageChange(data: string){
@@ -32,5 +39,4 @@ export class ScopeByCompanyTypeService  extends GenericService<ScopeByCompanyTyp
   getMessageChange(){
     return this.messageChange.asObservable();
   }
-  
 }

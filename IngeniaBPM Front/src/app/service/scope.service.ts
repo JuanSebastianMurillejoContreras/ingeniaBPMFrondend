@@ -18,7 +18,6 @@ export class ScopeService extends GenericService<Scope>{
     super(http, `${environment.HOST}/scopes`);
   }
 
-
   setScopeChange(data: Scope[]){
     this.examChange.next(data);
   }
