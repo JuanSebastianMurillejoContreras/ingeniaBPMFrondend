@@ -7,7 +7,9 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { Procedure } from 'src/app/model/Procedure';
 import { Supplies } from 'src/app/model/Supplies';
 import { SuppliesByProcedure } from 'src/app/model/SuppliesByProcedure';
+
 import { ProcedureService } from 'src/app/service/procedure.service';
+import { SuppliesByProcedureService } from 'src/app/service/supplies-by-procedure.service';
 import { SuppliesService } from 'src/app/service/supplies.service';
 
 @Component({
@@ -39,14 +41,13 @@ export class SuppliesEditComponent implements OnInit {
     private router: Router,
     private suppliesService: SuppliesService,
     private procedureService: ProcedureService,
+    private suppliesByProcedureService: SuppliesByProcedureService
   ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       idSupplies: [0],
       suppliesName: ['', Validators.required],
-      referenceValue: ['', Validators.required],
-      expectedValue: ['', Validators.required],
       lstSuppliesByProcedure: this.fb.array([])
     });
 
@@ -85,19 +86,19 @@ export class SuppliesEditComponent implements OnInit {
       this.suppliesService.findById(this.id).subscribe(data => {
         this.form.patchValue({
           idSupplies: data.idSupplies,
-          suppliesName: data.suppliesName,
+          suppliesName: data.suppliesName
         });
         this.setSuppliesByProcedure(data.lstSuppliesByProcedure);
       });
     }
   }
 
-  setSuppliesByProcedure(suppliesByProcedure: SuppliesByProcedure[]) {
-    const lstsuppliesByProcedure = this.form.get('lstSuppliesByProcedure') as FormArray;
-    suppliesByProcedure.forEach(suppliesByProcedure => {
-      lstsuppliesByProcedure.push(this.fb.group({
-        idSuppliesByProcedure: [suppliesByProcedure.idSuppliesByProcedure],
-        procedure: [suppliesByProcedure.procedure, Validators.required]
+  setSuppliesByProcedure(s: SuppliesByProcedure[]) {
+    const lsts = this.form.get('lstSuppliesByProcedure') as FormArray;
+    s.forEach(procedure => {
+      lsts.push(this.fb.group({
+        idSuppliesByProcedure: [procedure.idSuppliesByProcedure],
+        procedure: [procedure.procedure, Validators.required]
       }));
     });
   }
@@ -114,9 +115,9 @@ export class SuppliesEditComponent implements OnInit {
   }
 
   removeSuppliesByProcedure(index: number) {
-    const suppliesByProcedure = this.suppliesByProcedures.at(index).value;
-    if (suppliesByProcedure.idSuppliesByProcedure) {
-      this.idsToDeletesuppliesBySuppliesService.push(suppliesByProcedure.idSuppliesByProcedure);
+    const s = this.suppliesByProcedures.at(index).value;
+    if (s.idSuppliesByProcedure) {
+      this.idsToDeletesuppliesBySuppliesService.push(s.idSuppliesByProcedure);
     }
     this.suppliesByProcedures.removeAt(index);
   }
@@ -126,7 +127,7 @@ export class SuppliesEditComponent implements OnInit {
       return of(null);
     }
     const deleteSuppliesByProcedure$ = this.idsToDeletesuppliesBySuppliesService.map(id =>
-      this.suppliesService.delete(id)
+      this.suppliesByProcedureService.delete(id)
     );
     return forkJoin(deleteSuppliesByProcedure$);
   }
@@ -164,11 +165,11 @@ export class SuppliesEditComponent implements OnInit {
     ]).pipe(
       switchMap(() => this.saveOrUpdateSupplies(supplies)),
     ).subscribe(() => {
-      this.navigateToGeneralGoalList();
+      this.navigateToSuppliesList();
     });
   }
 
-  navigateToGeneralGoalList() {
+  navigateToSuppliesList() {
     this.router.navigate(['/pages/supplies']);
   }
 

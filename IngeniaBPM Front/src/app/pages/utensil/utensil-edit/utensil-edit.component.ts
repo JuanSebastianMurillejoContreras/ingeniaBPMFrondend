@@ -7,7 +7,9 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { Procedure } from 'src/app/model/Procedure';
 import { Utensil } from 'src/app/model/Utensil';
 import { UtensilByProcedure } from 'src/app/model/UtensilByProcedure';
+
 import { ProcedureService } from 'src/app/service/procedure.service';
+import { UtensilByProcedureService } from 'src/app/service/utensil-by-procedure.service';
 import { UtensilService } from 'src/app/service/utensil.service';
 
 @Component({
@@ -24,7 +26,8 @@ export class UtensilEditComponent implements OnInit {
   isEdit: boolean;
   form: FormGroup;
 
-  idsToDeleteutensilByProcedureService: number[] = [];
+  idsToDeleteutensilByProgramService: number[] = [];
+  idsToDeleteutensilByUtensilService: number[] = [];
 
   procedure: Procedure[];
   procedureControl: FormControl = new FormControl();
@@ -38,14 +41,13 @@ export class UtensilEditComponent implements OnInit {
     private router: Router,
     private utensilService: UtensilService,
     private procedureService: ProcedureService,
+    private utensilByProcedureService: UtensilByProcedureService
   ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
       idUtensil: [0],
       utensilName: ['', Validators.required],
-      referenceValue: ['', Validators.required],
-      expectedValue: ['', Validators.required],
       lstUtensilByProcedure: this.fb.array([])
     });
 
@@ -91,12 +93,12 @@ export class UtensilEditComponent implements OnInit {
     }
   }
 
-  setUtensilByProcedure(utensilByProcedure: UtensilByProcedure[]) {
-    const lstutensilByProcedure = this.form.get('lstUtensilByProcedure') as FormArray;
-    utensilByProcedure.forEach(utensilByProcedure => {
-      lstutensilByProcedure.push(this.fb.group({
-        idUtensilByProcedure: [utensilByProcedure.idUtensilByProcedure],
-        procedure: [utensilByProcedure.procedure, Validators.required]
+  setUtensilByProcedure(s: UtensilByProcedure[]) {
+    const lsts = this.form.get('lstUtensilByProcedure') as FormArray;
+    s.forEach(procedure => {
+      lsts.push(this.fb.group({
+        idUtensilByProcedure: [procedure.idUtensilByProcedure],
+        procedure: [procedure.procedure, Validators.required]
       }));
     });
   }
@@ -113,19 +115,19 @@ export class UtensilEditComponent implements OnInit {
   }
 
   removeUtensilByProcedure(index: number) {
-    const utensilByProcedure = this.utensilByProcedures.at(index).value;
-    if (utensilByProcedure.idUtensilByProcedure) {
-      this.idsToDeleteutensilByProcedureService.push(utensilByProcedure.idUtensilByProcedure);
+    const s = this.utensilByProcedures.at(index).value;
+    if (s.idUtensilByProcedure) {
+      this.idsToDeleteutensilByUtensilService.push(s.idUtensilByProcedure);
     }
     this.utensilByProcedures.removeAt(index);
   }
 
   deleteUtensilByProcedure(): Observable<any> {
-    if (this.idsToDeleteutensilByProcedureService.length === 0) {
+    if (this.idsToDeleteutensilByUtensilService.length === 0) {
       return of(null);
     }
-    const deleteUtensilByProcedure$ = this.idsToDeleteutensilByProcedureService.map(id =>
-      this.utensilService.delete(id)
+    const deleteUtensilByProcedure$ = this.idsToDeleteutensilByUtensilService.map(id =>
+      this.utensilByProcedureService.delete(id)
     );
     return forkJoin(deleteUtensilByProcedure$);
   }
@@ -137,7 +139,7 @@ export class UtensilEditComponent implements OnInit {
         switchMap(() => this.utensilService.findAll()),
         tap(data => {
           this.utensilService.setUtensilChange(data);
-          this.utensilService.setMessageChange('Utensilio actualizada!');
+          this.utensilService.setMessageChange('Utensil actualizada!');
         })
       );
     } else {
@@ -145,7 +147,7 @@ export class UtensilEditComponent implements OnInit {
         switchMap(() => this.utensilService.findAll()),
         tap(data => {
           this.utensilService.setUtensilChange(data);
-          this.utensilService.setMessageChange('Utensilio creado!');
+          this.utensilService.setMessageChange('Utensil creado!');
         })
       );
     }
@@ -163,11 +165,11 @@ export class UtensilEditComponent implements OnInit {
     ]).pipe(
       switchMap(() => this.saveOrUpdateUtensil(utensil)),
     ).subscribe(() => {
-      this.navigateToGeneralGoalList();
+      this.navigateToUtensilList();
     });
   }
 
-  navigateToGeneralGoalList() {
+  navigateToUtensilList() {
     this.router.navigate(['/pages/utensil']);
   }
 

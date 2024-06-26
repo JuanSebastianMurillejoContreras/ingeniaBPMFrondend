@@ -8,6 +8,7 @@ import { Procedure } from 'src/app/model/Procedure';
 import { VariableByProcedure } from 'src/app/model/VariableByProcedure';
 import { Variable } from 'src/app/model/variable';
 import { ProcedureService } from 'src/app/service/procedure.service';
+import { VariableByProcedureService } from 'src/app/service/variable-by-procedure.service';
 import { VariableService } from 'src/app/service/variable.service';
 
 @Component({
@@ -39,6 +40,7 @@ export class VariableEditComponent implements OnInit {
     private router: Router,
     private variableService: VariableService,
     private procedureService: ProcedureService,
+    private variableByProcedureService: VariableByProcedureService
   ) { }
 
   ngOnInit(): void {
@@ -94,12 +96,12 @@ export class VariableEditComponent implements OnInit {
     }
   }
 
-  setVariableByProcedure(variableByProcedure: VariableByProcedure[]) {
-    const lstvariableByProcedure = this.form.get('lstVariableByProcedure') as FormArray;
-    variableByProcedure.forEach(variableByProcedure => {
-      lstvariableByProcedure.push(this.fb.group({
-        idVariableByProcedure: [variableByProcedure.idVariableByProcedure],
-        procedure: [variableByProcedure.procedure, Validators.required]
+  setVariableByProcedure(s: VariableByProcedure[]) {
+    const lsts = this.form.get('lstVariableByProcedure') as FormArray;
+    s.forEach(procedure => {
+      lsts.push(this.fb.group({
+        idVariableByProcedure: [procedure.idVariableByProcedure],
+        procedure: [procedure.procedure, Validators.required]
       }));
     });
   }
@@ -116,9 +118,9 @@ export class VariableEditComponent implements OnInit {
   }
 
   removeVariableByProcedure(index: number) {
-    const variableByProcedure = this.variableByProcedures.at(index).value;
-    if (variableByProcedure.idVariableByProcedure) {
-      this.idsToDeletevariableByVariableService.push(variableByProcedure.idVariableByProcedure);
+    const s = this.variableByProcedures.at(index).value;
+    if (s.idVariableByProcedure) {
+      this.idsToDeletevariableByVariableService.push(s.idVariableByProcedure);
     }
     this.variableByProcedures.removeAt(index);
   }
@@ -128,7 +130,7 @@ export class VariableEditComponent implements OnInit {
       return of(null);
     }
     const deleteVariableByProcedure$ = this.idsToDeletevariableByVariableService.map(id =>
-      this.variableService.delete(id)
+      this.variableByProcedureService.delete(id)
     );
     return forkJoin(deleteVariableByProcedure$);
   }
@@ -166,11 +168,11 @@ export class VariableEditComponent implements OnInit {
     ]).pipe(
       switchMap(() => this.saveOrUpdateVariable(variable)),
     ).subscribe(() => {
-      this.navigateToGeneralGoalList();
+      this.navigateToVariableList();
     });
   }
 
-  navigateToGeneralGoalList() {
+  navigateToVariableList() {
     this.router.navigate(['/pages/variable']);
   }
 
