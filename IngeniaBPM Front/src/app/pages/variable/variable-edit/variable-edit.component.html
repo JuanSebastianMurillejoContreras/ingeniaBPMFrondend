@@ -12,7 +12,7 @@
     </div>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Escribe la Variable</mat-label>
+        <mat-label>Nombre de la variable</mat-label>
 
         <textarea matInput placeholder="Variable" required  formControlName="variableName"></textarea>
 
@@ -24,19 +24,20 @@
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Valor de referencia</mat-label>
-
-        <textarea matInput placeholder="Valor de referencia" required  formControlName="referenceValue"></textarea>
+        <mat-label>Valor de referencia a tener en cuenta en la medición</mat-label>
+       
+        <textarea matInput placeholder="Valor de referencia a tener en cuenta en la medición" required  formControlName="referenceValue"></textarea>
 
         <div *ngIf="form.get('referenceValue').invalid && form.get('referenceValue').dirty">
             <small *ngIf="form.get('referenceValue').hasError('required')">
                 Debe ingresar el valor de referencia de la variable. 
             </small>
         </div>
+        <span>El resultado debe estar acorde a la variable</span>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-        <mat-label>Valor de referencia</mat-label>
+        <mat-label>Valor esperado o rango</mat-label>
 
         <textarea matInput placeholder="Valor esperado" required  formControlName="expectedValue"></textarea>
 
@@ -71,7 +72,7 @@
 
             </div>
             <button class="button-spacing" mat-raised-button color="primary" type="button" style="float: left"
-                (click)="addVariableByProcedure()">Agregar programas</button>
+                (click)="addVariableByProcedure()">Agregar procedimientos</button>
         </div>
     </div>
 
