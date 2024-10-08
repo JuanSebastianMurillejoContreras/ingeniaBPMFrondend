@@ -209,6 +209,17 @@
                             <!--  <mat-icon class="icon-menu">extensions</mat-icon>--->
                         </mat-panel-title>
                     </mat-expansion-panel-header>
+
+                    <button class="myButton" [routerLinkActive]="['active']" mat-menu-item (click)="sidenav.toggle()"
+                        routerLink="/pages/procedure" style="cursor: pointer">
+                        <mat-icon class="icon-menu">
+                            <img src="assets/icons/monitoring.png" width="20" height="20">
+                        </mat-icon>
+                        <span>3.1 Ejecución Procedimiento</span>
+                    </button>
+
+                    <mat-divider></mat-divider>
+
                     <mat-divider></mat-divider>
 
                 </mat-expansion-panel>

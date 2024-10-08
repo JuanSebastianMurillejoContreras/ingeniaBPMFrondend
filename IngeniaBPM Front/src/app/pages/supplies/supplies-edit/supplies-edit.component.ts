@@ -7,7 +7,6 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { Procedure } from 'src/app/model/Procedure';
 import { Supplies } from 'src/app/model/Supplies';
 import { SuppliesByProcedure } from 'src/app/model/SuppliesByProcedure';
-
 import { ProcedureService } from 'src/app/service/procedure.service';
 import { SuppliesByProcedureService } from 'src/app/service/supplies-by-procedure.service';
 import { SuppliesService } from 'src/app/service/supplies.service';
@@ -18,8 +17,8 @@ import { SuppliesService } from 'src/app/service/supplies.service';
   templateUrl: './supplies-edit.component.html',
   styleUrls: ['./supplies-edit.component.css'],
   imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
-
-})
+}
+)
 export class SuppliesEditComponent implements OnInit {
 
   id: number;

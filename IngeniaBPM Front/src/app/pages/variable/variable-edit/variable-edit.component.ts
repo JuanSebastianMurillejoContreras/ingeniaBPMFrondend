@@ -48,7 +48,7 @@ export class VariableEditComponent implements OnInit {
       idVariable: [0],
       variableName: ['', Validators.required],
       referenceValue: ['', Validators.required],
-      expectedValue: ['', Validators.required],
+      expectedValue:  ['', Validators.required],
       lstVariableByProcedure: this.fb.array([])
     });
 
@@ -89,9 +89,10 @@ export class VariableEditComponent implements OnInit {
           idVariable: data.idVariable,
           variableName: data.variableName,
           referenceValue: data.referenceValue,
-          expectedValue: data.expectedValue,
+          expectedValue: data.expectedValue
         });
         this.setVariableByProcedure(data.lstVariableByProcedure);
+        console.log(data);
       });
     }
   }
@@ -142,7 +143,7 @@ export class VariableEditComponent implements OnInit {
         switchMap(() => this.variableService.findAll()),
         tap(data => {
           this.variableService.setVariableChange(data);
-          this.variableService.setMessageChange('Variable actualizada!');
+          this.variableService.setMessageChange('Variableio actualizada!');
         })
       );
     } else {
@@ -150,7 +151,7 @@ export class VariableEditComponent implements OnInit {
         switchMap(() => this.variableService.findAll()),
         tap(data => {
           this.variableService.setVariableChange(data);
-          this.variableService.setMessageChange('Variable creado!');
+          this.variableService.setMessageChange('Variable creada!');
         })
       );
     }

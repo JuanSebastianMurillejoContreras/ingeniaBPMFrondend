@@ -7,7 +7,6 @@ import { MaterialModule } from 'src/app/material/material.module';
 import { Procedure } from 'src/app/model/Procedure';
 import { Utensil } from 'src/app/model/Utensil';
 import { UtensilByProcedure } from 'src/app/model/UtensilByProcedure';
-
 import { ProcedureService } from 'src/app/service/procedure.service';
 import { UtensilByProcedureService } from 'src/app/service/utensil-by-procedure.service';
 import { UtensilService } from 'src/app/service/utensil.service';
@@ -89,6 +88,7 @@ export class UtensilEditComponent implements OnInit {
           utensilName: data.utensilName
         });
         this.setUtensilByProcedure(data.lstUtensilByProcedure);
+        console.log(data);
       });
     }
   }
@@ -139,7 +139,7 @@ export class UtensilEditComponent implements OnInit {
         switchMap(() => this.utensilService.findAll()),
         tap(data => {
           this.utensilService.setUtensilChange(data);
-          this.utensilService.setMessageChange('Utensil actualizada!');
+          this.utensilService.setMessageChange('Utensilio actualizada!');
         })
       );
     } else {
@@ -147,7 +147,7 @@ export class UtensilEditComponent implements OnInit {
         switchMap(() => this.utensilService.findAll()),
         tap(data => {
           this.utensilService.setUtensilChange(data);
-          this.utensilService.setMessageChange('Utensil creado!');
+          this.utensilService.setMessageChange('Utensilio creado!');
         })
       );
     }

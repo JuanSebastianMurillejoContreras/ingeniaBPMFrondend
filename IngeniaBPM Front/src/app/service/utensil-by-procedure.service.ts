@@ -21,7 +21,6 @@ export class UtensilByProcedureService extends GenericService<UtensilByProcedure
     super(http, `${environment.HOST}/utensilbyprocedures`);
   }
 
-
   setUtensilByProcedureChange(data: UtensilByProcedure[]){
     this.examChange.next(data);
   }
