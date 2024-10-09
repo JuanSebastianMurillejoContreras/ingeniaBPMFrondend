@@ -25,6 +25,8 @@ import { UtensilComponent } from './utensil/utensil.component';
 import { UtensilEditComponent } from './utensil/utensil-edit/utensil-edit.component';
 import { SuppliesComponent } from './supplies/supplies.component';
 import { SuppliesEditComponent } from './supplies/supplies-edit/supplies-edit.component';
+import { ProcedureExecutionComponent } from './procedureexecution/procedureexecution.component';
+import { ProcedureexecutionEditComponent } from './procedureexecution/procedureexecution-edit/procedureexecution-edit.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -218,7 +220,21 @@ export const PagesRoutes: Routes = [
       },
     ],
   },
-
+  {
+    path: 'procedureexecution',
+    component: ProcedureExecutionComponent,
+    children: [
+      {
+        path: 'new',
+        component: ProcedureexecutionEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ProcedureexecutionEditComponent,
+      },
+    ],
+  },
+  
   
 
 

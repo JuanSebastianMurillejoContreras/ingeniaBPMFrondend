@@ -1,0 +1,51 @@
+<form class="example-container" [formGroup]="form" #frmnameProcedureExecution="ngForm" (submit)="operate()">
+    <div>
+        <h1>Ejecucion del procedimiento</h1>
+        <h2>Formulario de registro</h2>
+    </div>
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idProcedureExecution">
+        </mat-form-field>
+    </div>
+
+
+    <!-- PROCEDIMIENTO -->
+    <h3>Selecione el procedimiento</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione el procedimiento" required formControlName="procedure"
+            [matAutocomplete]="autoProcedure">
+        <mat-error
+            *ngIf="form.get('procedure').invalid && (form.get('procedure').touched || form.get('procedure').dirty)">
+            <span *ngIf="form.get('procedure').hasError('required')">
+                Debe seleccionar un tipo de empresa
+            </span>
+        </mat-error>
+
+        <mat-autocomplete #autoProcedure="matAutocomplete" [displayWith]="showProcedure">
+            <mat-option *ngFor="let p of procedureFiltered$ | async" [value]="p">
+                {{p.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    
+
+    <h3>Descripción</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Escribe las observaciones para la ejecución del procedimiento </mat-label>
+        <textarea matInput placeholder="Descripción" required
+            formControlName="executionDescription"></textarea>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProcedureExecution.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/procedureexecution">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+
+</form>
