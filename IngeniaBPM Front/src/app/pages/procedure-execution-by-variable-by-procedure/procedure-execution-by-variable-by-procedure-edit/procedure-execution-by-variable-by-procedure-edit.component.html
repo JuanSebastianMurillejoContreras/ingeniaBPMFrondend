@@ -1,0 +1,60 @@
+<router-outlet></router-outlet>
+<form class="example-container" [formGroup]="form" #frmnameProcedureExecution="ngForm" (submit)="operate()">
+    <div>
+        <h1>Registro de la variable</h1>
+        <h2>Formulario de registro</h2>
+    </div>
+    <div [hidden]="true">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="ID" required formControlName="idProcedureExecutionByVariableByProcedure">
+        </mat-form-field>
+    </div>
+
+    <!-- PROCEDIMIENTO -->
+    <h3>Procedimiento</h3>
+    <mat-form-field>
+        <input matInput placeholder="Seleccione el procedimiento" required formControlName="variableByProcedure"
+            [matAutocomplete]="autoProcedure">
+        <mat-error
+            *ngIf="form.get('variableByProcedure').invalid && (form.get('variableByProcedure').touched || form.get('procedureExecution').dirty)">
+            <span *ngIf="form.get('variableByProcedure').hasError('required')">
+                Debe seleccionar un procedimiento
+            </span>
+        </mat-error>
+
+        <mat-autocomplete #autoProcedure="matAutocomplete" [displayWith]="showProcedureExecutionByVariableByProcedure">
+            <mat-option *ngFor="let p of procedureExecutionByVariableByProcedureFiltered$ | async" [value]="p">
+                {{p.procedureExecution}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- VARIABLE -->
+    <h3>Variable</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Escribe las observaciones para la ejecución del procedimiento </mat-label>
+        <textarea matInput placeholder="Descripción" required
+            formControlName="variableByProcedure"></textarea>
+    </mat-form-field>
+    
+
+    <h3>Valor registrado</h3>
+    <mat-form-field class="example-full-width, invalid">
+        <mat-label>Escribe las observaciones para la ejecución del procedimiento </mat-label>
+        <textarea matInput placeholder="Descripción" required
+            formControlName="registeredValue"></textarea>
+    </mat-form-field>
+    
+       
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProcedureExecution.invalid">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+    </button>
+
+    <button mat-raised-button color="accent" type="button" routerLink="/pages/procedureexecutionbyvariable">
+        <mat-icon>cancel</mat-icon>
+        <span>Cancel</span>
+    </button>
+
+</form>

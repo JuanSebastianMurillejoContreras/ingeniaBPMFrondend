@@ -36,8 +36,38 @@
         <textarea matInput placeholder="Descripción" required
             formControlName="executionDescription"></textarea>
     </mat-form-field>
+    
 
+    <div>
+        <h2>Configurar</h2>
 
+        <button mat-raised-button color="warm" type="button" routerLink="/pages/procedureexecutionbyvariable" style="cursor: pointer">
+            <mat-icon class="icon-menu">
+                <img src="assets/icons/variable.png" width="20" height="20">
+            </mat-icon>
+            <span>Variable</span>
+        </button>
+            
+        <button mat-raised-button color="warm" type="button" routerLink="/pages/procedureexecutionbyutensil" style="cursor: pointer">
+            <mat-icon class="icon-menu">
+                <img src="assets/icons/element.png" width="20" height="20">
+            </mat-icon>
+            <span>Elemento</span>
+        </button> 
+    
+            
+        <button mat-raised-button color="warm" type="button" routerLink="/pages/procedureexecutionbysupplies" style="cursor: pointer">
+            <mat-icon class="icon-menu">
+                <img src="assets/icons/consumer.png" width="20" height="20">
+            </mat-icon>
+            <span>Insumo</span>
+        </button> 
+    
+    </div>
+   
+    
+<p></p>
+    
     <button mat-raised-button color="primary" type="submit" [disabled]="frmnameProcedureExecution.invalid">
         <mat-icon>done</mat-icon>
         <span>Done</span>

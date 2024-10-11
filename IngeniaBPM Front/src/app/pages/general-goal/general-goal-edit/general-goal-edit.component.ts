@@ -81,6 +81,7 @@ import { MatCardModule } from '@angular/material/card';
     if (!val || typeof val !== 'string') {
       return [];
     }
+    
     return this.program.filter(el =>
       el.name.toLowerCase().includes(val.toLowerCase())
     );

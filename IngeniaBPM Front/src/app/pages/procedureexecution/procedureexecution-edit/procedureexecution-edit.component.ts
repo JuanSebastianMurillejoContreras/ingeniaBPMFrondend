@@ -15,10 +15,10 @@ import { ProcedureService } from 'src/app/service/procedure.service';
   templateUrl: './procedureexecution-edit.component.html',
   styleUrls: ['./procedureexecution-edit.component.css'],
 
- imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
- 
+  imports: [MaterialModule, ReactiveFormsModule, NgIf, NgFor, AsyncPipe, RouterLink, RouterOutlet]
+
 })
-export class ProcedureexecutionEditComponent implements OnInit{
+export class ProcedureexecutionEditComponent implements OnInit {
 
   id: number;
   isEdit: boolean;
@@ -38,12 +38,12 @@ export class ProcedureexecutionEditComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.form = new FormGroup( {
-      'idProcedureExecution': new FormControl( 0 ),
+    this.form = new FormGroup({
+      'idProcedureExecution': new FormControl(0),
       'procedure': this.procedureControl,
-      'executionDescription': new FormControl( '', [Validators.required]),
+      'executionDescription': new FormControl('', [Validators.required]),
     });
-  
+
     this.loadInitialData();
     this.procedureFiltered$ = this.procedureControl.valueChanges.pipe(startWith(''), map(val => this.filterProcedure(val)));
 
@@ -59,6 +59,12 @@ export class ProcedureexecutionEditComponent implements OnInit{
     if (!val || typeof val !== 'string') {
       return [];
     }
+    // Si el valor es '*', retornar todos los procedimientos
+    if (val === '*') {
+      return this.procedure;
+    }
+
+    // Si no es '*', aplicar el filtro normal
     return this.procedure.filter(el =>
       el.name.toLowerCase().includes(val.toLowerCase())
     );
@@ -87,7 +93,7 @@ export class ProcedureexecutionEditComponent implements OnInit{
 
 
   operate() {
-    if ( this.form.invalid ) { return; }
+    if (this.form.invalid) { return; }
 
     let procedureexecution = new ProcedureExecution();
     procedureexecution.idProcedureExecution = this.form.value['idProcedureExecution'];
@@ -95,32 +101,32 @@ export class ProcedureexecutionEditComponent implements OnInit{
     procedureexecution.executionDescription = this.form.value['executionDescription'];
 
 
-    if ( this.isEdit ) {
-      this.procedureExecutionService.update( procedureexecution.idProcedureExecution, procedureexecution ).pipe( switchMap( () => {
+    if (this.isEdit) {
+      this.procedureExecutionService.update(procedureexecution.idProcedureExecution, procedureexecution).pipe(switchMap(() => {
         return this.procedureExecutionService.findAll();
-      } ) )
-        .subscribe( data => {
-          this.procedureExecutionService.setProcedureExecutionChange( data );
-          this.procedureExecutionService.setMessageChange( 'Compañía actualizada!' )
+      }))
+        .subscribe(data => {
+          this.procedureExecutionService.setProcedureExecutionChange(data);
+          this.procedureExecutionService.setMessageChange('Compañía actualizada!')
 
-        } );
+        });
     } else {
-      this.procedureExecutionService.save( procedureexecution ).pipe( switchMap( () => {
+      this.procedureExecutionService.save(procedureexecution).pipe(switchMap(() => {
         return this.procedureExecutionService.findAll();
-      } ) )
-        .subscribe( data => {
-          this.procedureExecutionService.setProcedureExecutionChange( data );
-          this.procedureExecutionService.setMessageChange( "Compañia creada!" )          
-        } );              
+      }))
+        .subscribe(data => {
+          this.procedureExecutionService.setProcedureExecutionChange(data);
+          this.procedureExecutionService.setMessageChange("Compañia creada!")
+        });
     }
-    this.router.navigate( ['/pages/procedureexecution'] );  
+    this.router.navigate(['/pages/procedureexecution']);
   }
 
-  
+
 }
 
-  
-  
+
+
 
 
 

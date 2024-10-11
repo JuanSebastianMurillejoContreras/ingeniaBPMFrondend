@@ -16,8 +16,8 @@ import { ProcedureByProgramService } from 'src/app/service/procedurebyprogram.se
 import { ProgramService } from 'src/app/service/program.service';
 
 @Component({
-  standalone: true,
-  selector: 'app-procedure-edit',
+    selector: 'app-procedure-edit',
+    standalone: true,
   templateUrl: './procedure-edit.component.html',
   styleUrls: ['./procedure-edit.component.css'],
 

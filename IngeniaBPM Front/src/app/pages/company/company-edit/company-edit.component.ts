@@ -67,7 +67,13 @@ export class CompanyEditComponent implements OnInit {
     if (!val || typeof val !== 'string') {
       return [];
     }
+    
+    // Si el valor es '*', retornar todos los procedimientos
+    if (val === '*') {
+      return this.companyType;
+    }
 
+    // Si no es '*', aplicar el filtro normal
     return this.companyType.filter(el =>
       el.nameCompanyType.toLowerCase().includes(val.toLowerCase())
     );

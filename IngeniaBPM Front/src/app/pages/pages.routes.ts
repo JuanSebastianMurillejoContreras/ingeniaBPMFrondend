@@ -27,6 +27,12 @@ import { SuppliesComponent } from './supplies/supplies.component';
 import { SuppliesEditComponent } from './supplies/supplies-edit/supplies-edit.component';
 import { ProcedureExecutionComponent } from './procedureexecution/procedureexecution.component';
 import { ProcedureexecutionEditComponent } from './procedureexecution/procedureexecution-edit/procedureexecution-edit.component';
+import { ProcedureExecutionByVariableByProcedureComponent } from './procedure-execution-by-variable-by-procedure/procedure-execution-by-variable-by-procedure.component';
+import { ProcedureExecutionByVariableByProcedureEditComponent } from './procedure-execution-by-variable-by-procedure/procedure-execution-by-variable-by-procedure-edit/procedure-execution-by-variable-by-procedure-edit.component';
+import { ProcedureExecutionByUtensilByProcedureComponent } from './procedure-execution-by-utensil-by-procedure/procedure-execution-by-utensil-by-procedure.component';
+import { ProcedureExecutionByUtensilByProcedureEditComponent } from './procedure-execution-by-utensil-by-procedure/procedure-execution-by-utensil-by-procedure-edit/procedure-execution-by-utensil-by-procedure-edit.component';
+import { ProcedureExecutionBySuppliesByProcedureEditComponent } from './procedure-execution-by-supplies-by-procedure/procedure-execution-by-supplies-by-procedure-edit/procedure-execution-by-supplies-by-procedure-edit.component';
+import { ProcedureExecutionBySuppliesByProcedureComponent } from './procedure-execution-by-supplies-by-procedure/procedure-execution-by-supplies-by-procedure.component';
 
 export const PagesRoutes: Routes = [
   {
@@ -234,9 +240,50 @@ export const PagesRoutes: Routes = [
       },
     ],
   },
-  
-  
 
-
+  {
+    path: 'procedureexecutionbyvariable',
+    component: ProcedureExecutionByVariableByProcedureComponent,
+    children: [
+      {
+        path: 'new',
+        component: ProcedureExecutionByVariableByProcedureEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ProcedureExecutionByVariableByProcedureEditComponent,
+      },
+    ],
+  },
+  
+  {
+    path: 'procedureexecutionbyutensil',
+    component: ProcedureExecutionByUtensilByProcedureComponent,
+    children: [
+      {
+        path: 'new',
+        component: ProcedureExecutionByUtensilByProcedureEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ProcedureExecutionByUtensilByProcedureEditComponent,
+      },
+    ],
+  },
+  
+  {
+    path: 'procedureexecutionbysupplies',
+    component: ProcedureExecutionBySuppliesByProcedureComponent,
+    children: [
+      {
+        path: 'new',
+        component: ProcedureExecutionBySuppliesByProcedureEditComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: ProcedureExecutionBySuppliesByProcedureEditComponent,
+      },
+    ],
+  },
 
 ];

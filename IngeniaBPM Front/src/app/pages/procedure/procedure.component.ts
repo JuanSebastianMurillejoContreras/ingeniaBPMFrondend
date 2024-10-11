@@ -10,8 +10,8 @@ import { Procedure } from 'src/app/model/Procedure';
 import { ProcedureService } from 'src/app/service/procedure.service';
 
 @Component({
-  standalone: true,
   selector: 'app-procedure',
+  standalone: true,
   templateUrl: './procedure.component.html',
   styleUrls: ['./procedure.component.css'],
   imports:[MaterialModule, RouterLink, RouterOutlet]

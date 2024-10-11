@@ -72,6 +72,12 @@ export class UserEditComponent implements OnInit {
     if (!val || typeof val !== 'string') {
       return [];
     }
+        // Si el valor es '*', retornar todos los procedimientos
+        if (val === '*') {
+          return this.company;
+        }
+    
+        // Si no es '*', aplicar el filtro normal
 
     return this.company.filter(el =>
       el.name.toLowerCase().includes(val.toLowerCase())
